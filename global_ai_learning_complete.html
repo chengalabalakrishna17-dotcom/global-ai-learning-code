@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLOBAL AI LEARNING | Code with Bala Krishna</title>
+<style>
+:root{--bg:#020617;--card:#0f172a;--line:#26334d;--text:#f8fafc;--muted:#94a3b8;--primary:#6366f1;--cyan:#38bdf8}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;font-family:Arial,system-ui,sans-serif;background:var(--bg);color:var(--text)}
+nav{position:sticky;top:0;z-index:10;background:rgba(2,6,23,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:14px 5%;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:900;color:#a5b4fc}.navlinks{display:flex;gap:18px}.navlinks a{color:#cbd5e1;text-decoration:none;font-weight:700}
+.hero{min-height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:50px 20px;background:radial-gradient(circle at top,#312e81,#020617 65%)}
+.hero-content{max-width:1000px}.small-title{font-size:18px;font-weight:800;letter-spacing:3px;color:#a5b4fc}
+h1{font-size:clamp(45px,10vw,100px);margin:18px 0;background:linear-gradient(90deg,#fff,#818cf8,#38bdf8);-webkit-background-clip:text;color:transparent}
+.subtitle{font-size:21px;color:#cbd5e1;line-height:1.6}
+.buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+button{border:0;border-radius:12px;padding:13px 20px;background:var(--primary);color:white;font-weight:800;cursor:pointer;transition:.2s}
+button:hover{transform:translateY(-2px);filter:brightness(1.12)}
+.secondary{background:#1e293b;border:1px solid #475569}
+.section{max-width:1150px;margin:auto;padding:70px 20px}.section h2{text-align:center;font-size:36px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card,.astra,.progress-box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:25px;transition:.25s}
+.card:hover{transform:translateY(-6px);border-color:var(--primary)}
+.icon{font-size:40px}.card h3{font-size:21px}.card p{color:var(--muted);line-height:1.6}
+.card button{margin-top:8px}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}.toolbar input{flex:1;min-width:220px;padding:14px;border-radius:10px;border:1px solid var(--line);background:#020617;color:white}
+.progress{height:12px;background:#1e293b;border-radius:20px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#6366f1,#38bdf8);transition:1s}
+.chat{height:310px;background:#020617;border-radius:15px;padding:18px;overflow-y:auto;border:1px solid #1e293b}
+.message{padding:11px 14px;border-radius:12px;margin:9px 0;max-width:82%;line-height:1.5}.bot{background:#334155}.user{background:#4f46e5;margin-left:auto}
+.input-area{display:flex;gap:10px;margin-top:14px}.input-area input{flex:1;padding:14px;border-radius:10px;border:0;outline:0;font-size:16px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:25px}.stat{text-align:center;padding:20px;background:#0b1222;border-radius:15px;border:1px solid var(--line)}.stat b{font-size:28px}
+footer{text-align:center;padding:40px;background:#000;color:var(--muted)}
+#toast{position:fixed;bottom:25px;right:20px;background:#111827;border:1px solid #475569;padding:14px 18px;border-radius:12px;display:none;z-index:20}
+@media(max-width:650px){.navlinks{display:none}h1{font-size:48px}.subtitle{font-size:17px}.section{padding:50px 15px}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="logo">🚀 CODE WITH BALA KRISHNA</div>
+<div class="navlinks">
+<a href="#learning">Learning</a><a href="#progress">Progress</a><a href="#astra">Astra GPT</a>
+</div>
+</nav>
+
+<section class="hero">
+<div class="hero-content">
+<div class="small-title">CODE WITH BALA KRISHNA</div>
+<h1>GLOBAL AI LEARNING</h1>
+<p class="subtitle">Learn AI • Coding • Technology • Build the Future</p>
+<div class="buttons">
+<button onclick="go('learning')">🚀 Start Learning</button>
+<button class="secondary" onclick="go('astra')">✨ Astra GPT</button>
+</div>
+<div class="stats">
+<div class="stat"><b>🤖</b><br>AI</div><div class="stat"><b>💻</b><br>Coding</div><div class="stat"><b>🌐</b><br>Web</div><div class="stat"><b>🧠</b><br>Skills</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="learning">
+<h2>🌍 Global AI Learning</h2>
+<div class="toolbar">
+<input id="search" placeholder="Search courses..." oninput="filterCourses()">
+<button onclick="showAll()">Show All</button>
+</div>
+<div class="cards" id="courses">
+<div class="card course"><div class="icon">🤖</div><h3>Artificial Intelligence</h3><p>Learn AI, machine learning, generative AI and modern AI technology.</p><button onclick="startCourse('Artificial Intelligence')">Start Course</button></div>
+<div class="card course"><div class="icon">💻</div><h3>Coding</h3><p>Learn programming concepts and build useful projects.</p><button onclick="startCourse('Coding')">Start Course</button></div>
+<div class="card course"><div class="icon">🌐</div><h3>Web Development</h3><p>Learn HTML, CSS and JavaScript to create websites.</p><button onclick="startCourse('Web Development')">Start Course</button></div>
+<div class="card course"><div class="icon">🧠</div><h3>AI Skills</h3><p>Develop practical skills for the future of technology.</p><button onclick="startCourse('AI Skills')">Start Course</button></div>
+</div>
+</section>
+
+<section class="section" id="progress">
+<h2>📈 My Learning Progress</h2>
+<div class="progress-box">
+<p>Course progress</p><div class="progress"><div class="bar" id="bar"></div></div>
+<p id="progressText">0% completed</p>
+<button onclick="increaseProgress()">Mark Lesson Complete</button>
+<button class="secondary" onclick="resetProgress()">Reset</button>
+</div>
+</section>
+
+<section class="section" id="astra">
+<h2>✨ Astra GPT</h2>
+<div class="astra">
+<div class="chat" id="chat"><div class="message bot">Hello 👋 I am Astra GPT.<br>Ask me about AI, coding, HTML, CSS, JavaScript or learning.</div></div>
+<div class="input-area">
+<input id="input" placeholder="Ask Astra GPT..." onkeydown="handleKey(event)">
+<button onclick="sendMessage()">Send</button>
+</div>
+</div>
+</section>
+
+<footer><strong>CODE WITH BALA KRISHNA</strong><br><br>GLOBAL AI LEARNING<br><br>Learn • Build • Create • Explore</footer>
+<div id="toast"></div>
+
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";setTimeout(()=>t.style.display="none",2200)}
+function startCourse(name){toast("🚀 "+name+" course started!");increaseProgress()}
+function filterCourses(){const q=document.getElementById("search").value.toLowerCase();document.querySelectorAll(".course").forEach(c=>c.style.display=c.innerText.toLowerCase().includes(q)?"block":"none")}
+function showAll(){document.getElementById("search").value="";filterCourses()}
+let progress=Number(localStorage.getItem("galProgress")||0);updateProgress()
+function updateProgress(){document.getElementById("bar").style.width=progress+"%";document.getElementById("progressText").textContent=progress+"% completed"}
+function increaseProgress(){progress=Math.min(100,progress+10);localStorage.setItem("galProgress",progress);updateProgress();toast(progress===100?"🎉 Course completed!":"✅ Lesson completed!")}
+function resetProgress(){progress=0;localStorage.setItem("galProgress",0);updateProgress()}
+function addMessage(text,type){const chat=document.getElementById("chat"),m=document.createElement("div");m.className="message "+type;m.textContent=text;chat.appendChild(m);chat.scrollTop=chat.scrollHeight}
+function getReply(q){
+ q=q.toLowerCase();
+ if(q.includes("hello")||q.includes("hi")) return "Hello 👋 Welcome to Global AI Learning!";
+ if(q.includes("ai")) return "AI means Artificial Intelligence. It enables computers to perform tasks that normally require human intelligence.";
+ if(q.includes("html")) return "HTML creates the structure of a website.";
+ if(q.includes("css")) return "CSS controls the design and appearance of a website.";
+ if(q.includes("javascript")||q.includes("js")) return "JavaScript makes websites interactive.";
+ if(q.includes("coding")||q.includes("programming")) return "Coding means giving instructions to a computer using programming languages.";
+ if(q.includes("website")||q.includes("web")) return "Web development uses HTML, CSS and JavaScript to create interactive websites.";
+ if(q.includes("learn")) return "Start with HTML and CSS, then JavaScript, programming fundamentals and AI concepts.";
+ return "I am Astra GPT demo. Try asking about AI, coding, HTML, CSS, JavaScript or learning.";
+}
+function sendMessage(){const input=document.getElementById("input"),q=input.value.trim();if(!q)return;addMessage(q,"user");input.value="";setTimeout(()=>addMessage(getReply(q),"bot"),350)}
+function handleKey(e){if(e.key==="Enter")sendMessage()}
+</script>
+</body>
+</html>
