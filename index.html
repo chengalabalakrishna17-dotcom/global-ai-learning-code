@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GLOBAL AI LEARNING</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ font-family:Arial,Helvetica,sans-serif;
+ background:#f4f7fb;
+ color:#172033
+}
+
+header{
+ position:sticky;
+ top:0;
+ z-index:100;
+ background:#111827;
+ color:white;
+ padding:14px 20px;
+ display:flex;
+ align-items:center;
+ gap:15px;
+ flex-wrap:wrap
+}
+
+.logo{
+ font-size:22px;
+ font-weight:bold;
+ color:#60a5fa
+}
+
+.search{
+ flex:1;
+ min-width:220px;
+ padding:12px;
+ border-radius:8px;
+ border:0;
+ outline:0
+}
+
+button{
+ border:0;
+ padding:11px 16px;
+ border-radius:8px;
+ cursor:pointer;
+ font-weight:bold
+}
+
+.primary{
+ background:#4f46e5;
+ color:white
+}
+
+.secondary{
+ background:#e5e7eb;
+ color:#111827
+}
+
+.danger{
+ background:#dc2626;
+ color:white
+}
+
+.layout{
+ display:flex;
+ min-height:calc(100vh - 70px)
+}
+
+.sidebar{
+ width:240px;
+ background:#1e293b;
+ color:white;
+ padding:18px;
+ position:sticky;
+ top:70px;
+ height:calc(100vh - 70px)
+}
+
+.sidebar button{
+ width:100%;
+ margin:5px 0;
+ text-align:left;
+ background:transparent;
+ color:#cbd5e1
+}
+
+.sidebar button:hover{
+ background:#3730a3;
+ color:white
+}
+
+main{
+ flex:1;
+ padding:25px;
+ max-width:1500px;
+ margin:auto;
+ width:100%
+}
+
+.hero{
+ background:linear-gradient(135deg,#312e81,#7c3aed);
+ color:white;
+ padding:40px;
+ border-radius:20px;
+ margin-bottom:25px
+}
+
+.hero h1{
+ font-size:45px;
+ margin:0 0 10px
+}
+
+.hero p{
+ font-size:18px;
+ line-height:1.7
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+ gap:18px
+}
+
+.card{
+ background:white;
+ border:1px solid #e5e7eb;
+ border-radius:15px;
+ padding:20px;
+ box-shadow:0 5px 20px #0000000d;
+ margin-bottom:15px
+}
+
+.card h2,.card h3{
+ margin-top:0
+}
+
+.icon{
+ font-size:42px
+}
+
+.progress{
+ width:100%;
+ height:10px;
+ background:#e5e7eb;
+ border-radius:10px;
+ overflow:hidden
+}
+
+.progressBar{
+ height:100%;
+ background:linear-gradient(90deg,#4f46e5,#9333ea);
+ width:0%
+}
+
+.module{
+ background:white;
+ border:1px solid #ddd;
+ border-radius:12px;
+ margin:15px 0;
+ overflow:hidden
+}
+
+.moduleTitle{
+ padding:17px;
+ background:#f8fafc;
+ display:flex;
+ justify-content:space-between;
+ align-items:center
+}
+
+.lesson{
+ padding:15px;
+ border-top:1px solid #eee;
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+ align-items:center
+}
+
+.lesson:hover{
+ background:#f8fafc
+}
+
+.completed{
+ background:#ecfdf5
+}
+
+.badge{
+ display:inline-block;
+ background:#eef2ff;
+ color:#4338ca;
+ padding:5px 9px;
+ border-radius:20px;
+ font-size:12px;
+ font-weight:bold
+}
+
+.lessonContent{
+ line-height:1.8;
+ font-size:16px
+}
+
+.code{
+ background:#0f172a;
+ color:#dbeafe;
+ padding:18px;
+ border-radius:10px;
+ overflow:auto;
+ white-space:pre-wrap;
+ font-family:monospace
+}
+
+.video{
+ width:100%;
+ aspect-ratio:16/9;
+ border:0;
+ border-radius:12px
+}
+
+input,textarea,select{
+ width:100%;
+ padding:12px;
+ border:1px solid #cbd5e1;
+ border-radius:8px;
+ margin:5px 0 15px
+}
+
+textarea{
+ min-height:130px
+}
+
+label{
+ font-weight:bold
+}
+
+.quiz{
+ padding:18px;
+ border:1px solid #e5e7eb;
+ border-radius:12px;
+ margin:12px 0
+}
+
+.quiz label{
+ display:block;
+ padding:9px;
+ font-weight:normal
+}
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+ gap:15px;
+ margin-bottom:25px
+}
+
+.stat{
+ background:white;
+ padding:20px;
+ border-radius:12px;
+ border:1px solid #ddd
+}
+
+.stat strong{
+ font-size:30px;
+ display:block
+}
+
+.modal{
+ position:fixed;
+ inset:0;
+ background:#0009;
+ display:none;
+ justify-content:center;
+ align-items:center;
+ padding:20px;
+ z-index:200
+}
+
+.modal.show{
+ display:flex
+}
+
+.modalBox{
+ background:white;
+ width:min(800px,100%);
+ max-height:90vh;
+ overflow:auto;
+ padding:25px;
+ border-radius:15px
+}
+
+.hidden{
+ display:none
+}
+
+.empty{
+ text-align:center;
+ padding:50px;
+ color:#64748b
+}
+
+.resource{
+ border:1px dashed #94a3b8;
+ padding:15px;
+ border-radius:10px;
+ margin:8px 0
+}
+
+@media(max-width:800px){
+ .sidebar{display:none}
+ main{padding:15px}
+ .hero h1{font-size:32px}
+ header{position:relative}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">🌐 GLOBAL AI LEARNING</div>
+
+<input
+ id="search"
+ class="search"
+ placeholder="Search courses, lessons, concepts..."
+ oninput="searchSite()"
+>
+
+<button class="secondary" onclick="showHome()">🏠 Home</button>
+<button class="secondary" onclick="showProfile()">👤 Profile</button>
+
+</header>
+
+
+<div class="layout">
+
+<aside class="sidebar">
+
+<h3>LEARNING</h3>
+
+<button onclick="showHome()">🏠 Dashboard</button>
+
+<button onclick="showCourses()">📚 All Courses</button>
+
+<button onclick="showMyLearning()">📖 My Learning</button>
+
+<button onclick="showPractice()">🧪 Practice</button>
+
+<button onclick="showProjects()">🏗️ Projects</button>
+
+<button onclick="showResources()">📁 Resources</button>
+
+<hr>
+
+<h3>ADMIN</h3>
+
+<button onclick="showAdmin()">⚙️ Course Creator</button>
+
+</aside>
+
+
+<main id="app"></main>
+
+</div>
+
+
+<div id="modal" class="modal">
+
+<div id="modalBox" class="modalBox"></div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   DATABASE
+========================================================= */
+
+const DB_KEY="GLOBAL_AI_LEARNING_DATABASE";
+
+const defaultDB={
+
+profile:{
+ name:"Learner",
+ email:""
+},
+
+completed:[],
+lastLesson:null,
+
+courses:[
+
+/* ================= C ================= */
+
+{
+ id:"c",
+ name:"C Programming",
+ icon:"💻",
+ category:"Programming",
+ level:"Zero → Advanced",
+ description:"Complete C programming course from absolute basics to advanced concepts and projects.",
+
+ modules:[
+
+ {
+  id:"c1",
+  name:"Module 1 — C Fundamentals",
+
+  lessons:[
+
+  {
+   id:"c1l1",
+   title:"Introduction to C",
+   content:`C is a general purpose programming language.
+
+Learn:
+• What is C?
+• History of C
+• Where C is used
+• Compiler
+• Source code
+• Executable program
+• Basic programming workflow`,
+   code:`#include <stdio.h>
+
+int main()
+{
+    printf("Hello World");
+    return 0;
+}`,
+   video:""
+  },
+
+  {
+   id:"c1l2",
+   title:"Structure of a C Program",
+   content:`Understand:
+
+• #include
+• Header files
+• main()
+• Statements
+• Braces
+• Semicolon
+• Comments
+• return statement`,
+   code:`#include <stdio.h>
+
+int main()
+{
+    // This is a comment
+    printf("Hello");
+    return 0;
+}`,
+   video:""
+  },
+
+  {
+   id:"c1l3",
+   title:"Variables",
+   content:`Variables store data.
+
+Learn:
+• Declaration
+• Initialization
+• Assignment
+• Naming rules
+• Local variables`,
+   code:`int age = 18;
+float price = 99.5;
+char grade = 'A';`,
+   video:""
+  },
+
+  {
+   id:"c1l4",
+   title:"Data Types",
+   content:`Important C data types:
+
+int
+float
+double
+char
+void
+
+Understand memory and appropriate type selection.`,
+   code:`int age = 18;
+float marks = 92.5;
+double distance = 123.456;
+char grade = 'A';`,
+   video:""
+  },
+
+  {
+   id:"c1l5",
+   title:"Input and Output",
+   content:`Learn printf() and scanf().
+
+Understand:
+• Format specifiers
+• User input
+• Address operator
+• Basic validation`,
+   code:`#include <stdio.h>
+
+int main()
+{
+    int age;
+
+    printf("Enter age: ");
+    scanf("%d",&age);
+
+    printf("Age = %d",age);
+
+    return 0;
+}`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"c2",
+  name:"Module 2 — Operators & Decisions",
+
+  lessons:[
+
+  {
+   id:"c2l1",
+   title:"Arithmetic Operators",
+   content:`Arithmetic operators:
+
++
+-
+*
+/
+%
+
+Also learn assignment operators.`,
+   code:`int a=10,b=3;
+
+printf("%d",a+b);
+printf("%d",a-b);
+printf("%d",a*b);
+printf("%d",a/b);
+printf("%d",a%b);`,
+   video:""
+  },
+
+  {
+   id:"c2l2",
+   title:"Relational Operators",
+   content:`Relational operators compare values.
+
+>
+<
+>=
+<=
+==
+!=`,
+   code:`int a=10;
+
+if(a>5)
+{
+    printf("Greater");
+}`,
+   video:""
+  },
+
+  {
+   id:"c2l3",
+   title:"Logical Operators",
+   content:`Logical operators:
+
+&& AND
+|| OR
+! NOT`,
+   code:`int age=20;
+
+if(age>=18 && age<=60)
+{
+    printf("Valid age");
+}`,
+   video:""
+  },
+
+  {
+   id:"c2l4",
+   title:"if else",
+   content:`Decision making using if, else if and else.`,
+   code:`int marks=85;
+
+if(marks>=90)
+{
+    printf("A");
+}
+else if(marks>=75)
+{
+    printf("B");
+}
+else
+{
+    printf("C");
+}`,
+   video:""
+  },
+
+  {
+   id:"c2l5",
+   title:"switch",
+   content:`switch is useful for menu based programs.`,
+   code:`int choice=2;
+
+switch(choice)
+{
+    case 1:
+        printf("Add");
+        break;
+
+    case 2:
+        printf("Subtract");
+        break;
+
+    default:
+        printf("Invalid");
+}`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"c3",
+  name:"Module 3 — Loops",
+
+  lessons:[
+
+  {
+   id:"c3l1",
+   title:"for Loop",
+   content:`Use for when the number of repetitions is known.`,
+   code:`for(int i=1;i<=10;i++)
+{
+    printf("%d\\n",i);
+}`,
+   video:""
+  },
+
+  {
+   id:"c3l2",
+   title:"while Loop",
+   content:`while repeats while a condition remains true.`,
+   code:`int i=1;
+
+while(i<=5)
+{
+    printf("%d\\n",i);
+    i++;
+}`,
+   video:""
+  },
+
+  {
+   id:"c3l3",
+   title:"do while",
+   content:`do while executes the body at least once.`,
+   code:`int i=1;
+
+do
+{
+    printf("%d\\n",i);
+    i++;
+}
+while(i<=5);`,
+   video:""
+  },
+
+  {
+   id:"c3l4",
+   title:"break and continue",
+   content:`break exits a loop.
+
+continue skips the current iteration.`,
+   code:`for(int i=1;i<=10;i++)
+{
+    if(i==5)
+        continue;
+
+    printf("%d ",i);
+}`,
+   video:""
+  },
+
+  {
+   id:"c3l5",
+   title:"Nested Loops and Patterns",
+   content:`Nested loops are loops inside loops.
+
+Useful for:
+• Patterns
+• Tables
+• Matrices`,
+   code:`for(int r=1;r<=5;r++)
+{
+    for(int c=1;c<=r;c++)
+    {
+        printf("* ");
+    }
+
+    printf("\\n");
+}`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"c4",
+  name:"Module 4 — Functions",
+
+  lessons:[
+
+  {
+   id:"c4l1",
+   title:"Functions",
+   content:`Functions divide large programs into reusable blocks.`,
+   code:`int add(int a,int b)
+{
+    return a+b;
+}
+
+int main()
+{
+    printf("%d",add(10,20));
+}`,
+   video:""
+  },
+
+  {
+   id:"c4l2",
+   title:"Parameters and Return Values",
+   content:`Understand:
+
+• Arguments
+• Parameters
+• Return values
+• void functions`,
+   code:`int square(int n)
+{
+    return n*n;
+}`,
+   video:""
+  },
+
+  {
+   id:"c4l3",
+   title:"Recursion",
+   content:`A recursive function calls itself.
+
+Every recursion must have a base condition.`,
+   code:`int factorial(int n)
+{
+    if(n<=1)
+        return 1;
+
+    return n*factorial(n-1);
+}`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"c5",
+  name:"Module 5 — Arrays & Strings",
+
+  lessons:[
+
+  {
+   id:"c5l1",
+   title:"One Dimensional Arrays",
+   content:`Arrays store multiple values of the same type.`,
+   code:`int numbers[5]={10,20,30,40,50};
+
+for(int i=0;i<5;i++)
+{
+    printf("%d ",numbers[i]);
+}`,
+   video:""
+  },
+
+  {
+   id:"c5l2",
+   title:"Two Dimensional Arrays",
+   content:`2D arrays represent tables and matrices.`,
+   code:`int matrix[2][2]={
+    {1,2},
+    {3,4}
+};`,
+   video:""
+  },
+
+  {
+   id:"c5l3",
+   title:"Strings",
+   content:`A C string is a character array ending with a null character.`,
+   code:`char name[]="Bala";
+
+printf("%s",name);`,
+   video:""
+  },
+
+  {
+   id:"c5l4",
+   title:"String Functions",
+   content:`Important functions:
+
+strlen
+strcpy
+strcmp
+strcat`,
+   code:`#include <string.h>
+
+char a[50]="Hello";
+char b[]=" World";
+
+strcat(a,b);
+
+printf("%s",a);`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"c6",
+  name:"Module 6 — Pointers",
+
+  lessons:[
+
+  {
+   id:"c6l1",
+   title:"Pointer Basics",
+   content:`Pointers store memory addresses.
+
+Learn:
+• &
+• *
+• Address
+• Dereference`,
+   code:`int x=10;
+
+int *p=&x;
+
+printf("%d",*p);`,
+   video:""
+  },
+
+  {
+   id:"c6l2",
+   title:"Pointers and Arrays",
+   content:`Arrays and pointers are closely related in C.`,
+   code:`int a[]={10,20,30};
+
+int *p=a;
+
+printf("%d",*(p+1));`,
+   video:""
+  },
+
+  {
+   id:"c6l3",
+   title:"Pointers and Functions",
+   content:`Pointers allow functions to modify original variables.`,
+   code:`void swap(int *a,int *b)
+{
+    int temp=*a;
+    *a=*b;
+    *b=temp;
+}`,
+   video:""
+  },
+
+  {
+   id:"c6l4",
+   title:"Dynamic Memory",
+   content:`Learn:
+
+malloc
+calloc
+realloc
+free
+
+Understand memory leaks and safe memory management.`,
+   code:`int *p;
+
+p=malloc(5*sizeof(int));
+
+free(p);`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"c7",
+  name:"Module 7 — Advanced C",
+
+  lessons:[
+
+  {
+   id:"c7l1",
+   title:"Structures",
+   content:`Structures group different types of data.`,
+   code:`struct Student
+{
+    char name[30];
+    int age;
+    float marks;
+};`,
+   video:""
+  },
+
+  {
+   id:"c7l2",
+   title:"Union and Enum",
+   content:`Learn union, enum and typedef.`,
+   code:`enum Day
+{
+    MON,
+    TUE,
+    WED
+};`,
+   video:""
+  },
+
+  {
+   id:"c7l3",
+   title:"File Handling",
+   content:`Learn:
+
+fopen
+fclose
+fprintf
+fscanf
+fread
+fwrite`,
+   code:`FILE *file;
+
+file=fopen("data.txt","w");
+
+fprintf(file,"Hello");
+
+fclose(file);`,
+   video:""
+  },
+
+  {
+   id:"c7l4",
+   title:"Preprocessor",
+   content:`Learn #include, #define and conditional compilation.`,
+   code:`#define MAX 100
+
+#include <stdio.h>`,
+   video:""
+  },
+
+  {
+   id:"c7l5",
+   title:"Final C Project",
+   content:`Build a complete Student Management System.
+
+Include:
+
+• Structures
+• Functions
+• Arrays
+• Files
+• Menu
+• Search
+• Add
+• Update
+• Delete`,
+   code:`// Final Project
+// Student Management System`,
+   video:""
+  }
+
+  ]
+ }
+
+ ]
+
+},
+
+/* ================= PYTHON ================= */
+
+{
+ id:"python",
+ name:"Python Programming",
+ icon:"🐍",
+ category:"Programming",
+ level:"Zero → Advanced",
+ description:"Complete Python learning path.",
+ modules:[
+
+ {
+  id:"py1",
+  name:"Module 1 — Python Basics",
+  lessons:[
+
+  {
+   id:"py1l1",
+   title:"Introduction to Python",
+   content:"Learn what Python is, where it is used and how Python programs run.",
+   code:`print("Hello World")`,
+   video:""
+  },
+
+  {
+   id:"py1l2",
+   title:"Variables and Data Types",
+   content:"Learn int, float, string, boolean and None.",
+   code:`name="Bala"
+age=18
+marks=95.5
+active=True`,
+   video:""
+  },
+
+  {
+   id:"py1l3",
+   title:"Input and Type Conversion",
+   content:"Learn input() and converting values.",
+   code:`age=int(input("Age: "))
+print(age+1)`,
+   video:""
+  },
+
+  {
+   id:"py1l4",
+   title:"Operators",
+   content:"Arithmetic, comparison and logical operators.",
+   code:`x=10
+print(x>5 and x<20)`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"py2",
+  name:"Module 2 — Control Flow",
+  lessons:[
+
+  {
+   id:"py2l1",
+   title:"if elif else",
+   content:"Decision making in Python.",
+   code:`mark=85
+
+if mark>=90:
+    print("A")
+elif mark>=75:
+    print("B")
+else:
+    print("C")`,
+   video:""
+  },
+
+  {
+   id:"py2l2",
+   title:"for Loop",
+   content:"Iterate over ranges and collections.",
+   code:`for i in range(1,6):
+    print(i)`,
+   video:""
+  },
+
+  {
+   id:"py2l3",
+   title:"while Loop",
+   content:"Condition controlled repetition.",
+   code:`i=1
+
+while i<=5:
+    print(i)
+    i+=1`,
+   video:""
+  },
+
+  {
+   id:"py2l4",
+   title:"Comprehensions",
+   content:"Create collections using concise expressions.",
+   code:`squares=[x*x for x in range(10)]`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"py3",
+  name:"Module 3 — Collections",
+  lessons:[
+
+  {
+   id:"py3l1",
+   title:"Strings",
+   content:"Indexing, slicing and string methods.",
+   code:`name="Python"
+print(name[0:3])`,
+   video:""
+  },
+
+  {
+   id:"py3l2",
+   title:"Lists and Tuples",
+   content:"Understand ordered collections and mutability.",
+   code:`numbers=[1,2,3]
+numbers.append(4)`,
+   video:""
+  },
+
+  {
+   id:"py3l3",
+   title:"Sets",
+   content:"Store unique values.",
+   code:`a={1,2,3}
+b={3,4}
+print(a|b)`,
+   video:""
+  },
+
+  {
+   id:"py3l4",
+   title:"Dictionaries",
+   content:"Work with key-value data.",
+   code:`student={
+ "name":"Bala",
+ "marks":90
+}
+
+print(student["name"])`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"py4",
+  name:"Module 4 — Functions and OOP",
+  lessons:[
+
+  {
+   id:"py4l1",
+   title:"Functions",
+   content:"Create reusable functions.",
+   code:`def add(a,b):
+    return a+b`,
+   video:""
+  },
+
+  {
+   id:"py4l2",
+   title:"Modules",
+   content:"Import and organize Python code.",
+   code:`import math
+
+print(math.sqrt(25))`,
+   video:""
+  },
+
+  {
+   id:"py4l3",
+   title:"Exceptions",
+   content:"Handle errors safely.",
+   code:`try:
+    x=int(input())
+except ValueError:
+    print("Invalid")`,
+   video:""
+  },
+
+  {
+   id:"py4l4",
+   title:"Classes and Objects",
+   content:"Object-oriented programming in Python.",
+   code:`class Student:
+
+    def __init__(self,name):
+        self.name=name
+
+s=Student("Bala")`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"py5",
+  name:"Module 5 — Advanced Python & Projects",
+  lessons:[
+
+  {
+   id:"py5l1",
+   title:"Inheritance",
+   content:"Reuse classes using inheritance.",
+   code:`class Dog(Animal):
+    pass`,
+   video:""
+  },
+
+  {
+   id:"py5l2",
+   title:"File Handling",
+   content:"Read and write files.",
+   code:`with open("data.txt","w") as f:
+    f.write("Hello")`,
+   video:""
+  },
+
+  {
+   id:"py5l3",
+   title:"JSON and CSV",
+   content:"Work with structured data.",
+   code:`import json
+
+data={"name":"Bala"}
+
+print(json.dumps(data))`,
+   video:""
+  },
+
+  {
+   id:"py5l4",
+   title:"Python Final Project",
+   content:"Build a complete practical application combining Python concepts.",
+   code:`# Final Python Project`,
+   video:""
+  }
+
+  ]
+ }
+
+ ]
+
+},
+
+/* ================= JAVA ================= */
+
+{
+ id:"java",
+ name:"Java Programming",
+ icon:"☕",
+ category:"Programming",
+ level:"Zero → Advanced",
+ description:"Complete Java course.",
+ modules:[
+
+ {
+  id:"j1",
+  name:"Module 1 — Java Basics",
+  lessons:[
+
+  {
+   id:"j1l1",
+   title:"Java and JVM",
+   content:"Understand Java, JDK, JRE, JVM and bytecode.",
+   code:`public class Main{
+ public static void main(String[] args){
+  System.out.println("Hello");
+ }
+}`,
+   video:""
+  },
+
+  {
+   id:"j1l2",
+   title:"Variables and Data Types",
+   content:"Primitive types and variables.",
+   code:`int age=18;
+double price=99.5;
+char grade='A';`,
+   video:""
+  },
+
+  {
+   id:"j1l3",
+   title:"Conditions",
+   content:"if, else and switch.",
+   code:`if(age>=18){
+ System.out.println("Adult");
+}`,
+   video:""
+  },
+
+  {
+   id:"j1l4",
+   title:"Loops",
+   content:"for, while and do while.",
+   code:`for(int i=0;i<5;i++){
+ System.out.println(i);
+}`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"j2",
+  name:"Module 2 — OOP",
+  lessons:[
+
+  {
+   id:"j2l1",
+   title:"Classes and Objects",
+   content:"Create classes and objects.",
+   code:`class Student{
+ String name;
+}`,
+   video:""
+  },
+
+  {
+   id:"j2l2",
+   title:"Constructors",
+   content:"Initialize objects using constructors.",
+   code:`Student(String name){
+ this.name=name;
+}`,
+   video:""
+  },
+
+  {
+   id:"j2l3",
+   title:"Inheritance",
+   content:"Reuse functionality using inheritance.",
+   code:`class Dog extends Animal{
+}`,
+   video:""
+  },
+
+  {
+   id:"j2l4",
+   title:"Polymorphism",
+   content:"Understand overloading and overriding.",
+   code:`void show(){
+ System.out.println("Hello");
+}`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"j3",
+  name:"Module 3 — Collections and Exceptions",
+  lessons:[
+
+  {
+   id:"j3l1",
+   title:"Arrays",
+   content:"Store multiple values.",
+   code:`int[] a={1,2,3};`,
+   video:""
+  },
+
+  {
+   id:"j3l2",
+   title:"ArrayList",
+   content:"Dynamic collections.",
+   code:`ArrayList<String> names=new ArrayList<>();`,
+   video:""
+  },
+
+  {
+   id:"j3l3",
+   title:"HashMap",
+   content:"Key-value collections.",
+   code:`HashMap<String,Integer> map=new HashMap<>();`,
+   video:""
+  },
+
+  {
+   id:"j3l4",
+   title:"Exception Handling",
+   content:"Handle runtime problems using try catch.",
+   code:`try{
+ int x=10/0;
+}
+catch(Exception e){
+ System.out.println("Error");
+}`,
+   video:""
+  }
+
+  ]
+ },
+
+ {
+  id:"j4",
+  name:"Module 4 — Files, Threads & Project",
+  lessons:[
+
+  {
+   id:"j4l1",
+   title:"File Handling",
+   content:"Read and write files.",
+   code:`Files.writeString(
+ Path.of("data.txt"),
+ "Hello"
+);`,
+   video:""
+  },
+
+  {
+   id:"j4l2",
+   title:"Threads",
+   content:"Learn basic multithreading.",
+   code:`Thread t=new Thread(
+ () -> System.out.println("Running")
+);
+
+t.start();`,
+   video:""
+  },
+
+  {
+   id:"j4l3",
+   title:"Final Java Project",
+   content
