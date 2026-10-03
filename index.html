@@ -1,345 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GLOBAL AI LEARNING | Code with Bala Krishna</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #050816;
-      color: white;
-      min-height: 100vh;
-    }
-
-    header {
-      background: #0b1225;
-      padding: 18px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid #26324f;
-    }
-
-    header h2 {
-      font-size: 18px;
-    }
-
-    nav button {
-      background: transparent;
-      color: white;
-      border: none;
-      margin-left: 12px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    nav button:hover {
-      color: #60a5fa;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 70px 20px;
-    }
-
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 12px;
-    }
-
-    .hero p {
-      color: #aeb9d4;
-      font-size: 18px;
-      margin-bottom: 25px;
-    }
-
-    .btn {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 13px 22px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 15px;
-    }
-
-    .btn:hover {
-      background: #1d4ed8;
-    }
-
-    section {
-      padding: 45px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    section h2 {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .courses {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      background: #0d162b;
-      border: 1px solid #26324f;
-      border-radius: 12px;
-      padding: 22px;
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: #aeb9d4;
-      margin-bottom: 15px;
-    }
-
-    .status {
-      margin-top: 15px;
-      text-align: center;
-      color: #60a5fa;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #8995b0;
-      border-top: 1px solid #26324f;
-      margin-top: 40px;
-    }
-
-    #userBox {
-      text-align: center;
-      margin-top: 15px;
-      color: #93c5fd;
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <h2>Code with Bala Krishna</h2>
-
-  <nav>
-    <button onclick="showHome()">Home</button>
-    <button onclick="showCourses()">Courses</button>
-    <button onclick="loginUser()">Login</button>
-    <button onclick="logoutUser()">Logout</button>
-  </nav>
-</header>
-
-<main id="app">
-
-  <div class="hero">
-    <h1>GLOBAL AI LEARNING</h1>
-    <p>Learn AI, Coding and Technology from anywhere in the world.</p>
-
-    <button class="btn" onclick="showCourses()">
-      Explore Courses
-    </button>
-
-    <div id="userBox">Not logged in</div>
-  </div>
-
-  <section id="courses">
-    <h2>Learning Courses</h2>
-
-    <div class="courses">
-
-      <div class="card">
-        <h3>Python</h3>
-        <p>Learn Python from basics to advanced programming.</p>
-        <button class="btn" onclick="openCourse('Python')">
-          Start Python
-        </button>
-      </div>
-
-      <div class="card">
-        <h3>Java</h3>
-        <p>Learn Java programming step by step.</p>
-        <button class="btn" onclick="openCourse('Java')">
-          Start Java
-        </button>
-      </div>
-
-      <div class="card">
-        <h3>C Language</h3>
-        <p>Build strong programming fundamentals with C.</p>
-        <button class="btn" onclick="openCourse('C Language')">
-          Start C
-        </button>
-      </div>
-
-      <div class="card">
-        <h3>Artificial Intelligence</h3>
-        <p>Explore AI concepts, tools and applications.</p>
-        <button class="btn" onclick="openCourse('Artificial Intelligence')">
-          Start AI
-        </button>
-      </div>
-
-    </div>
-
-    <div id="courseStatus" class="status"></div>
-  </section>
-
-</main>
-
-<footer>
-  © 2026 GLOBAL AI LEARNING — Code with Bala Krishna
-</footer>
-
-<script type="module">
-
-  import { initializeApp }
-    from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-
-  import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup,
-    signOut,
-    onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
-
-  import {
-    getFirestore,
-    doc,
-    setDoc,
-    getDoc
-  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
-
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBwTtdNupA4S8vBhxuXAUCOOEiedALHrLo",
-    authDomain: "global-ai-learning-7f2c7.firebaseapp.com",
-    projectId: "global-ai-learning-7f2c7",
-    storageBucket: "global-ai-learning-7f2c7.firebasestorage.app",
-    messagingSenderId: "814301153167",
-    appId: "1:814301153167:web:01db46d4bb807eb6feedfa"
-  };
-
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  const provider = new GoogleAuthProvider();
-
-
-  window.loginUser = async function () {
-
-    try {
-
-      const result = await signInWithPopup(auth, provider);
-
-      const user = result.user;
-
-      await setDoc(
-        doc(db, "users", user.uid),
-        {
-          name: user.displayName || "",
-          email: user.email || "",
-          photo: user.photoURL || "",
-          lastLogin: new Date().toISOString()
-        },
-        { merge: true }
-      );
-
-      alert("Login successful!");
-
-    } catch (error) {
-
-      console.error(error);
-
-      alert("Login failed: " + error.message);
-    }
-  };
-
-
-  window.logoutUser = async function () {
-
-    try {
-
-      await signOut(auth);
-
-      alert("Logged out");
-
-    } catch (error) {
-
-      alert(error.message);
-    }
-  };
-
-
-  onAuthStateChanged(auth, async (user) => {
-
-    const box = document.getElementById("userBox");
-
-    if (user) {
-
-      box.innerHTML =
-        "Logged in as: <b>" +
-        (user.displayName || user.email) +
-        "</b>";
-
-    } else {
-
-      box.innerHTML = "Not logged in";
-    }
-
-  });
-
-
-  window.openCourse = function(courseName) {
-
-    document.getElementById("courseStatus").innerHTML =
-      "<h3>" + courseName + " Course</h3>" +
-      "<p>Course page is ready. Lessons will be added next.</p>";
-
-    document
-      .getElementById("courses")
-      .scrollIntoView({ behavior: "smooth" });
-  };
-
-
-  window.showCourses = function() {
-
-    document
-      .getElementById("courses")
-      .scrollIntoView({ behavior: "smooth" });
-
-  };
-
-
-  window.showHome = function() {
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-  };
-
-</script>
-
-</body>
- </html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GLOBAL AI LEARNING | Code with Bala Krishna</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#050816;
+  color:white;
+  min-height:100vh;
+}
+
+header{
+  background:#0b1225;
+  padding:18px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:15px;
+  border-bottom:1px solid #26324f;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+header h2{
+  font-size:18px;
+}
+
+nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+nav button{
+  background:transparent;
+  color:white;
+  border:1px solid #26324f;
+  padding:8px 12px;
+  border-radius:7px;
+  cursor:pointer;
+}
+
+nav button:hover{
+  background:#2563eb;
+}
+
+.hero{
+  text-align:center;
+  padding:70px 20px 50px;
+}
+
+.hero h1{
+  font-size:clamp(32px,8vw,52px);
+  margin-bottom:15px;
+}
+
+.hero p{
+  color:#aeb9d4;
+  font-size:17px;
+  line-height:1.6;
+  margin-bottom:25px;
+}
+
+.btn{
+  background:#2563eb;
+  color:white;
+  border:none;
+  padding:12px 20px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.btn:hover{
+  background:#1d4ed8;
+}
+
+section{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+section h2{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.courses{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#0d162b;
+  border:1px solid #26324f;
+  border-radius:12px
