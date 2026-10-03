@@ -26,7 +26,7 @@ header{
   border-bottom:1px solid #26324f;
   position:sticky;
   top:0;
-  z-index:10;
+  z-index:100;
 }
 
 .header-inner{
@@ -52,6 +52,7 @@ nav{
 
 button{
   cursor:pointer;
+  font-family:inherit;
 }
 
 .nav-btn{
@@ -64,6 +65,10 @@ button{
 
 .nav-btn:hover{
   background:#2563eb;
+}
+
+.nav-btn.logout{
+  display:none;
 }
 
 .hero{
@@ -97,9 +102,26 @@ button{
 }
 
 #userBox{
-  margin-top:20px;
+  margin:20px auto 0;
   color:#60a5fa;
   min-height:25px;
+  max-width:700px;
+}
+
+.user-card{
+  background:#0d162b;
+  border:1px solid #26324f;
+  border-radius:10px;
+  padding:15px;
+  margin-top:15px;
+}
+
+.user-card strong{
+  color:#60a5fa;
+}
+
+.login-message{
+  color:#fbbf24;
 }
 
 section{
@@ -148,6 +170,11 @@ section h2{
   background:#1d4ed8;
 }
 
+.course-btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
 #courseArea{
   display:none;
   margin-top:30px;
@@ -178,6 +205,18 @@ section h2{
   margin-top:10px;
 }
 
+.status{
+  margin-top:15px;
+  padding:12px;
+  border-radius:8px;
+  background:#111c35;
+  color:#aeb9d4;
+}
+
+.success{
+  color:#4ade80;
+}
+
 footer{
   text-align:center;
   color:#8995b0;
@@ -185,12 +224,41 @@ footer{
   margin-top:50px;
   padding:30px 20px;
 }
+
+.loading{
+  color:#fbbf24;
+}
+
+@media(max-width:600px){
+
+  .header-inner{
+    justify-content:center;
+  }
+
+  .logo{
+    width:100%;
+    text-align:center;
+  }
+
+  nav{
+    justify-content:center;
+  }
+
+  .hero{
+    padding-top:50px;
+  }
+
+  .hero h1{
+    font-size:38px;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
+
 <div class="header-inner">
 
 <div class="logo">
@@ -198,74 +266,143 @@ Code with Bala Krishna
 </div>
 
 <nav>
-<button class="nav-btn" onclick="showHome()">Home</button>
-<button class="nav-btn" onclick="showCourses()">Courses</button>
-<button class="nav-btn" onclick="loginUser()">Login</button>
-<button class="nav-btn" onclick="logoutUser()">Logout</button>
+
+<button class="nav-btn"
+onclick="showHome()">
+Home
+</button>
+
+<button class="nav-btn"
+onclick="showCourses()">
+Courses
+</button>
+
+<button class="nav-btn"
+id="loginBtn"
+onclick="loginUser()">
+Login
+</button>
+
+<button class="nav-btn logout"
+id="logoutBtn"
+onclick="logoutUser()">
+Logout
+</button>
+
 </nav>
 
 </div>
+
 </header>
+
 
 <main>
 
 <div class="hero" id="home">
 
-<h1>GLOBAL AI LEARNING</h1>
+<h1>
+GLOBAL AI LEARNING
+</h1>
 
 <p>
 Learn AI, Coding and Technology from anywhere in the world.
 </p>
 
-<button class="primary" onclick="showCourses()">
+<button class="primary"
+onclick="showCourses()">
 Explore Courses
 </button>
 
-<div id="userBox">
-Not logged in
+<div id="userBox" class="loading">
+Checking login...
 </div>
 
 </div>
+
 
 <section id="courses">
 
-<h2>Learning Courses</h2>
+<h2>
+Learning Courses
+</h2>
 
 <div class="courses">
 
+
 <div class="card">
-<h3>Python</h3>
-<p>Learn Python from basics to advanced programming.</p>
-<button class="course-btn" onclick="openCourse('Python')">
+
+<h3>
+Python
+</h3>
+
+<p>
+Learn Python from basics to advanced programming.
+</p>
+
+<button class="course-btn"
+onclick="openCourse('Python')">
 Start Python
 </button>
+
 </div>
 
+
 <div class="card">
-<h3>Java</h3>
-<p>Learn Java programming step by step.</p>
-<button class="course-btn" onclick="openCourse('Java')">
+
+<h3>
+Java
+</h3>
+
+<p>
+Learn Java programming step by step.
+</p>
+
+<button class="course-btn"
+onclick="openCourse('Java')">
 Start Java
 </button>
+
 </div>
 
+
 <div class="card">
-<h3>C Language</h3>
-<p>Build strong programming fundamentals with C.</p>
-<button class="course-btn" onclick="openCourse('C Language')">
+
+<h3>
+C Language
+</h3>
+
+<p>
+Build strong programming fundamentals with C.
+</p>
+
+<button class="course-btn"
+onclick="openCourse('C Language')">
 Start C
 </button>
+
 </div>
+
 
 <div class="card">
-<h3>Artificial Intelligence</h3>
-<p>Explore AI concepts, tools and applications.</p>
-<button class="course-btn" onclick="openCourse('Artificial Intelligence')">
+
+<h3>
+Artificial Intelligence
+</h3>
+
+<p>
+Explore AI concepts, tools and applications.
+</p>
+
+<button class="course-btn"
+onclick="openCourse('Artificial Intelligence')">
 Start AI
 </button>
-</div>
 
 </div>
+
+
+</div>
+
 
 <div id="courseArea"></div>
 
@@ -273,49 +410,70 @@ Start AI
 
 </main>
 
+
 <footer>
 © 2026 GLOBAL AI LEARNING — Code with Bala Krishna
 </footer>
 
+
 <script type="module">
+
+/* ================================
+   FIREBASE IMPORTS
+================================ */
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
 import {
-getAuth,
-GoogleAuthProvider,
-signInWithRedirect,
-getRedirectResult,
-signOut,
-onAuthStateChanged
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
 }
 from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
 import {
-getFirestore,
-doc,
-setDoc
+  getFirestore,
+  doc,
+  setDoc
 }
 from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
+/* ================================
+   FIREBASE CONFIG
+================================ */
+
 const firebaseConfig = {
 
-apiKey:"AIzaSyBwTtdNupA4S8vBhxuXAUCOOEiedALHrLo",
+  apiKey:
+  "AIzaSyBwTtdNupA4S8vBhxuXAUCOOEiedALHrLo",
 
-authDomain:"global-ai-learning-7f2c7.firebaseapp.com",
+  authDomain:
+  "global-ai-learning-7f2c7.firebaseapp.com",
 
-projectId:"global-ai-learning-7f2c7",
+  projectId:
+  "global-ai-learning-7f2c7",
 
-storageBucket:"global-ai-learning-7f2c7.firebasestorage.app",
+  storageBucket:
+  "global-ai-learning-7f2c7.firebasestorage.app",
 
-messagingSenderId:"814301153167",
+  messagingSenderId:
+  "814301153167",
 
-appId:"1:814301153167:web:01db46d4bb807eb6feedfa"
+  appId:
+  "1:814301153167:web:01db46d4bb807eb6feedfa"
 
 };
 
+
+/* ================================
+   INITIALIZE FIREBASE
+================================ */
 
 const app = initializeApp(firebaseConfig);
 
@@ -326,153 +484,553 @@ const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
 
+/* ================================
+   KEEP LOGIN ACTIVE
+================================ */
+
+setPersistence(
+  auth,
+  browserLocalPersistence
+)
+.catch((error)=>{
+  console.error(
+    "Persistence error:",
+    error
+  );
+});
+
+
+/* ================================
+   LOGIN
+================================ */
+
 window.loginUser = async function(){
 
-try{
+  const loginBtn =
+    document.getElementById("loginBtn");
 
-await signInWithRedirect(auth,provider);
+  const userBox =
+    document.getElementById("userBox");
 
-}catch(error){
+  loginBtn.disabled = true;
 
-console.error(error);
+  userBox.innerHTML =
+    '<div class="loading">Opening Google Login...</div>';
 
-alert("Login error: "+error.message);
+  try{
 
-}
+    const result =
+      await signInWithPopup(
+        auth,
+        provider
+      );
+
+    const user =
+      result.user;
+
+    console.log(
+      "Login successful:",
+      user
+    );
+
+
+    /* Save user in Firestore */
+
+    try{
+
+      await setDoc(
+        doc(
+          db,
+          "users",
+          user.uid
+        ),
+        {
+          name:
+            user.displayName || "",
+
+          email:
+            user.email || "",
+
+          photo:
+            user.photoURL || "",
+
+          lastLogin:
+            new Date().toISOString()
+        },
+        {
+          merge:true
+        }
+      );
+
+    }catch(error){
+
+      console.error(
+        "Firestore save error:",
+        error
+      );
+
+    }
+
+
+    /* UI is also updated immediately */
+
+    updateUserUI(user);
+
+
+  }catch(error){
+
+    console.error(
+      "Login error:",
+      error
+    );
+
+    userBox.innerHTML =
+      '<div class="login-message">' +
+      "Login failed: " +
+      escapeHTML(error.message) +
+      "</div>";
+
+  }finally{
+
+    loginBtn.disabled = false;
+
+  }
 
 };
 
 
-getRedirectResult(auth)
-
-.then(async(result)=>{
-
-if(result && result.user){
-
-const user=result.user;
-
-try{
-
-await setDoc(
-doc(db,"users",user.uid),
-{
-name:user.displayName || "",
-email:user.email || "",
-photo:user.photoURL || "",
-lastLogin:new Date().toISOString()
-},
-{merge:true}
-);
-
-}catch(error){
-
-console.error("Firestore error:",error);
-
-}
-
-}
-
-})
-
-.catch(error=>{
-
-console.error("Google login error:",error);
-
-});
-
+/* ================================
+   LOGOUT
+================================ */
 
 window.logoutUser = async function(){
 
-try{
+  const userBox =
+    document.getElementById("userBox");
 
-await signOut(auth);
+  try{
 
-}catch(error){
+    await signOut(auth);
 
-alert("Logout error: "+error.message);
+    userBox.innerHTML =
+      '<div class="login-message">' +
+      "Logged out successfully." +
+      "</div>";
+
+  }catch(error){
+
+    console.error(
+      "Logout error:",
+      error
+    );
+
+    alert(
+      "Logout error: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+/* ================================
+   AUTH STATE
+================================ */
+
+onAuthStateChanged(
+  auth,
+  function(user){
+
+    console.log(
+      "Current Firebase user:",
+      user
+    );
+
+    updateUserUI(user);
+
+  }
+);
+
+
+/* ================================
+   UPDATE LOGIN UI
+================================ */
+
+function updateUserUI(user){
+
+  const userBox =
+    document.getElementById("userBox");
+
+  const loginBtn =
+    document.getElementById("loginBtn");
+
+  const logoutBtn =
+    document.getElementById("logoutBtn");
+
+
+  if(user){
+
+    const name =
+      user.displayName ||
+      user.email ||
+      "User";
+
+
+    userBox.innerHTML =
+      '<div class="user-card">' +
+      'Logged in as: ' +
+      '<strong>' +
+      escapeHTML(name) +
+      '</strong>' +
+      '</div>';
+
+
+    loginBtn.style.display =
+      "none";
+
+    logoutBtn.style.display =
+      "inline-block";
+
+
+  }else{
+
+    userBox.innerHTML =
+      '<div class="login-message">' +
+      "Not logged in" +
+      "</div>";
+
+
+    loginBtn.style.display =
+      "inline-block";
+
+    logoutBtn.style.display =
+      "none";
+
+  }
 
 }
 
-};
 
+/* ================================
+   SECURITY HELPER
+================================ */
 
-onAuthStateChanged(auth,(user)=>{
+function escapeHTML(value){
 
-const userBox=document.getElementById("userBox");
-
-if(user){
-
-userBox.innerHTML=
-"Logged in as: <b>"+
-(user.displayName || user.email)+
-"</b>";
-
-}else{
-
-userBox.textContent="Not logged in";
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
-});
 
+/* ================================
+   HOME
+================================ */
 
-window.showHome=function(){
+window.showHome =
+function(){
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+  window.scrollTo({
 
-};
+    top:0,
 
+    behavior:"smooth"
 
-window.showCourses=function(){
-
-document
-.getElementById("courses")
-.scrollIntoView({
-behavior:"smooth"
-});
+  });
 
 };
 
 
-window.openCourse=function(courseName){
+/* ================================
+   COURSES
+================================ */
 
-const area=document.getElementById("courseArea");
+window.showCourses =
+function(){
 
-area.style.display="block";
+  document
+    .getElementById("courses")
+    .scrollIntoView({
 
-area.innerHTML=
-"<h3>"+courseName+" Course</h3>"+
-"<p>Welcome to the "+courseName+" learning course.</p>"+
-"<div class='lesson'>"+
-"<strong>Lesson 1</strong>"+
-"<p>Introduction to "+courseName+"</p>"+
-"<button class='course-btn' onclick=\"completeLesson('"+courseName+"')\">Complete Lesson</button>"+
-"</div>";
+      behavior:"smooth"
 
-area.scrollIntoView({
-behavior:"smooth"
-});
+    });
 
 };
 
 
-window.completeLesson=function(courseName){
+/* ================================
+   OPEN COURSE
+================================ */
 
-const area=document.getElementById("courseArea");
+window.openCourse =
+function(courseName){
 
-area.innerHTML=
-"<h3>"+courseName+" Course</h3>"+
-"<p>Lesson 1 completed successfully.</p>"+
-"<div class='lesson'>"+
-"<strong>Next Lesson</strong>"+
-"<p>More "+courseName+" lessons will appear here.</p>"+
-"</div>";
+  const area =
+    document.getElementById(
+      "courseArea"
+    );
+
+
+  area.style.display =
+    "block";
+
+
+  area.innerHTML =
+
+    "<h3>" +
+    escapeHTML(courseName) +
+    " Course</h3>" +
+
+    "<p>" +
+
+    "Welcome to the " +
+
+    escapeHTML(courseName) +
+
+    " learning course." +
+
+    "</p>" +
+
+    "<div class='lesson'>" +
+
+    "<strong>Lesson 1</strong>" +
+
+    "<p>" +
+
+    "Introduction to " +
+
+    escapeHTML(courseName) +
+
+    "</p>" +
+
+    "<button " +
+
+    "class='course-btn' " +
+
+    "onclick=\"completeLesson('" +
+
+    escapeHTML(courseName) +
+
+    "')\">" +
+
+    "Complete Lesson" +
+
+    "</button>" +
+
+    "</div>";
+
+
+  area.scrollIntoView({
+
+    behavior:"smooth"
+
+  });
 
 };
 
+
+/* ================================
+   COMPLETE LESSON
+================================ */
+
+window.completeLesson =
+function(courseName){
+
+  const area =
+    document.getElementById(
+      "courseArea"
+    );
+
+
+  area.innerHTML =
+
+    "<h3>" +
+
+    escapeHTML(courseName) +
+
+    " Course</h3>" +
+
+    "<div class='status'>" +
+
+    "<p class='success'>" +
+
+    "✓ Lesson 1 completed successfully."
+
+    +
+
+    "</p>" +
+
+    "</div>" +
+
+    "<div class='lesson'>" +
+
+    "<strong>Lesson 2</strong>" +
+
+    "<p>" +
+
+    "The next lesson is ready."
+
+    +
+
+    "</p>" +
+
+    "<button " +
+
+    "class='course-btn' " +
+
+    "onclick=\"openNextLesson('" +
+
+    escapeHTML(courseName) +
+
+    "')\">" +
+
+    "Start Lesson 2" +
+
+    "</button>" +
+
+    "</div>";
+
+};
+
+
+/* ================================
+   NEXT LESSON
+================================ */
+
+window.openNextLesson =
+function(courseName){
+
+  const area =
+    document.getElementById(
+      "courseArea"
+    );
+
+
+  area.innerHTML =
+
+    "<h3>" +
+
+    escapeHTML(courseName) +
+
+    " - Lesson 2</h3>" +
+
+    "<p>" +
+
+    "This lesson introduces the next " +
+
+    "important concept in " +
+
+    escapeHTML(courseName) +
+
+    "."
+
+    +
+
+    "</p>" +
+
+    "<div class='lesson'>" +
+
+    "<strong>Practice Task</strong>" +
+
+    "<p>" +
+
+    "Study this concept and complete " +
+
+    "the practice task."
+
+    +
+
+    "</p>" +
+
+    "<button " +
+
+    "class='course-btn' " +
+
+    "onclick=\"completeLesson2('" +
+
+    escapeHTML(courseName) +
+
+    "')\">" +
+
+    "Complete Lesson 2" +
+
+    "</button>" +
+
+    "</div>";
+
+};
+
+
+/* ================================
+   COMPLETE LESSON 2
+================================ */
+
+window.completeLesson2 =
+function(courseName){
+
+  const area =
+    document.getElementById(
+      "courseArea"
+    );
+
+
+  area.innerHTML =
+
+    "<h3>" +
+
+    escapeHTML(courseName) +
+
+    " Course</h3>" +
+
+    "<div class='status'>" +
+
+    "<p class='success'>" +
+
+    "✓ Lesson 2 completed successfully."
+
+    +
+
+    "</p>" +
+
+    "</div>" +
+
+    "<div class='lesson'>" +
+
+    "<strong>Course Progress</strong>" +
+
+    "<p>" +
+
+    "2 lessons completed."
+
+    +
+
+    "</p>" +
+
+    "<button " +
+
+    "class='course-btn' " +
+
+    "onclick=\"openCourse('" +
+
+    escapeHTML(courseName) +
+
+    "')\">" +
+
+    "Back to Course"
+
+    +
+
+    "</button>" +
+
+    "</div>";
+
+};
 
 </script>
 
