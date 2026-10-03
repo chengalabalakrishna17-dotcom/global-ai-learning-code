@@ -11,10 +11,10 @@
   box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family:Arial,sans-serif;
 }
 
 body{
+  font-family:Arial,sans-serif;
   background:#050816;
   color:white;
   min-height:100vh;
@@ -22,20 +22,26 @@ body{
 
 header{
   background:#0b1225;
-  padding:18px 22px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:15px;
+  padding:16px 20px;
   border-bottom:1px solid #26324f;
   position:sticky;
   top:0;
   z-index:10;
 }
 
-header h2{
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.logo{
   font-size:18px;
+  font-weight:bold;
 }
 
 nav{
@@ -44,16 +50,19 @@ nav{
   flex-wrap:wrap;
 }
 
-nav button{
-  background:transparent;
-  color:white;
-  border:1px solid #26324f;
-  padding:8px 12px;
-  border-radius:7px;
+button{
   cursor:pointer;
 }
 
-nav button:hover{
+.nav-btn{
+  background:transparent;
+  color:white;
+  border:1px solid #334155;
+  padding:9px 13px;
+  border-radius:7px;
+}
+
+.nav-btn:hover{
   background:#2563eb;
 }
 
@@ -63,29 +72,34 @@ nav button:hover{
 }
 
 .hero h1{
-  font-size:clamp(32px,8vw,52px);
+  font-size:clamp(35px,9vw,58px);
   margin-bottom:15px;
 }
 
 .hero p{
   color:#aeb9d4;
-  font-size:17px;
-  line-height:1.6;
-  margin-bottom:25px;
+  max-width:700px;
+  margin:0 auto 25px;
+  line-height:1.7;
 }
 
-.btn{
+.primary{
   background:#2563eb;
   color:white;
-  border:none;
-  padding:12px 20px;
+  border:0;
+  padding:13px 22px;
   border-radius:8px;
-  cursor:pointer;
   font-size:15px;
 }
 
-.btn:hover{
+.primary:hover{
   background:#1d4ed8;
+}
+
+#userBox{
+  margin-top:20px;
+  color:#60a5fa;
+  min-height:25px;
 }
 
 section{
@@ -108,4 +122,359 @@ section h2{
 .card{
   background:#0d162b;
   border:1px solid #26324f;
-  border-radius:12px
+  border-radius:12px;
+  padding:22px;
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#aeb9d4;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+.course-btn{
+  background:#2563eb;
+  color:white;
+  border:0;
+  padding:10px 16px;
+  border-radius:7px;
+}
+
+.course-btn:hover{
+  background:#1d4ed8;
+}
+
+#courseArea{
+  display:none;
+  margin-top:30px;
+  background:#0b1225;
+  border:1px solid #26324f;
+  border-radius:12px;
+  padding:25px;
+}
+
+#courseArea h3{
+  margin-bottom:12px;
+}
+
+#courseArea p{
+  color:#aeb9d4;
+  line-height:1.7;
+  margin-bottom:18px;
+}
+
+.lesson{
+  background:#111c35;
+  padding:15px;
+  border-radius:8px;
+  margin-top:10px;
+}
+
+.lesson button{
+  margin-top:10px;
+}
+
+footer{
+  text-align:center;
+  color:#8995b0;
+  border-top:1px solid #26324f;
+  margin-top:50px;
+  padding:30px 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-inner">
+
+<div class="logo">
+Code with Bala Krishna
+</div>
+
+<nav>
+<button class="nav-btn" onclick="showHome()">Home</button>
+<button class="nav-btn" onclick="showCourses()">Courses</button>
+<button class="nav-btn" onclick="loginUser()">Login</button>
+<button class="nav-btn" onclick="logoutUser()">Logout</button>
+</nav>
+
+</div>
+</header>
+
+<main>
+
+<div class="hero" id="home">
+
+<h1>GLOBAL AI LEARNING</h1>
+
+<p>
+Learn AI, Coding and Technology from anywhere in the world.
+</p>
+
+<button class="primary" onclick="showCourses()">
+Explore Courses
+</button>
+
+<div id="userBox">
+Not logged in
+</div>
+
+</div>
+
+<section id="courses">
+
+<h2>Learning Courses</h2>
+
+<div class="courses">
+
+<div class="card">
+<h3>Python</h3>
+<p>Learn Python from basics to advanced programming.</p>
+<button class="course-btn" onclick="openCourse('Python')">
+Start Python
+</button>
+</div>
+
+<div class="card">
+<h3>Java</h3>
+<p>Learn Java programming step by step.</p>
+<button class="course-btn" onclick="openCourse('Java')">
+Start Java
+</button>
+</div>
+
+<div class="card">
+<h3>C Language</h3>
+<p>Build strong programming fundamentals with C.</p>
+<button class="course-btn" onclick="openCourse('C Language')">
+Start C
+</button>
+</div>
+
+<div class="card">
+<h3>Artificial Intelligence</h3>
+<p>Explore AI concepts, tools and applications.</p>
+<button class="course-btn" onclick="openCourse('Artificial Intelligence')">
+Start AI
+</button>
+</div>
+
+</div>
+
+<div id="courseArea"></div>
+
+</section>
+
+</main>
+
+<footer>
+© 2026 GLOBAL AI LEARNING — Code with Bala Krishna
+</footer>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithRedirect,
+getRedirectResult,
+signOut,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+setDoc
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyBwTtdNupA4S8vBhxuXAUCOOEiedALHrLo",
+
+authDomain:"global-ai-learning-7f2c7.firebaseapp.com",
+
+projectId:"global-ai-learning-7f2c7",
+
+storageBucket:"global-ai-learning-7f2c7.firebasestorage.app",
+
+messagingSenderId:"814301153167",
+
+appId:"1:814301153167:web:01db46d4bb807eb6feedfa"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+const provider = new GoogleAuthProvider();
+
+
+window.loginUser = async function(){
+
+try{
+
+await signInWithRedirect(auth,provider);
+
+}catch(error){
+
+console.error(error);
+
+alert("Login error: "+error.message);
+
+}
+
+};
+
+
+getRedirectResult(auth)
+
+.then(async(result)=>{
+
+if(result && result.user){
+
+const user=result.user;
+
+try{
+
+await setDoc(
+doc(db,"users",user.uid),
+{
+name:user.displayName || "",
+email:user.email || "",
+photo:user.photoURL || "",
+lastLogin:new Date().toISOString()
+},
+{merge:true}
+);
+
+}catch(error){
+
+console.error("Firestore error:",error);
+
+}
+
+}
+
+})
+
+.catch(error=>{
+
+console.error("Google login error:",error);
+
+});
+
+
+window.logoutUser = async function(){
+
+try{
+
+await signOut(auth);
+
+}catch(error){
+
+alert("Logout error: "+error.message);
+
+}
+
+};
+
+
+onAuthStateChanged(auth,(user)=>{
+
+const userBox=document.getElementById("userBox");
+
+if(user){
+
+userBox.innerHTML=
+"Logged in as: <b>"+
+(user.displayName || user.email)+
+"</b>";
+
+}else{
+
+userBox.textContent="Not logged in";
+
+}
+
+});
+
+
+window.showHome=function(){
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+};
+
+
+window.showCourses=function(){
+
+document
+.getElementById("courses")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+};
+
+
+window.openCourse=function(courseName){
+
+const area=document.getElementById("courseArea");
+
+area.style.display="block";
+
+area.innerHTML=
+"<h3>"+courseName+" Course</h3>"+
+"<p>Welcome to the "+courseName+" learning course.</p>"+
+"<div class='lesson'>"+
+"<strong>Lesson 1</strong>"+
+"<p>Introduction to "+courseName+"</p>"+
+"<button class='course-btn' onclick=\"completeLesson('"+courseName+"')\">Complete Lesson</button>"+
+"</div>";
+
+area.scrollIntoView({
+behavior:"smooth"
+});
+
+};
+
+
+window.completeLesson=function(courseName){
+
+const area=document.getElementById("courseArea");
+
+area.innerHTML=
+"<h3>"+courseName+" Course</h3>"+
+"<p>Lesson 1 completed successfully.</p>"+
+"<div class='lesson'>"+
+"<strong>Next Lesson</strong>"+
+"<p>More "+courseName+" lessons will appear here.</p>"+
+"</div>";
+
+};
+
+
+</script>
+
+</body>
+</html>
