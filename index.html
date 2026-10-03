@@ -71,6 +71,11 @@ button{
   display:none;
 }
 
+.nav-btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
 .hero{
   text-align:center;
   padding:70px 20px 50px;
@@ -103,25 +108,43 @@ button{
 
 #userBox{
   margin:20px auto 0;
-  color:#60a5fa;
-  min-height:25px;
   max-width:700px;
+  min-height:25px;
 }
 
 .user-card{
   background:#0d162b;
-  border:1px solid #26324f;
+  border:1px solid #2563eb;
   border-radius:10px;
-  padding:15px;
+  padding:16px;
   margin-top:15px;
+  text-align:center;
 }
 
-.user-card strong{
+.user-card .logged-title{
+  color:#4ade80;
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.user-card .user-name{
   color:#60a5fa;
+  font-weight:bold;
+}
+
+.user-card .user-email{
+  color:#94a3b8;
+  margin-top:6px;
+  font-size:14px;
 }
 
 .login-message{
   color:#fbbf24;
+}
+
+.error-message{
+  color:#f87171;
 }
 
 section{
@@ -168,11 +191,6 @@ section h2{
 
 .course-btn:hover{
   background:#1d4ed8;
-}
-
-.course-btn:disabled{
-  opacity:.6;
-  cursor:not-allowed;
 }
 
 #courseArea{
@@ -295,7 +313,6 @@ Logout
 
 </header>
 
-
 <main>
 
 <div class="hero" id="home">
@@ -319,7 +336,6 @@ Checking login...
 
 </div>
 
-
 <section id="courses">
 
 <h2>
@@ -327,7 +343,6 @@ Learning Courses
 </h2>
 
 <div class="courses">
-
 
 <div class="card">
 
@@ -346,7 +361,6 @@ Start Python
 
 </div>
 
-
 <div class="card">
 
 <h3>
@@ -363,7 +377,6 @@ Start Java
 </button>
 
 </div>
-
 
 <div class="card">
 
@@ -382,7 +395,6 @@ Start C
 
 </div>
 
-
 <div class="card">
 
 <h3>
@@ -400,9 +412,7 @@ Start AI
 
 </div>
 
-
 </div>
-
 
 <div id="courseArea"></div>
 
@@ -410,17 +420,15 @@ Start AI
 
 </main>
 
-
 <footer>
 © 2026 GLOBAL AI LEARNING — Code with Bala Krishna
 </footer>
 
-
 <script type="module">
 
-/* ================================
+/* =================================
    FIREBASE IMPORTS
-================================ */
+================================= */
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
@@ -444,9 +452,9 @@ import {
 from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
-/* ================================
+/* =================================
    FIREBASE CONFIG
-================================ */
+================================= */
 
 const firebaseConfig = {
 
@@ -471,51 +479,72 @@ const firebaseConfig = {
 };
 
 
-/* ================================
+/* =================================
    INITIALIZE FIREBASE
-================================ */
+================================= */
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+  getAuth(app);
 
-const db = getFirestore(app);
+const db =
+  getFirestore(app);
 
-const provider = new GoogleAuthProvider();
+const provider =
+  new GoogleAuthProvider();
 
 
-/* ================================
-   KEEP LOGIN ACTIVE
-================================ */
+/* =================================
+   KEEP USER LOGGED IN
+================================= */
 
 setPersistence(
   auth,
   browserLocalPersistence
 )
-.catch((error)=>{
+.then(() => {
+
+  console.log(
+    "Login persistence enabled"
+  );
+
+})
+.catch((error) => {
+
   console.error(
     "Persistence error:",
     error
   );
+
 });
 
 
-/* ================================
+/* =================================
    LOGIN
-================================ */
+================================= */
 
-window.loginUser = async function(){
+window.loginUser =
+async function(){
 
   const loginBtn =
-    document.getElementById("loginBtn");
+    document.getElementById(
+      "loginBtn"
+    );
 
   const userBox =
-    document.getElementById("userBox");
+    document.getElementById(
+      "userBox"
+    );
 
-  loginBtn.disabled = true;
+  loginBtn.disabled =
+    true;
 
   userBox.innerHTML =
-    '<div class="loading">Opening Google Login...</div>';
+    '<div class="loading">' +
+    'Opening Google Login...' +
+    '</div>';
 
   try{
 
@@ -534,7 +563,7 @@ window.loginUser = async function(){
     );
 
 
-    /* Save user in Firestore */
+    /* SAVE USER */
 
     try{
 
@@ -545,6 +574,7 @@ window.loginUser = async function(){
           user.uid
         ),
         {
+
           name:
             user.displayName || "",
 
@@ -556,13 +586,19 @@ window.loginUser = async function(){
 
           lastLogin:
             new Date().toISOString()
+
         },
         {
           merge:true
         }
       );
 
-    }catch(error){
+      console.log(
+        "User saved to Firestore"
+      );
+
+    }
+    catch(error){
 
       console.error(
         "Firestore save error:",
@@ -572,12 +608,13 @@ window.loginUser = async function(){
     }
 
 
-    /* UI is also updated immediately */
+    /* UPDATE WEBSITE */
 
     updateUserUI(user);
 
 
-  }catch(error){
+  }
+  catch(error){
 
     console.error(
       "Login error:",
@@ -585,65 +622,78 @@ window.loginUser = async function(){
     );
 
     userBox.innerHTML =
-      '<div class="login-message">' +
-      "Login failed: " +
-      escapeHTML(error.message) +
-      "</div>";
+      '<div class="error-message">' +
+      'Login failed: ' +
+      escapeHTML(
+        error.message
+      ) +
+      '</div>';
 
-  }finally{
+  }
+  finally{
 
-    loginBtn.disabled = false;
+    loginBtn.disabled =
+      false;
 
   }
 
 };
 
 
-/* ================================
+/* =================================
    LOGOUT
-================================ */
+================================= */
 
-window.logoutUser = async function(){
+window.logoutUser =
+async function(){
 
   const userBox =
-    document.getElementById("userBox");
+    document.getElementById(
+      "userBox"
+    );
 
   try{
 
     await signOut(auth);
 
+    updateUserUI(null);
+
     userBox.innerHTML =
       '<div class="login-message">' +
-      "Logged out successfully." +
-      "</div>";
+      'Logged out successfully.' +
+      '</div>';
 
-  }catch(error){
+  }
+  catch(error){
 
     console.error(
       "Logout error:",
       error
     );
 
-    alert(
-      "Logout error: " +
-      error.message
-    );
+    userBox.innerHTML =
+      '<div class="error-message">' +
+      'Logout error: ' +
+      escapeHTML(
+        error.message
+      ) +
+      '</div>';
 
   }
 
 };
 
 
-/* ================================
-   AUTH STATE
-================================ */
+/* =================================
+   AUTH STATE LISTENER
+================================= */
 
 onAuthStateChanged(
   auth,
   function(user){
 
     console.log(
-      "Current Firebase user:",
+      "Firebase auth state:",
       user
     );
 
@@ -653,37 +703,61 @@ onAuthStateChanged(
 );
 
 
-/* ================================
+/* =================================
    UPDATE LOGIN UI
-================================ */
+================================= */
 
 function updateUserUI(user){
 
   const userBox =
-    document.getElementById("userBox");
+    document.getElementById(
+      "userBox"
+    );
 
   const loginBtn =
-    document.getElementById("loginBtn");
+    document.getElementById(
+      "loginBtn"
+    );
 
   const logoutBtn =
-    document.getElementById("logoutBtn");
+    document.getElementById(
+      "logoutBtn"
+    );
 
 
   if(user){
 
     const name =
       user.displayName ||
-      user.email ||
       "User";
 
+    const email =
+      user.email ||
+      "";
 
-    userBox.innerHTML =
-      '<div class="user-card">' +
-      'Logged in as: ' +
-      '<strong>' +
-      escapeHTML(name) +
-      '</strong>' +
-      '</div>';
+
+    userBox.innerHTML = `
+
+      <div class="user-card">
+
+        <div class="logged-title">
+          ✅ Logged In
+        </div>
+
+        <div>
+          Welcome,
+          <span class="user-name">
+            ${escapeHTML(name)}
+          </span>
+        </div>
+
+        <div class="user-email">
+          ${escapeHTML(email)}
+        </div>
+
+      </div>
+
+    `;
 
 
     loginBtn.style.display =
@@ -693,12 +767,16 @@ function updateUserUI(user){
       "inline-block";
 
 
-  }else{
+  }
+  else{
 
-    userBox.innerHTML =
-      '<div class="login-message">' +
-      "Not logged in" +
-      "</div>";
+    userBox.innerHTML = `
+
+      <div class="login-message">
+        🔒 Not logged in
+      </div>
+
+    `;
 
 
     loginBtn.style.display =
@@ -712,25 +790,45 @@ function updateUserUI(user){
 }
 
 
-/* ================================
+/* =================================
    SECURITY HELPER
-================================ */
+================================= */
 
 function escapeHTML(value){
 
   return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
-/* ================================
+/* =================================
    HOME
-================================ */
+================================= */
 
 window.showHome =
 function(){
@@ -746,15 +844,17 @@ function(){
 };
 
 
-/* ================================
+/* =================================
    COURSES
-================================ */
+================================= */
 
 window.showCourses =
 function(){
 
   document
-    .getElementById("courses")
+    .getElementById(
+      "courses"
+    )
     .scrollIntoView({
 
       behavior:"smooth"
@@ -764,9 +864,9 @@ function(){
 };
 
 
-/* ================================
+/* =================================
    OPEN COURSE
-================================ */
+================================= */
 
 window.openCourse =
 function(courseName){
@@ -781,49 +881,41 @@ function(courseName){
     "block";
 
 
-  area.innerHTML =
+  area.innerHTML = `
 
-    "<h3>" +
-    escapeHTML(courseName) +
-    " Course</h3>" +
+    <h3>
+      ${escapeHTML(courseName)}
+      Course
+    </h3>
 
-    "<p>" +
+    <p>
+      Welcome to the
+      ${escapeHTML(courseName)}
+      learning course.
+    </p>
 
-    "Welcome to the " +
+    <div class="lesson">
 
-    escapeHTML(courseName) +
+      <strong>
+        Lesson 1
+      </strong>
 
-    " learning course." +
+      <p>
+        Introduction to
+        ${escapeHTML(courseName)}
+      </p>
 
-    "</p>" +
+      <button
+        class="course-btn"
+        onclick="completeLesson('${escapeHTML(courseName)}')">
 
-    "<div class='lesson'>" +
+        Complete Lesson
 
-    "<strong>Lesson 1</strong>" +
+      </button>
 
-    "<p>" +
+    </div>
 
-    "Introduction to " +
-
-    escapeHTML(courseName) +
-
-    "</p>" +
-
-    "<button " +
-
-    "class='course-btn' " +
-
-    "onclick=\"completeLesson('" +
-
-    escapeHTML(courseName) +
-
-    "')\">" +
-
-    "Complete Lesson" +
-
-    "</button>" +
-
-    "</div>";
+  `;
 
 
   area.scrollIntoView({
@@ -835,9 +927,9 @@ function(courseName){
 };
 
 
-/* ================================
-   COMPLETE LESSON
-================================ */
+/* =================================
+   COMPLETE LESSON 1
+================================= */
 
 window.completeLesson =
 function(courseName){
@@ -848,60 +940,49 @@ function(courseName){
     );
 
 
-  area.innerHTML =
+  area.innerHTML = `
 
-    "<h3>" +
+    <h3>
+      ${escapeHTML(courseName)}
+      Course
+    </h3>
 
-    escapeHTML(courseName) +
+    <div class="status">
 
-    " Course</h3>" +
+      <p class="success">
+        ✓ Lesson 1 completed successfully.
+      </p>
 
-    "<div class='status'>" +
+    </div>
 
-    "<p class='success'>" +
+    <div class="lesson">
 
-    "✓ Lesson 1 completed successfully."
+      <strong>
+        Lesson 2
+      </strong>
 
-    +
+      <p>
+        The next lesson is ready.
+      </p>
 
-    "</p>" +
+      <button
+        class="course-btn"
+        onclick="openNextLesson('${escapeHTML(courseName)}')">
 
-    "</div>" +
+        Start Lesson 2
 
-    "<div class='lesson'>" +
+      </button>
 
-    "<strong>Lesson 2</strong>" +
+    </div>
 
-    "<p>" +
-
-    "The next lesson is ready."
-
-    +
-
-    "</p>" +
-
-    "<button " +
-
-    "class='course-btn' " +
-
-    "onclick=\"openNextLesson('" +
-
-    escapeHTML(courseName) +
-
-    "')\">" +
-
-    "Start Lesson 2" +
-
-    "</button>" +
-
-    "</div>";
+  `;
 
 };
 
 
-/* ================================
+/* =================================
    NEXT LESSON
-================================ */
+================================= */
 
 window.openNextLesson =
 function(courseName){
@@ -912,64 +993,48 @@ function(courseName){
     );
 
 
-  area.innerHTML =
+  area.innerHTML = `
 
-    "<h3>" +
+    <h3>
+      ${escapeHTML(courseName)}
+      - Lesson 2
+    </h3>
 
-    escapeHTML(courseName) +
+    <p>
+      This lesson introduces the next
+      important concept in
+      ${escapeHTML(courseName)}.
+    </p>
 
-    " - Lesson 2</h3>" +
+    <div class="lesson">
 
-    "<p>" +
+      <strong>
+        Practice Task
+      </strong>
 
-    "This lesson introduces the next " +
+      <p>
+        Study this concept and complete
+        the practice task.
+      </p>
 
-    "important concept in " +
+      <button
+        class="course-btn"
+        onclick="completeLesson2('${escapeHTML(courseName)}')">
 
-    escapeHTML(courseName) +
+        Complete Lesson 2
 
-    "."
+      </button>
 
-    +
+    </div>
 
-    "</p>" +
-
-    "<div class='lesson'>" +
-
-    "<strong>Practice Task</strong>" +
-
-    "<p>" +
-
-    "Study this concept and complete " +
-
-    "the practice task."
-
-    +
-
-    "</p>" +
-
-    "<button " +
-
-    "class='course-btn' " +
-
-    "onclick=\"completeLesson2('" +
-
-    escapeHTML(courseName) +
-
-    "')\">" +
-
-    "Complete Lesson 2" +
-
-    "</button>" +
-
-    "</div>";
+  `;
 
 };
 
 
-/* ================================
+/* =================================
    COMPLETE LESSON 2
-================================ */
+================================= */
 
 window.completeLesson2 =
 function(courseName){
@@ -980,55 +1045,42 @@ function(courseName){
     );
 
 
-  area.innerHTML =
+  area.innerHTML = `
 
-    "<h3>" +
+    <h3>
+      ${escapeHTML(courseName)}
+      Course
+    </h3>
 
-    escapeHTML(courseName) +
+    <div class="status">
 
-    " Course</h3>" +
+      <p class="success">
+        ✓ Lesson 2 completed successfully.
+      </p>
 
-    "<div class='status'>" +
+    </div>
 
-    "<p class='success'>" +
+    <div class="lesson">
 
-    "✓ Lesson 2 completed successfully."
+      <strong>
+        Course Progress
+      </strong>
 
-    +
+      <p>
+        2 lessons completed.
+      </p>
 
-    "</p>" +
+      <button
+        class="course-btn"
+        onclick="openCourse('${escapeHTML(courseName)}')">
 
-    "</div>" +
+        Back to Course
 
-    "<div class='lesson'>" +
+      </button>
 
-    "<strong>Course Progress</strong>" +
+    </div>
 
-    "<p>" +
-
-    "2 lessons completed."
-
-    +
-
-    "</p>" +
-
-    "<button " +
-
-    "class='course-btn' " +
-
-    "onclick=\"openCourse('" +
-
-    escapeHTML(courseName) +
-
-    "')\">" +
-
-    "Back to Course"
-
-    +
-
-    "</button>" +
-
-    "</div>";
+  `;
 
 };
 
