@@ -13,6 +13,10 @@
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   font-family:Arial,sans-serif;
   background:#050816;
@@ -55,6 +59,11 @@ button{
   font-family:inherit;
 }
 
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
 .nav-btn{
   background:transparent;
   color:white;
@@ -67,13 +76,8 @@ button{
   background:#2563eb;
 }
 
-.nav-btn.logout{
+#logoutBtn{
   display:none;
-}
-
-.nav-btn:disabled{
-  opacity:.6;
-  cursor:not-allowed;
 }
 
 .hero{
@@ -112,39 +116,36 @@ button{
   min-height:25px;
 }
 
-.user-card{
-  background:#0d162b;
-  border:1px solid #2563eb;
-  border-radius:10px;
-  padding:16px;
-  margin-top:15px;
-  text-align:center;
-}
-
-.user-card .logged-title{
-  color:#4ade80;
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
-.user-card .user-name{
-  color:#60a5fa;
-  font-weight:bold;
-}
-
-.user-card .user-email{
-  color:#94a3b8;
-  margin-top:6px;
-  font-size:14px;
+.loading{
+  color:#fbbf24;
 }
 
 .login-message{
   color:#fbbf24;
 }
 
-.error-message{
-  color:#f87171;
+.user-card{
+  background:#0d162b;
+  border:1px solid #2563eb;
+  border-radius:10px;
+  padding:16px;
+  margin-top:15px;
+}
+
+.user-card strong{
+  color:#60a5fa;
+}
+
+.user-email{
+  color:#aeb9d4;
+  margin-top:6px;
+  font-size:14px;
+}
+
+.status-online{
+  color:#4ade80;
+  margin-top:8px;
+  font-size:14px;
 }
 
 section{
@@ -169,6 +170,12 @@ section h2{
   border:1px solid #26324f;
   border-radius:12px;
   padding:22px;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border-color:#2563eb;
 }
 
 .card h3{
@@ -214,9 +221,9 @@ section h2{
 
 .lesson{
   background:#111c35;
-  padding:15px;
+  padding:18px;
   border-radius:8px;
-  margin-top:10px;
+  margin-top:12px;
 }
 
 .lesson button{
@@ -225,7 +232,7 @@ section h2{
 
 .status{
   margin-top:15px;
-  padding:12px;
+  padding:15px;
   border-radius:8px;
   background:#111c35;
   color:#aeb9d4;
@@ -235,16 +242,27 @@ section h2{
   color:#4ade80;
 }
 
+.progress{
+  margin-top:15px;
+  background:#111827;
+  border-radius:8px;
+  overflow:hidden;
+  height:12px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:#2563eb;
+  transition:.3s;
+}
+
 footer{
   text-align:center;
   color:#8995b0;
   border-top:1px solid #26324f;
   margin-top:50px;
   padding:30px 20px;
-}
-
-.loading{
-  color:#fbbf24;
 }
 
 @media(max-width:600px){
@@ -269,6 +287,11 @@ footer{
   .hero h1{
     font-size:38px;
   }
+
+  section{
+    padding-left:15px;
+    padding-right:15px;
+  }
 }
 </style>
 </head>
@@ -285,25 +308,19 @@ Code with Bala Krishna
 
 <nav>
 
-<button class="nav-btn"
-onclick="showHome()">
+<button class="nav-btn" onclick="showHome()">
 Home
 </button>
 
-<button class="nav-btn"
-onclick="showCourses()">
+<button class="nav-btn" onclick="showCourses()">
 Courses
 </button>
 
-<button class="nav-btn"
-id="loginBtn"
-onclick="loginUser()">
-Login
+<button class="nav-btn" id="loginBtn" onclick="loginUser()">
+Login with Google
 </button>
 
-<button class="nav-btn logout"
-id="logoutBtn"
-onclick="logoutUser()">
+<button class="nav-btn" id="logoutBtn" onclick="logoutUser()">
 Logout
 </button>
 
@@ -312,6 +329,7 @@ Logout
 </div>
 
 </header>
+
 
 <main>
 
@@ -325,16 +343,18 @@ GLOBAL AI LEARNING
 Learn AI, Coding and Technology from anywhere in the world.
 </p>
 
-<button class="primary"
-onclick="showCourses()">
+<button class="primary" onclick="showCourses()">
 Explore Courses
 </button>
 
-<div id="userBox" class="loading">
+<div id="userBox">
+<div class="loading">
 Checking login...
+</div>
 </div>
 
 </div>
+
 
 <section id="courses">
 
@@ -361,6 +381,7 @@ Start Python
 
 </div>
 
+
 <div class="card">
 
 <h3>
@@ -378,6 +399,7 @@ Start Java
 
 </div>
 
+
 <div class="card">
 
 <h3>
@@ -394,6 +416,7 @@ Start C
 </button>
 
 </div>
+
 
 <div class="card">
 
@@ -414,35 +437,41 @@ Start AI
 
 </div>
 
+
 <div id="courseArea"></div>
 
 </section>
 
 </main>
 
+
 <footer>
 © 2026 GLOBAL AI LEARNING — Code with Bala Krishna
 </footer>
 
+
 <script type="module">
 
-/* =================================
+/* =====================================================
    FIREBASE IMPORTS
-================================= */
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+===================================================== */
 
 import {
-  getAuth,
+  initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+
+import {
+  initializeAuth,
+  browserLocalPersistence,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
-  onAuthStateChanged,
-  setPersistence,
-  browserLocalPersistence
+  onAuthStateChanged
 }
 from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
 
 import {
   getFirestore,
@@ -452,9 +481,9 @@ import {
 from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
-/* =================================
+/* =====================================================
    FIREBASE CONFIG
-================================= */
+===================================================== */
 
 const firebaseConfig = {
 
@@ -479,74 +508,70 @@ const firebaseConfig = {
 };
 
 
-/* =================================
+/* =====================================================
    INITIALIZE FIREBASE
-================================= */
+===================================================== */
 
-const app =
-  initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const auth =
-  getAuth(app);
+
+/*
+  IMPORTANT:
+  Auth is initialized with browserLocalPersistence
+  from the beginning.
+*/
+
+const auth = initializeAuth(app, {
+
+  persistence:
+  browserLocalPersistence
+
+});
+
 
 const db =
   getFirestore(app);
+
 
 const provider =
   new GoogleAuthProvider();
 
 
-/* =================================
-   KEEP USER LOGGED IN
-================================= */
+/* =====================================================
+   DOM ELEMENTS
+===================================================== */
 
-setPersistence(
-  auth,
-  browserLocalPersistence
-)
-.then(() => {
+const userBox =
+  document.getElementById("userBox");
 
-  console.log(
-    "Login persistence enabled"
-  );
+const loginBtn =
+  document.getElementById("loginBtn");
 
-})
-.catch((error) => {
-
-  console.error(
-    "Persistence error:",
-    error
-  );
-
-});
+const logoutBtn =
+  document.getElementById("logoutBtn");
 
 
-/* =================================
+/* =====================================================
    LOGIN
-================================= */
+===================================================== */
 
-window.loginUser =
-async function(){
+window.loginUser = async function(){
 
-  const loginBtn =
-    document.getElementById(
-      "loginBtn"
-    );
-
-  const userBox =
-    document.getElementById(
-      "userBox"
-    );
-
-  loginBtn.disabled =
-    true;
+  loginBtn.disabled = true;
 
   userBox.innerHTML =
-    '<div class="loading">' +
-    'Opening Google Login...' +
-    '</div>';
+  `
+    <div class="loading">
+      Opening Google Login...
+    </div>
+  `;
+
 
   try{
+
+    /*
+      Google popup
+    */
 
     const result =
       await signInWithPopup(
@@ -554,25 +579,39 @@ async function(){
         provider
       );
 
+
     const user =
       result.user;
 
+
     console.log(
-      "Login successful:",
+      "Google Login Success:",
       user
     );
 
 
-    /* SAVE USER */
+    /*
+      IMPORTANT:
+      Immediately update webpage UI.
+    */
+
+    updateUserUI(user);
+
+
+    /*
+      Save user information in Firestore.
+    */
 
     try{
 
       await setDoc(
+
         doc(
           db,
           "users",
           user.uid
         ),
+
         {
 
           name:
@@ -588,9 +627,11 @@ async function(){
             new Date().toISOString()
 
         },
+
         {
           merge:true
         }
+
       );
 
       console.log(
@@ -598,189 +639,197 @@ async function(){
       );
 
     }
-    catch(error){
+    catch(firestoreError){
 
       console.error(
-        "Firestore save error:",
-        error
+        "Firestore error:",
+        firestoreError
       );
 
+      /*
+        Firestore error will NOT
+        log the user out.
+      */
+
     }
-
-
-    /* UPDATE WEBSITE */
-
-    updateUserUI(user);
 
 
   }
   catch(error){
 
     console.error(
-      "Login error:",
+      "Google Login Error:",
       error
     );
 
+
     userBox.innerHTML =
-      '<div class="error-message">' +
-      'Login failed: ' +
-      escapeHTML(
-        error.message
-      ) +
-      '</div>';
+    `
+      <div class="login-message">
+        Login failed.
+        <br>
+        ${escapeHTML(error.message)}
+      </div>
+    `;
 
   }
   finally{
 
-    loginBtn.disabled =
-      false;
+    loginBtn.disabled = false;
 
   }
 
 };
 
 
-/* =================================
+/* =====================================================
    LOGOUT
-================================= */
+===================================================== */
 
-window.logoutUser =
-async function(){
+window.logoutUser = async function(){
 
-  const userBox =
-    document.getElementById(
-      "userBox"
-    );
+  logoutBtn.disabled = true;
+
 
   try{
 
     await signOut(auth);
 
+
     updateUserUI(null);
 
+
     userBox.innerHTML =
-      '<div class="login-message">' +
-      'Logged out successfully.' +
-      '</div>';
+    `
+      <div class="login-message">
+        Logged out successfully.
+      </div>
+    `;
+
 
   }
   catch(error){
 
     console.error(
-      "Logout error:",
+      "Logout Error:",
       error
     );
 
+
     userBox.innerHTML =
-      '<div class="error-message">' +
-      'Logout error: ' +
-      escapeHTML(
-        error.message
-      ) +
-      '</div>';
+    `
+      <div class="login-message">
+        Logout failed.
+        <br>
+        ${escapeHTML(error.message)}
+      </div>
+    `;
+
+  }
+  finally{
+
+    logoutBtn.disabled = false;
 
   }
 
 };
 
 
-/* =================================
-   AUTH STATE LISTENER
-================================= */
+/* =====================================================
+   FIREBASE AUTH STATE LISTENER
+===================================================== */
 
 onAuthStateChanged(
+
   auth,
+
   function(user){
 
     console.log(
-      "Firebase auth state:",
+      "Firebase Auth State:",
       user
     );
+
 
     updateUserUI(user);
 
   }
+
 );
 
 
-/* =================================
-   UPDATE LOGIN UI
-================================= */
+/* =====================================================
+   UPDATE USER UI
+===================================================== */
 
 function updateUserUI(user){
 
-  const userBox =
-    document.getElementById(
-      "userBox"
-    );
-
-  const loginBtn =
-    document.getElementById(
-      "loginBtn"
-    );
-
-  const logoutBtn =
-    document.getElementById(
-      "logoutBtn"
-    );
-
+  /*
+    If Firebase has a logged-in user
+  */
 
   if(user){
 
     const name =
       user.displayName ||
-      "User";
+      "Google User";
+
 
     const email =
       user.email ||
       "";
 
 
-    userBox.innerHTML = `
-
+    userBox.innerHTML =
+    `
       <div class="user-card">
 
-        <div class="logged-title">
-          ✅ Logged In
-        </div>
-
         <div>
-          Welcome,
-          <span class="user-name">
+          🔓 Logged in as:
+          <strong>
             ${escapeHTML(name)}
-          </span>
+          </strong>
         </div>
 
         <div class="user-email">
           ${escapeHTML(email)}
         </div>
 
-      </div>
+        <div class="status-online">
+          ● Account is active
+        </div>
 
+      </div>
     `;
 
 
     loginBtn.style.display =
       "none";
 
+
     logoutBtn.style.display =
       "inline-block";
 
 
   }
+
+  /*
+    If nobody is logged in
+  */
+
   else{
 
-    userBox.innerHTML = `
-
+    userBox.innerHTML =
+    `
       <div class="login-message">
         🔒 Not logged in
       </div>
-
     `;
 
 
     loginBtn.style.display =
       "inline-block";
+
 
     logoutBtn.style.display =
       "none";
@@ -790,9 +839,9 @@ function updateUserUI(user){
 }
 
 
-/* =================================
+/* =====================================================
    SECURITY HELPER
-================================= */
+===================================================== */
 
 function escapeHTML(value){
 
@@ -826,47 +875,47 @@ function escapeHTML(value){
 }
 
 
-/* =================================
+/* =====================================================
    HOME
-================================= */
+===================================================== */
 
 window.showHome =
 function(){
 
-  window.scrollTo({
-
-    top:0,
-
-    behavior:"smooth"
-
-  });
-
-};
-
-
-/* =================================
-   COURSES
-================================= */
-
-window.showCourses =
-function(){
-
   document
-    .getElementById(
-      "courses"
-    )
+    .getElementById("home")
     .scrollIntoView({
 
-      behavior:"smooth"
+      behavior:
+      "smooth"
 
     });
 
 };
 
 
-/* =================================
+/* =====================================================
+   COURSES
+===================================================== */
+
+window.showCourses =
+function(){
+
+  document
+    .getElementById("courses")
+    .scrollIntoView({
+
+      behavior:
+      "smooth"
+
+    });
+
+};
+
+
+/* =====================================================
    OPEN COURSE
-================================= */
+===================================================== */
 
 window.openCourse =
 function(courseName){
@@ -881,7 +930,8 @@ function(courseName){
     "block";
 
 
-  area.innerHTML = `
+  area.innerHTML =
+  `
 
     <h3>
       ${escapeHTML(courseName)}
@@ -894,6 +944,7 @@ function(courseName){
       learning course.
     </p>
 
+
     <div class="lesson">
 
       <strong>
@@ -902,16 +953,26 @@ function(courseName){
 
       <p>
         Introduction to
-        ${escapeHTML(courseName)}
+        ${escapeHTML(courseName)}.
       </p>
 
       <button
         class="course-btn"
         onclick="completeLesson('${escapeHTML(courseName)}')">
 
-        Complete Lesson
+        Complete Lesson 1
 
       </button>
+
+    </div>
+
+
+    <div class="progress">
+
+      <div
+        class="progress-bar"
+        id="progressBar">
+      </div>
 
     </div>
 
@@ -920,16 +981,17 @@ function(courseName){
 
   area.scrollIntoView({
 
-    behavior:"smooth"
+    behavior:
+    "smooth"
 
   });
 
 };
 
 
-/* =================================
+/* =====================================================
    COMPLETE LESSON 1
-================================= */
+===================================================== */
 
 window.completeLesson =
 function(courseName){
@@ -940,12 +1002,14 @@ function(courseName){
     );
 
 
-  area.innerHTML = `
+  area.innerHTML =
+  `
 
     <h3>
       ${escapeHTML(courseName)}
       Course
     </h3>
+
 
     <div class="status">
 
@@ -955,6 +1019,17 @@ function(courseName){
 
     </div>
 
+
+    <div class="progress">
+
+      <div
+        class="progress-bar"
+        style="width:50%">
+      </div>
+
+    </div>
+
+
     <div class="lesson">
 
       <strong>
@@ -962,7 +1037,8 @@ function(courseName){
       </strong>
 
       <p>
-        The next lesson is ready.
+        Continue learning the next
+        important concept.
       </p>
 
       <button
@@ -980,9 +1056,9 @@ function(courseName){
 };
 
 
-/* =================================
-   NEXT LESSON
-================================= */
+/* =====================================================
+   LESSON 2
+===================================================== */
 
 window.openNextLesson =
 function(courseName){
@@ -993,18 +1069,21 @@ function(courseName){
     );
 
 
-  area.innerHTML = `
+  area.innerHTML =
+  `
 
     <h3>
       ${escapeHTML(courseName)}
       - Lesson 2
     </h3>
 
+
     <p>
       This lesson introduces the next
       important concept in
       ${escapeHTML(courseName)}.
     </p>
+
 
     <div class="lesson">
 
@@ -1013,8 +1092,8 @@ function(courseName){
       </strong>
 
       <p>
-        Study this concept and complete
-        the practice task.
+        Complete the practice task
+        and continue your learning.
       </p>
 
       <button
@@ -1027,14 +1106,24 @@ function(courseName){
 
     </div>
 
+
+    <div class="progress">
+
+      <div
+        class="progress-bar"
+        style="width:50%">
+      </div>
+
+    </div>
+
   `;
 
 };
 
 
-/* =================================
+/* =====================================================
    COMPLETE LESSON 2
-================================= */
+===================================================== */
 
 window.completeLesson2 =
 function(courseName){
@@ -1045,12 +1134,14 @@ function(courseName){
     );
 
 
-  area.innerHTML = `
+  area.innerHTML =
+  `
 
     <h3>
       ${escapeHTML(courseName)}
       Course
     </h3>
+
 
     <div class="status">
 
@@ -1059,6 +1150,17 @@ function(courseName){
       </p>
 
     </div>
+
+
+    <div class="progress">
+
+      <div
+        class="progress-bar"
+        style="width:100%">
+      </div>
+
+    </div>
+
 
     <div class="lesson">
 
@@ -1070,11 +1172,16 @@ function(courseName){
         2 lessons completed.
       </p>
 
+      <p class="success">
+        Progress: 100%
+      </p>
+
+
       <button
         class="course-btn"
         onclick="openCourse('${escapeHTML(courseName)}')">
 
-        Back to Course
+        Restart Course
 
       </button>
 
@@ -1084,7 +1191,65 @@ function(courseName){
 
 };
 
+
+/* =====================================================
+   EXTRA AUTH CHECK
+   =====================================================
+
+   This checks Firebase again when the page
+   becomes active.
+===================================================== */
+
+window.addEventListener(
+  "focus",
+  function(){
+
+    const currentUser =
+      auth.currentUser;
+
+
+    if(currentUser){
+
+      updateUserUI(
+        currentUser
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   PAGE LOAD AUTH CHECK
+===================================================== */
+
+setTimeout(
+  function(){
+
+    const currentUser =
+      auth.currentUser;
+
+
+    console.log(
+      "Current User On Page Load:",
+      currentUser
+    );
+
+
+    if(currentUser){
+
+      updateUserUI(
+        currentUser
+      );
+
+    }
+
+  },
+  1000
+);
+
 </script>
 
 </body>
-</html>
+  </html>
