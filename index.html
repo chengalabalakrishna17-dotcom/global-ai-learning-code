@@ -18,7 +18,7 @@ html{
 }
 
 body{
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:#050816;
   color:#fff;
   line-height:1.6;
@@ -169,7 +169,14 @@ section h2{
   color:#cbd5e1;
 }
 
-.practice-box{
+.lesson.active{
+  display:block;
+}
+
+.practice-box,
+.astra-box{
+  max-width:850px;
+  margin:auto;
   background:#0f172a;
   border:1px solid #1e293b;
   border-radius:15px;
@@ -200,15 +207,6 @@ textarea{
   color:#a7f3d0;
 }
 
-.astra-box{
-  max-width:850px;
-  margin:auto;
-  background:#0f172a;
-  border:1px solid #1e293b;
-  border-radius:15px;
-  padding:25px;
-}
-
 .chat{
   height:400px;
   overflow-y:auto;
@@ -227,10 +225,12 @@ textarea{
 
 .user{
   background:#1e3a8a;
+  margin-left:40px;
 }
 
 .bot{
   background:#172554;
+  margin-right:40px;
 }
 
 .chat-input{
@@ -260,6 +260,7 @@ footer{
 }
 
 @media(max-width:700px){
+
   nav{
     flex-direction:column;
   }
@@ -271,6 +272,14 @@ footer{
   .hero{
     padding:60px 15px;
   }
+
+  .user{
+    margin-left:10px;
+  }
+
+  .bot{
+    margin-right:10px;
+  }
 }
 </style>
 </head>
@@ -279,15 +288,26 @@ footer{
 
 <header>
 <nav>
-<div class="logo">Code with Bala Krishna</div>
+
+<div class="logo">
+Code with Bala Krishna
+</div>
 
 <div class="nav-links">
+
 <a href="#home">Home</a>
 <a href="#courses">Courses</a>
 <a href="#practice">Practice</a>
 <a href="#astra">Astra GPT</a>
 <a href="#login">Login</a>
-<button id="logoutBtn" onclick="logoutUser()" style="display:none;">Logout</button>
+
+<button
+id="logoutBtn"
+onclick="logoutUser()"
+style="display:none;">
+Logout
+</button>
+
 </div>
 </nav>
 </header>
@@ -295,30 +315,42 @@ footer{
 
 <section class="hero" id="home">
 
-<div class="small-title">Code with Bala Krishna</div>
+<div class="small-title">
+Code with Bala Krishna
+</div>
 
-<h1>GLOBAL AI LEARNING</h1>
+<h1>
+GLOBAL AI LEARNING
+</h1>
 
 <p>
-Learn Programming, Artificial Intelligence, Technology and Digital Skills in one place.
+Learn Programming, Artificial Intelligence,
+Technology and Digital Skills in one place.
 </p>
 
-<a class="btn" href="#courses">Explore Courses</a>
+<a class="btn" href="#courses">
+Explore Courses
+</a>
 
 </section>
 
 
 <section id="login">
 
-<h2>Student Login</h2>
+<h2>
+Student Login
+</h2>
 
 <div class="status-box">
 
 <div id="loginMessage">
+
 <button class="btn" onclick="loginWithGoogle()">
 Login with Google
 </button>
+
 </div>
+
 
 <div id="userInfo" style="display:none;">
 
@@ -337,82 +369,147 @@ Login with Google
 
 <section id="courses">
 
-<h2>Programming Courses</h2>
+<h2>
+Programming Courses
+</h2>
 
 <div class="courses">
 
-<div class="card">
-<h3>Python</h3>
-<p>Learn Python from beginner level with practical coding.</p>
 
-<button class="btn" onclick="toggleLesson('pythonLesson')">
+<div class="card">
+
+<h3>Python</h3>
+
+<p>
+Learn Python from beginner level with
+practical coding.
+</p>
+
+<button
+class="btn"
+onclick="toggleLesson('pythonLesson')">
 Open Python
 </button>
 
 <div class="lesson" id="pythonLesson">
+
 <h4>Python Beginner</h4>
-<p>Variables, data types, conditions, loops, functions, lists and practical programming.</p>
+
+<p>
+Variables, data types, conditions, loops,
+functions, lists and practical programming.
+</p>
+
 </div>
+
 </div>
 
 
 <div class="card">
-<h3>Java</h3>
-<p>Learn Java programming and object-oriented concepts.</p>
 
-<button class="btn" onclick="toggleLesson('javaLesson')">
+<h3>Java</h3>
+
+<p>
+Learn Java programming and
+object-oriented concepts.
+</p>
+
+<button
+class="btn"
+onclick="toggleLesson('javaLesson')">
 Open Java
 </button>
 
 <div class="lesson" id="javaLesson">
+
 <h4>Java Beginner</h4>
-<p>Classes, objects, methods, variables, loops and object-oriented programming.</p>
+
+<p>
+Classes, objects, methods, variables,
+loops and object-oriented programming.
+</p>
+
 </div>
+
 </div>
 
 
 <div class="card">
-<h3>C Language</h3>
-<p>Learn C programming, logic, arrays, strings and functions.</p>
 
-<button class="btn" onclick="toggleLesson('cLesson')">
+<h3>C Language</h3>
+
+<p>
+Learn C programming, logic, arrays,
+strings and functions.
+</p>
+
+<button
+class="btn"
+onclick="toggleLesson('cLesson')">
 Open C
 </button>
 
 <div class="lesson" id="cLesson">
+
 <h4>C Programming</h4>
-<p>Variables, operators, conditions, loops, arrays, strings, functions and pointers.</p>
+
+<p>
+Variables, operators, conditions, loops,
+arrays, strings, functions and pointers.
+</p>
+
 </div>
+
 </div>
 
 
 <div class="card">
-<h3>Artificial Intelligence</h3>
-<p>Learn AI concepts, machine learning, generative AI and modern tools.</p>
 
-<button class="btn" onclick="toggleLesson('aiLesson')">
+<h3>Artificial Intelligence</h3>
+
+<p>
+Learn AI concepts, machine learning,
+generative AI and modern tools.
+</p>
+
+<button
+class="btn"
+onclick="toggleLesson('aiLesson')">
 Open AI
 </button>
 
 <div class="lesson" id="aiLesson">
+
 <h4>Artificial Intelligence</h4>
-<p>AI fundamentals, Machine Learning, Generative AI, LLMs and AI applications.</p>
-</div>
+
+<p>
+AI fundamentals, Machine Learning,
+Generative AI, LLMs and AI applications.
+</p>
+
 </div>
 
 </div>
+
+</div>
+
 </section>
 
 
 <section id="practice">
 
-<h2>Python Coding Practice</h2>
+<h2>
+Python Coding Practice
+</h2>
 
 <div class="practice-box">
 
 <p>
-Write Python code and run it directly in your browser.
+Write Python code and run it directly
+in your browser.
 </p>
+
+<br>
 
 <textarea id="pythonCode">print("Hello Global AI Learning")</textarea>
 
@@ -427,22 +524,30 @@ Output will appear here.
 </div>
 
 </div>
+
 </section>
 
 
 <section id="astra">
 
-<h2>🤖 Astra GPT</h2>
+<h2>
+🤖 Astra GPT
+</h2>
 
 <div class="astra-box">
 
 <div class="chat" id="chatBox">
 
 <div class="message bot">
-Hello! I am Astra, the AI learning assistant of GLOBAL AI LEARNING. Ask me anything about programming, AI or technology.
+Hello! I am Astra, the AI learning assistant
+of GLOBAL AI LEARNING.
+
+Ask me anything about programming,
+AI or technology.
 </div>
 
 </div>
+
 
 <div class="chat-input">
 
@@ -453,7 +558,9 @@ placeholder="Ask Astra..."
 autocomplete="off"
 />
 
-<button class="btn" onclick="sendToAstra()">
+<button
+class="btn"
+onclick="sendToAstra()">
 Send
 </button>
 
@@ -465,53 +572,102 @@ Send
 
 
 <footer>
-© 2026 Code with Bala Krishna — GLOBAL AI LEARNING
+
+© 2026 Code with Bala Krishna —
+GLOBAL AI LEARNING
+
 </footer>
 
 
-<!-- Firebase -->
+<!-- =========================
+     FIREBASE
+========================= -->
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
 
 <script>
 
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBwTtdNupA4S8vBhxuXAUCOOEiedALHrLo",
-  authDomain: "global-ai-learning-7f2c7.firebaseapp.com",
-  projectId: "global-ai-learning-7f2c7",
-  storageBucket: "global-ai-learning-7f2c7.firebasestorage.app",
-  messagingSenderId: "814301153167",
-  appId: "1:814301153167:web:01db46d4bb807eb6feedfa"
+
+  apiKey:
+  "AIzaSyBwTtdNupA4S8vBhxuXAUCOOEiedALHrLo",
+
+  authDomain:
+  "global-ai-learning-7f2c7.firebaseapp.com",
+
+  projectId:
+  "global-ai-learning-7f2c7",
+
+  storageBucket:
+  "global-ai-learning-7f2c7.firebasestorage.app",
+
+  messagingSenderId:
+  "814301153167",
+
+  appId:
+  "1:814301153167:web:01db46d4bb807eb6feedfa"
+
 };
+
 
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 
-const provider = new firebase.auth.GoogleAuthProvider();
+const provider =
+new firebase.auth.GoogleAuthProvider();
+
+
+/* =========================
+   LOGIN STATE
+========================= */
 
 auth.onAuthStateChanged(function(user){
 
-  const loginMessage = document.getElementById("loginMessage");
-  const userInfo = document.getElementById("userInfo");
-  const logoutBtn = document.getElementById("logoutBtn");
+  const loginMessage =
+  document.getElementById("loginMessage");
+
+  const userInfo =
+  document.getElementById("userInfo");
+
+  const logoutBtn =
+  document.getElementById("logoutBtn");
+
 
   if(user){
 
     loginMessage.style.display = "none";
+
     userInfo.style.display = "block";
+
     logoutBtn.style.display = "inline-block";
 
-    document.getElementById("welcomeName").textContent =
-      "Welcome, " + (user.displayName || "Student");
 
-    document.getElementById("userEmail").textContent =
-      user.email || "";
+    document.getElementById("welcomeName")
+    .textContent =
+    "Welcome, " +
+    (user.displayName || "Student");
 
-  }else{
+
+    document.getElementById("userEmail")
+    .textContent =
+    user.email || "";
+
+  }
+
+  else{
 
     loginMessage.style.display = "block";
+
     userInfo.style.display = "none";
+
     logoutBtn.style.display = "none";
 
   }
@@ -519,208 +675,323 @@ auth.onAuthStateChanged(function(user){
 });
 
 
+/* =========================
+   GOOGLE LOGIN
+========================= */
+
 function loginWithGoogle(){
 
   auth.signInWithPopup(provider)
-    .catch(function(error){
 
-      alert("Login error: " + error.message);
+  .catch(function(error){
 
-    });
+    alert(
+      "Login error: " +
+      error.message
+    );
+
+  });
 
 }
 
+
+/* =========================
+   LOGOUT
+========================= */
 
 function logoutUser(){
 
   auth.signOut()
-    .catch(function(error){
 
-      alert("Logout error: " + error.message);
+  .catch(function(error){
 
-    });
+    alert(
+      "Logout error: " +
+      error.message
+    );
+
+  });
 
 }
 
+
+/* =========================
+   COURSE LESSONS
+========================= */
 
 function toggleLesson(id){
 
-  const element = document.getElementById(id);
+  const element =
+  document.getElementById(id);
 
-  if(element.style.display === "block"){
-
-    element.style.display = "none";
-
-  }else{
-
-    element.style.display = "block";
-
-  }
+  element.classList.toggle("active");
 
 }
 
 
-/*
-========================================
-PYTHON PRACTICE
-========================================
-*/
+/* =========================
+   PYTHON PRACTICE
+========================= */
 
 let pyodide = null;
 
+
 async function loadPyodideEngine(){
 
-  if(pyodide) return pyodide;
+  if(pyodide){
 
-  document.getElementById("pythonOutput").textContent =
-    "Loading Python engine...";
+    return pyodide;
 
-  pyodide = await loadPyodide();
+  }
+
+
+  const output =
+  document.getElementById("pythonOutput");
+
+
+  output.textContent =
+  "Loading Python engine...";
+
+
+  pyodide =
+  await loadPyodide();
+
 
   return pyodide;
+
 }
 
 
 async function runPython(){
 
-  const output = document.getElementById("pythonOutput");
+  const output =
+  document.getElementById("pythonOutput");
 
-  const code = document.getElementById("pythonCode").value;
 
-  output.textContent = "Running...";
+  const code =
+  document.getElementById("pythonCode").value;
+
+
+  output.textContent =
+  "Running...";
+
 
   try{
 
-    const engine = await loadPyodideEngine();
+    const engine =
+    await loadPyodideEngine();
+
 
     let result = "";
 
+
     engine.setStdout({
-      batched: function(text){
+
+      batched:function(text){
+
         result += text;
+
       }
+
     });
+
 
     await engine.runPythonAsync(code);
 
-    output.textContent =
-      result || "Program executed successfully.";
-
-  }catch(error){
 
     output.textContent =
-      "Python Error:\n" + error;
+    result ||
+    "Program executed successfully.";
+
+  }
+
+  catch(error){
+
+    output.textContent =
+    "Python Error:\n" +
+    error;
 
   }
 
 }
 
 
+/* =========================
+   ASTRA BACKEND
+========================= */
+
 /*
-========================================
-ASTRA GPT
-========================================
-
 IMPORTANT:
-NO API KEY IS STORED IN THIS WEBSITE.
 
-The website sends the message to the Render
-backend. The backend keeps OPENAI_API_KEY
-securely in its environment.
+No OpenAI API key is stored here.
+
+The secret API key remains on
+the Render backend.
+
+Current backend:
 */
 
 const ASTRA_BACKEND =
-  "https://global-ai-learning-astra-h2dt.onrender.com";
+"https://global-ai-learning-astra-6p8u.onrender.com";
 
 
-function addChatMessage(text, type){
+/* =========================
+   CHAT MESSAGE
+========================= */
 
-  const chatBox = document.getElementById("chatBox");
+function addChatMessage(text,type){
 
-  const message = document.createElement("div");
+  const chatBox =
+  document.getElementById("chatBox");
+
+
+  const message =
+  document.createElement("div");
+
 
   message.className =
-    "message " + type;
+  "message " + type;
 
-  message.textContent = text;
+
+  message.textContent =
+  text;
+
 
   chatBox.appendChild(message);
 
+
   chatBox.scrollTop =
-    chatBox.scrollHeight;
+  chatBox.scrollHeight;
 
 }
 
+
+/* =========================
+   SEND TO ASTRA
+========================= */
 
 async function sendToAstra(){
 
   const input =
-    document.getElementById("astraInput");
+  document.getElementById("astraInput");
+
 
   const message =
-    input.value.trim();
+  input.value.trim();
 
-  if(!message) return;
 
-  addChatMessage(message, "user");
+  if(!message){
+
+    return;
+
+  }
+
+
+  addChatMessage(
+    message,
+    "user"
+  );
+
 
   input.value = "";
 
-  addChatMessage("Astra is thinking...", "bot");
+
+  addChatMessage(
+    "Astra is thinking...",
+    "bot"
+  );
+
+
+  const chatBox =
+  document.getElementById("chatBox");
+
 
   const thinkingMessage =
-    document.getElementById("chatBox").lastElementChild;
+  chatBox.lastElementChild;
+
 
   try{
 
-    const response = await fetch(
-      ASTRA_BACKEND + "/api/chat",
+    const response =
+    await fetch(
+
+      ASTRA_BACKEND +
+      "/api/chat",
+
       {
+
         method:"POST",
 
         headers:{
-          "Content-Type":"application/json"
+          "Content-Type":
+          "application/json"
         },
 
-        body:JSON.stringify({
+        body:
+        JSON.stringify({
+
           message:message
+
         })
+
       }
+
     );
 
 
     const data =
-      await response.json();
+    await response.json();
 
 
     thinkingMessage.remove();
 
 
-    if(!response.ok || !data.success){
+    if(
+      !response.ok ||
+      !data.success
+    ){
 
       addChatMessage(
+
         "Astra error: " +
-        (data.error || "Server request failed."),
+        (
+          data.error ||
+          "Server request failed."
+        ),
+
         "bot"
+
       );
 
       return;
+
     }
 
 
     addChatMessage(
-      data.reply || "Astra did not return a response.",
+
+      data.reply ||
+      "Astra did not return a response.",
+
       "bot"
+
     );
 
+  }
 
-  }catch(error){
+
+  catch(error){
 
     thinkingMessage.remove();
 
+
     addChatMessage(
-      "Astra connection error: " + error.message,
+
+      "Astra connection error: " +
+      error.message,
+
       "bot"
+
     );
 
   }
@@ -728,27 +999,38 @@ async function sendToAstra(){
 }
 
 
+/* =========================
+   ENTER KEY
+========================= */
+
 document
 .getElementById("astraInput")
-.addEventListener("keydown", function(event){
+.addEventListener(
+  "keydown",
+  function(event){
 
-  if(event.key === "Enter"){
+    if(event.key === "Enter"){
 
-    event.preventDefault();
+      event.preventDefault();
 
-    sendToAstra();
+      sendToAstra();
+
+    }
 
   }
-
-});
+);
 
 </script>
 
 
-<!-- Pyodide -->
+<!-- =========================
+     PYODIDE
+========================= -->
+
 <script
 src="https://cdn.jsdelivr.net/pyodide/v0.28.2/full/pyodide.js">
 </script>
+
 
 </body>
   </html>
