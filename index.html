@@ -26,19 +26,19 @@ body{
 
 header{
   background:#0b1225;
-  padding:16px 20px;
   border-bottom:1px solid #26324f;
+  padding:16px 20px;
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:1000;
 }
 
 .header-inner{
   max-width:1100px;
   margin:auto;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:15px;
   flex-wrap:wrap;
 }
@@ -55,13 +55,8 @@ nav{
 }
 
 button{
-  cursor:pointer;
   font-family:inherit;
-}
-
-button:disabled{
-  opacity:.6;
-  cursor:not-allowed;
+  cursor:pointer;
 }
 
 .nav-btn{
@@ -92,18 +87,17 @@ button:disabled{
 
 .hero p{
   color:#aeb9d4;
+  line-height:1.7;
   max-width:700px;
   margin:0 auto 25px;
-  line-height:1.7;
 }
 
 .primary{
   background:#2563eb;
   color:white;
   border:0;
-  padding:13px 22px;
   border-radius:8px;
-  font-size:15px;
+  padding:13px 22px;
 }
 
 .primary:hover{
@@ -111,9 +105,9 @@ button:disabled{
 }
 
 #userBox{
-  margin:20px auto 0;
   max-width:700px;
   min-height:25px;
+  margin:20px auto 0;
 }
 
 .loading{
@@ -129,11 +123,6 @@ button:disabled{
   border:1px solid #2563eb;
   border-radius:10px;
   padding:16px;
-  margin-top:15px;
-}
-
-.user-card strong{
-  color:#60a5fa;
 }
 
 .user-email{
@@ -142,7 +131,7 @@ button:disabled{
   font-size:14px;
 }
 
-.status-online{
+.online{
   color:#4ade80;
   margin-top:8px;
   font-size:14px;
@@ -170,11 +159,9 @@ section h2{
   border:1px solid #26324f;
   border-radius:12px;
   padding:22px;
-  transition:.2s;
 }
 
 .card:hover{
-  transform:translateY(-4px);
   border-color:#2563eb;
 }
 
@@ -213,48 +200,151 @@ section h2{
   margin-bottom:12px;
 }
 
-#courseArea p{
+.course-description{
   color:#aeb9d4;
   line-height:1.7;
-  margin-bottom:18px;
+  margin-bottom:20px;
 }
 
 .lesson{
   background:#111c35;
-  padding:18px;
-  border-radius:8px;
-  margin-top:12px;
+  border-radius:10px;
+  padding:20px;
+  margin-top:15px;
 }
 
-.lesson button{
+.lesson h4{
+  margin-bottom:12px;
+}
+
+.lesson p{
+  color:#c2cbe0;
+  line-height:1.7;
+  margin-bottom:15px;
+}
+
+.editor-title{
+  margin-top:20px;
+  margin-bottom:8px;
+  font-weight:bold;
+}
+
+#pythonCode{
+  width:100%;
+  min-height:220px;
+  resize:vertical;
+  background:#020617;
+  color:#e2e8f0;
+  border:1px solid #334155;
+  border-radius:8px;
+  padding:15px;
+  font-family:monospace;
+  font-size:15px;
+  line-height:1.5;
+  outline:none;
+}
+
+#pythonCode:focus{
+  border-color:#2563eb;
+}
+
+.editor-buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
   margin-top:10px;
 }
 
-.status{
-  margin-top:15px;
-  padding:15px;
+.run-btn{
+  background:#16a34a;
+  color:white;
+  border:0;
+  padding:11px 18px;
+  border-radius:7px;
+}
+
+.run-btn:hover{
+  background:#15803d;
+}
+
+.clear-btn{
+  background:#475569;
+  color:white;
+  border:0;
+  padding:11px 18px;
+  border-radius:7px;
+}
+
+.output-title{
+  margin-top:20px;
+  margin-bottom:8px;
+  font-weight:bold;
+}
+
+#pythonOutput{
+  min-height:100px;
+  background:#020617;
+  border:1px solid #334155;
   border-radius:8px;
-  background:#111c35;
+  padding:15px;
+  white-space:pre-wrap;
+  font-family:monospace;
+  color:#4ade80;
+  overflow:auto;
+}
+
+.task{
+  margin-top:20px;
+  padding:18px;
+  background:#172033;
+  border-left:4px solid #2563eb;
+  border-radius:8px;
+}
+
+.task h4{
+  margin-bottom:10px;
+}
+
+.task p{
+  color:#cbd5e1;
+  line-height:1.7;
+}
+
+.complete-btn{
+  margin-top:15px;
+  background:#2563eb;
+  color:white;
+  border:0;
+  padding:11px 18px;
+  border-radius:7px;
+}
+
+.progress-container{
+  margin-top:20px;
+}
+
+.progress-text{
+  margin-bottom:8px;
   color:#aeb9d4;
 }
 
-.success{
-  color:#4ade80;
-}
-
 .progress{
-  margin-top:15px;
-  background:#111827;
-  border-radius:8px;
-  overflow:hidden;
+  width:100%;
   height:12px;
+  background:#1e293b;
+  border-radius:20px;
+  overflow:hidden;
 }
 
 .progress-bar{
   height:100%;
   width:0%;
   background:#2563eb;
-  transition:.3s;
+  transition:.4s;
+}
+
+.success{
+  color:#4ade80;
 }
 
 footer{
@@ -292,9 +382,14 @@ footer{
     padding-left:15px;
     padding-right:15px;
   }
+
+  #pythonCode{
+    min-height:190px;
+  }
 }
 </style>
 </head>
+
 
 <body>
 
@@ -308,19 +403,25 @@ Code with Bala Krishna
 
 <nav>
 
-<button class="nav-btn" onclick="showHome()">
+<button class="nav-btn"
+onclick="showHome()">
 Home
 </button>
 
-<button class="nav-btn" onclick="showCourses()">
+<button class="nav-btn"
+onclick="showCourses()">
 Courses
 </button>
 
-<button class="nav-btn" id="loginBtn" onclick="loginUser()">
+<button class="nav-btn"
+id="loginBtn"
+onclick="loginUser()">
 Login with Google
 </button>
 
-<button class="nav-btn" id="logoutBtn" onclick="logoutUser()">
+<button class="nav-btn"
+id="logoutBtn"
+onclick="logoutUser()">
 Logout
 </button>
 
@@ -343,14 +444,17 @@ GLOBAL AI LEARNING
 Learn AI, Coding and Technology from anywhere in the world.
 </p>
 
-<button class="primary" onclick="showCourses()">
+<button class="primary"
+onclick="showCourses()">
 Explore Courses
 </button>
 
 <div id="userBox">
+
 <div class="loading">
 Checking login...
 </div>
+
 </div>
 
 </div>
@@ -362,7 +466,9 @@ Checking login...
 Learning Courses
 </h2>
 
+
 <div class="courses">
+
 
 <div class="card">
 
@@ -435,6 +541,7 @@ Start AI
 
 </div>
 
+
 </div>
 
 
@@ -450,16 +557,24 @@ Start AI
 </footer>
 
 
+<!-- =================================================
+     PYODIDE
+================================================== -->
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.28.2/full/pyodide.js"></script>
+
+
 <script type="module">
 
-/* =====================================================
-   FIREBASE IMPORTS
-===================================================== */
+/* =================================================
+   FIREBASE
+================================================== */
 
 import {
   initializeApp
 }
-from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+from
+"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
 
 import {
@@ -470,7 +585,8 @@ import {
   signOut,
   onAuthStateChanged
 }
-from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+from
+"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
 
 import {
@@ -478,12 +594,13 @@ import {
   doc,
   setDoc
 }
-from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+from
+"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
-/* =====================================================
+/* =================================================
    FIREBASE CONFIG
-===================================================== */
+================================================== */
 
 const firebaseConfig = {
 
@@ -508,25 +625,18 @@ const firebaseConfig = {
 };
 
 
-/* =====================================================
-   INITIALIZE FIREBASE
-===================================================== */
-
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
 
-/*
-  IMPORTANT:
-  Auth is initialized with browserLocalPersistence
-  from the beginning.
-*/
-
-const auth = initializeAuth(app, {
-
-  persistence:
-  browserLocalPersistence
-
-});
+const auth =
+  initializeAuth(
+    app,
+    {
+      persistence:
+      browserLocalPersistence
+    }
+  );
 
 
 const db =
@@ -537,25 +647,24 @@ const provider =
   new GoogleAuthProvider();
 
 
-/* =====================================================
-   DOM ELEMENTS
-===================================================== */
-
 const userBox =
   document.getElementById("userBox");
 
+
 const loginBtn =
   document.getElementById("loginBtn");
+
 
 const logoutBtn =
   document.getElementById("logoutBtn");
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
+/* =================================================
+   GOOGLE LOGIN
+================================================== */
 
-window.loginUser = async function(){
+window.loginUser =
+async function(){
 
   loginBtn.disabled = true;
 
@@ -569,10 +678,6 @@ window.loginUser = async function(){
 
   try{
 
-    /*
-      Google popup
-    */
-
     const result =
       await signInWithPopup(
         auth,
@@ -584,23 +689,8 @@ window.loginUser = async function(){
       result.user;
 
 
-    console.log(
-      "Google Login Success:",
-      user
-    );
-
-
-    /*
-      IMPORTANT:
-      Immediately update webpage UI.
-    */
-
     updateUserUI(user);
 
-
-    /*
-      Save user information in Firestore.
-    */
 
     try{
 
@@ -615,16 +705,16 @@ window.loginUser = async function(){
         {
 
           name:
-            user.displayName || "",
+          user.displayName || "",
 
           email:
-            user.email || "",
+          user.email || "",
 
           photo:
-            user.photoURL || "",
+          user.photoURL || "",
 
           lastLogin:
-            new Date().toISOString()
+          new Date().toISOString()
 
         },
 
@@ -634,40 +724,27 @@ window.loginUser = async function(){
 
       );
 
+    }
+    catch(error){
+
       console.log(
-        "User saved to Firestore"
+        "Firestore save skipped:",
+        error
       );
 
     }
-    catch(firestoreError){
-
-      console.error(
-        "Firestore error:",
-        firestoreError
-      );
-
-      /*
-        Firestore error will NOT
-        log the user out.
-      */
-
-    }
-
 
   }
   catch(error){
 
     console.error(
-      "Google Login Error:",
       error
     );
-
 
     userBox.innerHTML =
     `
       <div class="login-message">
-        Login failed.
-        <br>
+        Login failed:
         ${escapeHTML(error.message)}
       </div>
     `;
@@ -682,74 +759,41 @@ window.loginUser = async function(){
 };
 
 
-/* =====================================================
+/* =================================================
    LOGOUT
-===================================================== */
+================================================== */
 
-window.logoutUser = async function(){
-
-  logoutBtn.disabled = true;
-
+window.logoutUser =
+async function(){
 
   try{
 
     await signOut(auth);
 
-
     updateUserUI(null);
-
-
-    userBox.innerHTML =
-    `
-      <div class="login-message">
-        Logged out successfully.
-      </div>
-    `;
-
 
   }
   catch(error){
 
-    console.error(
-      "Logout Error:",
-      error
+    alert(
+      "Logout failed: " +
+      error.message
     );
-
-
-    userBox.innerHTML =
-    `
-      <div class="login-message">
-        Logout failed.
-        <br>
-        ${escapeHTML(error.message)}
-      </div>
-    `;
-
-  }
-  finally{
-
-    logoutBtn.disabled = false;
 
   }
 
 };
 
 
-/* =====================================================
-   FIREBASE AUTH STATE LISTENER
-===================================================== */
+/* =================================================
+   AUTH STATE
+================================================== */
 
 onAuthStateChanged(
 
   auth,
 
   function(user){
-
-    console.log(
-      "Firebase Auth State:",
-      user
-    );
-
 
     updateUserUI(user);
 
@@ -758,45 +802,40 @@ onAuthStateChanged(
 );
 
 
-/* =====================================================
-   UPDATE USER UI
-===================================================== */
+/* =================================================
+   UPDATE USER
+================================================== */
 
 function updateUserUI(user){
 
-  /*
-    If Firebase has a logged-in user
-  */
-
   if(user){
-
-    const name =
-      user.displayName ||
-      "Google User";
-
-
-    const email =
-      user.email ||
-      "";
-
 
     userBox.innerHTML =
     `
       <div class="user-card">
 
         <div>
-          🔓 Logged in as:
+          ✅ Logged In
+        </div>
+
+        <div style="margin-top:8px">
+          Welcome,
           <strong>
-            ${escapeHTML(name)}
+            ${escapeHTML(
+              user.displayName ||
+              "User"
+            )}
           </strong>
         </div>
 
         <div class="user-email">
-          ${escapeHTML(email)}
+          ${escapeHTML(
+            user.email || ""
+          )}
         </div>
 
-        <div class="status-online">
-          ● Account is active
+        <div class="online">
+          ● Account active
         </div>
 
       </div>
@@ -810,13 +849,7 @@ function updateUserUI(user){
     logoutBtn.style.display =
       "inline-block";
 
-
   }
-
-  /*
-    If nobody is logged in
-  */
-
   else{
 
     userBox.innerHTML =
@@ -839,9 +872,9 @@ function updateUserUI(user){
 }
 
 
-/* =====================================================
-   SECURITY HELPER
-===================================================== */
+/* =================================================
+   SECURITY
+================================================== */
 
 function escapeHTML(value){
 
@@ -875,9 +908,9 @@ function escapeHTML(value){
 }
 
 
-/* =====================================================
+/* =================================================
    HOME
-===================================================== */
+================================================== */
 
 window.showHome =
 function(){
@@ -886,17 +919,16 @@ function(){
     .getElementById("home")
     .scrollIntoView({
 
-      behavior:
-      "smooth"
+      behavior:"smooth"
 
     });
 
 };
 
 
-/* =====================================================
+/* =================================================
    COURSES
-===================================================== */
+================================================== */
 
 window.showCourses =
 function(){
@@ -905,17 +937,16 @@ function(){
     .getElementById("courses")
     .scrollIntoView({
 
-      behavior:
-      "smooth"
+      behavior:"smooth"
 
     });
 
 };
 
 
-/* =====================================================
+/* =================================================
    OPEN COURSE
-===================================================== */
+================================================== */
 
 window.openCourse =
 function(courseName){
@@ -930,6 +961,15 @@ function(courseName){
     "block";
 
 
+  if(courseName === "Python"){
+
+    openPythonCourse();
+
+    return;
+
+  }
+
+
   area.innerHTML =
   `
 
@@ -938,40 +978,166 @@ function(courseName){
       Course
     </h3>
 
-    <p>
-      Welcome to the
+    <p class="course-description">
       ${escapeHTML(courseName)}
-      learning course.
+      course is ready for development.
+    </p>
+
+    <div class="lesson">
+
+      <h4>
+        Course Module
+      </h4>
+
+      <p>
+        Real lessons, practice tasks,
+        quizzes and projects will be added
+        to this course.
+      </p>
+
+    </div>
+
+  `;
+
+
+  area.scrollIntoView({
+    behavior:"smooth"
+  });
+
+};
+
+
+/* =================================================
+   PYTHON COURSE
+================================================== */
+
+function openPythonCourse(){
+
+  const area =
+    document.getElementById(
+      "courseArea"
+    );
+
+
+  area.innerHTML =
+  `
+
+    <h3>
+      Python Course
+    </h3>
+
+
+    <p class="course-description">
+
+      Learn Python from zero.
+      Start with your first Python program.
+
     </p>
 
 
     <div class="lesson">
 
-      <strong>
-        Lesson 1
-      </strong>
+      <h4>
+        Lesson 1 — Python Basics
+      </h4>
+
 
       <p>
-        Introduction to
-        ${escapeHTML(courseName)}.
+        Python is a programming language
+        used to build applications,
+        automation tools, websites,
+        AI systems and more.
       </p>
 
-      <button
-        class="course-btn"
-        onclick="completeLesson('${escapeHTML(courseName)}')">
 
-        Complete Lesson 1
-
-      </button>
-
-    </div>
+      <p>
+        Your first Python program:
+      </p>
 
 
-    <div class="progress">
+      <div class="editor-title">
+        Python Code Editor
+      </div>
 
-      <div
-        class="progress-bar"
-        id="progressBar">
+
+      <textarea id="pythonCode">print("Hello, GLOBAL AI LEARNING!")</textarea>
+
+
+      <div class="editor-buttons">
+
+        <button
+          class="run-btn"
+          onclick="runPython()">
+
+          ▶ Run Python
+
+        </button>
+
+
+        <button
+          class="clear-btn"
+          onclick="clearPython()">
+
+          Clear
+
+        </button>
+
+      </div>
+
+
+      <div class="output-title">
+        Output
+      </div>
+
+
+      <div id="pythonOutput">
+        Click "Run Python" to execute your code.
+      </div>
+
+
+      <div class="task">
+
+        <h4>
+          📝 Practice Task
+        </h4>
+
+        <p>
+          Change the program so it prints:
+        </p>
+
+        <p>
+          <strong>
+            Hello Bala Krishna
+          </strong>
+        </p>
+
+
+        <button
+          class="complete-btn"
+          onclick="completePythonLesson()">
+
+          Complete Lesson
+
+        </button>
+
+      </div>
+
+
+      <div class="progress-container">
+
+        <div class="progress-text">
+          Lesson Progress: 0%
+        </div>
+
+        <div class="progress">
+
+          <div
+            id="pythonProgress"
+            class="progress-bar">
+          </div>
+
+        </div>
+
       </div>
 
     </div>
@@ -980,276 +1146,315 @@ function(courseName){
 
 
   area.scrollIntoView({
-
-    behavior:
-    "smooth"
-
+    behavior:"smooth"
   });
 
-};
+}
 
 
-/* =====================================================
-   COMPLETE LESSON 1
-===================================================== */
+/* =================================================
+   PYTHON RUNTIME
+================================================== */
 
-window.completeLesson =
-function(courseName){
+let pyodide = null;
 
-  const area =
-    document.getElementById(
-      "courseArea"
-    );
+let pythonLoading = false;
 
 
-  area.innerHTML =
-  `
+async function loadPython(){
 
-    <h3>
-      ${escapeHTML(courseName)}
-      Course
-    </h3>
+  if(pyodide){
+    return pyodide;
+  }
 
 
-    <div class="status">
+  if(pythonLoading){
 
-      <p class="success">
-        ✓ Lesson 1 completed successfully.
-      </p>
+    while(!pyodide){
 
-    </div>
-
-
-    <div class="progress">
-
-      <div
-        class="progress-bar"
-        style="width:50%">
-      </div>
-
-    </div>
-
-
-    <div class="lesson">
-
-      <strong>
-        Lesson 2
-      </strong>
-
-      <p>
-        Continue learning the next
-        important concept.
-      </p>
-
-      <button
-        class="course-btn"
-        onclick="openNextLesson('${escapeHTML(courseName)}')">
-
-        Start Lesson 2
-
-      </button>
-
-    </div>
-
-  `;
-
-};
-
-
-/* =====================================================
-   LESSON 2
-===================================================== */
-
-window.openNextLesson =
-function(courseName){
-
-  const area =
-    document.getElementById(
-      "courseArea"
-    );
-
-
-  area.innerHTML =
-  `
-
-    <h3>
-      ${escapeHTML(courseName)}
-      - Lesson 2
-    </h3>
-
-
-    <p>
-      This lesson introduces the next
-      important concept in
-      ${escapeHTML(courseName)}.
-    </p>
-
-
-    <div class="lesson">
-
-      <strong>
-        Practice Task
-      </strong>
-
-      <p>
-        Complete the practice task
-        and continue your learning.
-      </p>
-
-      <button
-        class="course-btn"
-        onclick="completeLesson2('${escapeHTML(courseName)}')">
-
-        Complete Lesson 2
-
-      </button>
-
-    </div>
-
-
-    <div class="progress">
-
-      <div
-        class="progress-bar"
-        style="width:50%">
-      </div>
-
-    </div>
-
-  `;
-
-};
-
-
-/* =====================================================
-   COMPLETE LESSON 2
-===================================================== */
-
-window.completeLesson2 =
-function(courseName){
-
-  const area =
-    document.getElementById(
-      "courseArea"
-    );
-
-
-  area.innerHTML =
-  `
-
-    <h3>
-      ${escapeHTML(courseName)}
-      Course
-    </h3>
-
-
-    <div class="status">
-
-      <p class="success">
-        ✓ Lesson 2 completed successfully.
-      </p>
-
-    </div>
-
-
-    <div class="progress">
-
-      <div
-        class="progress-bar"
-        style="width:100%">
-      </div>
-
-    </div>
-
-
-    <div class="lesson">
-
-      <strong>
-        Course Progress
-      </strong>
-
-      <p>
-        2 lessons completed.
-      </p>
-
-      <p class="success">
-        Progress: 100%
-      </p>
-
-
-      <button
-        class="course-btn"
-        onclick="openCourse('${escapeHTML(courseName)}')">
-
-        Restart Course
-
-      </button>
-
-    </div>
-
-  `;
-
-};
-
-
-/* =====================================================
-   EXTRA AUTH CHECK
-   =====================================================
-
-   This checks Firebase again when the page
-   becomes active.
-===================================================== */
-
-window.addEventListener(
-  "focus",
-  function(){
-
-    const currentUser =
-      auth.currentUser;
-
-
-    if(currentUser){
-
-      updateUserUI(
-        currentUser
+      await new Promise(
+        resolve =>
+        setTimeout(
+          resolve,
+          100
+        )
       );
+
+    }
+
+    return pyodide;
+
+  }
+
+
+  pythonLoading = true;
+
+
+  const output =
+    document.getElementById(
+      "pythonOutput"
+    );
+
+
+  if(output){
+
+    output.textContent =
+      "Loading Python runtime...";
+
+  }
+
+
+  try{
+
+    pyodide =
+      await loadPyodide();
+
+
+    return pyodide;
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    throw error;
+
+  }
+  finally{
+
+    pythonLoading = false;
+
+  }
+
+}
+
+
+/* =================================================
+   RUN PYTHON
+================================================== */
+
+window.runPython =
+async function(){
+
+  const codeBox =
+    document.getElementById(
+      "pythonCode"
+    );
+
+
+  const output =
+    document.getElementById(
+      "pythonOutput"
+    );
+
+
+  if(!codeBox || !output){
+    return;
+  }
+
+
+  const code =
+    codeBox.value;
+
+
+  output.textContent =
+    "Loading Python...";
+
+
+  try{
+
+    const runtime =
+      await loadPython();
+
+
+    let capturedOutput = "";
+
+
+    runtime.setStdout({
+
+      batched:
+      function(text){
+
+        capturedOutput +=
+          text + "\n";
+
+      }
+
+    });
+
+
+    runtime.setStderr({
+
+      batched:
+      function(text){
+
+        capturedOutput +=
+          text + "\n";
+
+      }
+
+    });
+
+
+    await runtime.runPythonAsync(
+      code
+    );
+
+
+    if(capturedOutput.trim()){
+
+      output.textContent =
+        capturedOutput.trim();
+
+    }
+    else{
+
+      output.textContent =
+        "Program finished successfully.";
 
     }
 
   }
-);
+  catch(error){
+
+    output.textContent =
+      "Python Error:\n\n" +
+      error.message;
+
+  }
+
+};
 
 
-/* =====================================================
-   PAGE LOAD AUTH CHECK
-===================================================== */
+/* =================================================
+   CLEAR PYTHON
+================================================== */
 
-setTimeout(
-  function(){
+window.clearPython =
+function(){
 
-    const currentUser =
-      auth.currentUser;
-
-
-    console.log(
-      "Current User On Page Load:",
-      currentUser
+  const codeBox =
+    document.getElementById(
+      "pythonCode"
     );
 
 
-    if(currentUser){
+  const output =
+    document.getElementById(
+      "pythonOutput"
+    );
 
-      updateUserUI(
-        currentUser
+
+  if(codeBox){
+
+    codeBox.value = "";
+
+  }
+
+
+  if(output){
+
+    output.textContent =
+      "Output cleared.";
+
+  }
+
+};
+
+
+/* =================================================
+   COMPLETE PYTHON LESSON
+================================================== */
+
+window.completePythonLesson =
+function(){
+
+  const codeBox =
+    document.getElementById(
+      "pythonCode"
+    );
+
+
+  const progress =
+    document.getElementById(
+      "pythonProgress"
+    );
+
+
+  const taskCode =
+    codeBox ?
+    codeBox.value.trim() :
+    "";
+
+
+  /*
+    We mark the lesson complete
+    only after the student has entered
+    a practice program.
+  */
+
+  if(
+    !taskCode.includes(
+      "Bala Krishna"
+    )
+  ){
+
+    alert(
+      'First complete the practice task by printing "Hello Bala Krishna".'
+    );
+
+    return;
+
+  }
+
+
+  if(progress){
+
+    progress.style.width =
+      "100%";
+
+  }
+
+
+  const lesson =
+    document.querySelector(
+      ".lesson"
+    );
+
+
+  if(lesson){
+
+    const message =
+      document.createElement(
+        "div"
       );
 
-    }
 
-  },
-  1000
-);
+    message.className =
+      "status";
+
+
+    message.innerHTML =
+    `
+      <p class="success">
+        ✓ Python Lesson 1 completed successfully!
+      </p>
+
+      <p style="margin-top:8px">
+        Progress: 100%
+      </p>
+    `;
+
+
+    lesson.appendChild(
+      message
+    );
+
+  }
+
+};
 
 </script>
 
 </body>
-  </html>
+</html>
