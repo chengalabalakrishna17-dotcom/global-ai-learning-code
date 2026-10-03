@@ -1,5 +1,4 @@
 const http = require("http");
-
 const PORT = process.env.PORT || 3000;
 
 function sendJSON(res, status, data) {
@@ -11,6 +10,15 @@ function sendJSON(res, status, data) {
   });
 
   res.end(JSON.stringify(data));
+}
+
+function sendHTML(res, html) {
+  res.writeHead(200, {
+    "Content-Type": "text/html; charset=utf-8",
+    "Access-Control-Allow-Origin": "*"
+  });
+
+  res.end(html);
 }
 
 function readBody(req) {
@@ -34,101 +42,120 @@ function readBody(req) {
 function getAstraReply(message) {
   const text = message.toLowerCase().trim();
 
-  if (
-    text.includes("hello") ||
-    text.includes("hi") ||
-    text.includes("hey")
-  ) {
-    return "Hello! 👋 I am Astra, your GLOBAL AI LEARNING assistant. I can help you learn programming, AI, mathematics and technology.";
+  if (/^(hi|hello|hey|hai)$/.test(text)) {
+    return "Hello! 👋 I am Astra, your GLOBAL AI LEARNING assistant. Ask me about programming, AI, mathematics, technology or RRB NTPC.";
   }
 
   if (text.includes("python")) {
-    return "🐍 Python is a beginner-friendly programming language. Start with variables, data types, if-else, loops, functions, lists and dictionaries.";
+    return "🐍 Python learning path: Variables → Data Types → Operators → If/Else → Loops → Functions → Lists → Dictionaries → OOP → Projects.";
   }
 
   if (text.includes("java")) {
-    return "☕ Java is a powerful programming language used for applications, backend systems and Android development. Start with variables, conditions, loops, methods and classes.";
-  }
-
-  if (text.includes("c language") || text === "c" || text.includes("learn c")) {
-    return "💻 C is a fundamental programming language. Start with variables, data types, operators, if-else, loops, arrays, strings, functions and pointers.";
+    return "☕ Java learning path: Variables → Data Types → Conditions → Loops → Methods → Arrays → Classes → Objects → OOP → Projects.";
   }
 
   if (
-    text.includes("artificial intelligence") ||
+    text === "c" ||
+    text.includes("c language") ||
+    text.includes("learn c")
+  ) {
+    return "💻 C learning path: Variables → Data Types → Operators → If/Else → Loops → Arrays → Strings → Functions → Pointers → Structures → Projects.";
+  }
+
+  if (
     text === "ai" ||
+    text.includes("artificial intelligence") ||
     text.includes("learn ai")
   ) {
-    return "🤖 Artificial Intelligence means building computer systems that can perform tasks that normally require human intelligence, such as understanding language, recognizing patterns and making predictions.";
+    return "🤖 AI is the field of creating systems that can perform tasks involving learning, reasoning, language, vision and pattern recognition. You can start with Python and basic mathematics.";
   }
 
-  if (
-    text.includes("html") ||
-    text.includes("website")
-  ) {
-    return "🌐 HTML creates the structure of a webpage. CSS controls its appearance and JavaScript adds interaction and functionality.";
+  if (text.includes("html")) {
+    return "🌐 HTML creates the structure of webpages. Learn headings, paragraphs, links, images, forms, tables and semantic elements.";
   }
 
-  if (
-    text.includes("javascript") ||
-    text.includes("js")
-  ) {
-    return "⚡ JavaScript makes websites interactive. You can use it for buttons, forms, games, web applications and much more.";
+  if (text.includes("javascript") || text.includes("js")) {
+    return "⚡ JavaScript adds functionality and interaction to webpages. Start with variables, functions, conditions, loops, arrays, DOM and events.";
   }
 
-  if (
-    text.includes("math") ||
-    text.includes("mathematics")
-  ) {
-    return "📐 I can help you with mathematics step by step. Send me the exact problem you want to learn.";
+  if (text.includes("website") || text.includes("web development")) {
+    return "🌐 Web development usually uses HTML for structure, CSS for design and JavaScript for functionality. Backend technologies can provide APIs and databases.";
   }
 
-  if (
-    text.includes("rrb") ||
-    text.includes("ntpc")
-  ) {
-    return "🚆 RRB NTPC preparation includes Mathematics, Reasoning and General Awareness. I can help you understand concepts and practice questions step by step.";
+  if (text.includes("math") || text.includes("mathematics")) {
+    return "📐 Send me a mathematics problem and I can explain the solution step by step.";
+  }
+
+  if (text.includes("rrb") || text.includes("ntpc")) {
+    return "🚆 RRB NTPC preparation covers Mathematics, General Intelligence & Reasoning and General Awareness. I can help you learn concepts and practice questions step by step.";
   }
 
   if (
     text.includes("help") ||
     text.includes("what can you do")
   ) {
-    return "✨ I am Astra. Try asking about Python, Java, C Language, AI, HTML, JavaScript, Mathematics or RRB NTPC.";
+    return "✨ Astra can currently help with Python, Java, C, AI, HTML, JavaScript, Mathematics, Web Development and RRB NTPC.";
   }
 
-  return "🤖 Astra received your message. I can currently help with Python, Java, C Language, AI, HTML, JavaScript, Mathematics and RRB NTPC. Try asking me about one of these topics.";
+  return "🤖 Astra received your message. Ask me about Python, Java, C, AI, HTML, JavaScript, Mathematics, Web Development or RRB NTPC.";
+}
+
+function getHealth() {
+  return {
+    success: true,
+    service: "GLOBAL AI LEARNING",
+    assistant: "Astra",
+    status: "online",
+    mode: "free",
+    timestamp: new Date().toISOString()
+  };
 }
 
 const server = http.createServer(async (req, res) => {
 
+  // CORS preflight
   if (req.method === "OPTIONS") {
-    sendJSON(res, 200, {
-      success: true
-    });
+    sendJSON(res, 200, { success: true });
     return;
   }
 
+  // Main API / health route
   if (req.method === "GET" && req.url === "/") {
+    sendJSON(res, 200, getHealth());
+    return;
+  }
+
+  // Health check
+  if (req.method === "GET" && req.url === "/health") {
+    sendJSON(res, 200, getHealth());
+    return;
+  }
+
+  // API information
+  if (req.method === "GET" && req.url === "/api") {
     sendJSON(res, 200, {
       success: true,
       service: "GLOBAL AI LEARNING",
       assistant: "Astra",
       status: "online",
-      mode: "free"
+      endpoints: {
+        health: "GET /health",
+        chat: "POST /api/chat",
+        api: "GET /api"
+      }
     });
     return;
   }
 
+  // Astra chat API
   if (req.method === "POST" && req.url === "/api/chat") {
-
     try {
       const rawBody = await readBody(req);
 
       let body;
 
       try {
-        body = JSON.parse(rawBody);
+        body = JSON.parse(rawBody || "{}");
       } catch {
         sendJSON(res, 400, {
           success: false,
@@ -156,11 +183,11 @@ const server = http.createServer(async (req, res) => {
         success: true,
         assistant: "Astra",
         mode: "free",
+        message: message,
         reply: reply
       });
 
     } catch (error) {
-
       console.error("Astra backend error:", error);
 
       sendJSON(res, 500, {
@@ -172,15 +199,35 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Unknown route
   sendJSON(res, 404, {
     success: false,
-    error: "Route not found."
+    error: "Route not found.",
+    path: req.url,
+    availableRoutes: [
+      "GET /",
+      "GET /health",
+      "GET /api",
+      "POST /api/chat"
+    ]
   });
-
 });
 
 server.listen(PORT, () => {
   console.log(
-    `GLOBAL AI LEARNING Astra free backend running on port ${PORT}`
+    `GLOBAL AI LEARNING Astra backend running on port ${PORT}`
   );
 });
+
+ఇప్పుడు next step
+
+1. GitHubలో Save/Commit changes చేయి.
+2. Render automatic deploy start అవుతుంది.
+3. Deploy status Live అయ్యే వరకు wait చేయి.
+4. తర్వాత browserలో నీ URL open చేయి:
+
+"https://global-ai-learning-astra-6p8u.onrender.com"
+
+Root pageలో "success: true" వస్తే backend correct.
+
+అది వచ్చిన తర్వాత వెంటనే నాకు "Done" అని చెప్పు. అప్పుడు మనం website "index.html" ↔ Astra backend connection మొత్తం correct చేద్దాం.
