@@ -1,4 +1,5 @@
 const http = require("http");
+
 const PORT = process.env.PORT || 3000;
 
 function sendJSON(res, status, data) {
@@ -12,20 +13,11 @@ function sendJSON(res, status, data) {
   res.end(JSON.stringify(data));
 }
 
-function sendHTML(res, html) {
-  res.writeHead(200, {
-    "Content-Type": "text/html; charset=utf-8",
-    "Access-Control-Allow-Origin": "*"
-  });
-
-  res.end(html);
-}
-
 function readBody(req) {
   return new Promise((resolve, reject) => {
     let body = "";
 
-    req.on("data", chunk => {
+    req.on("data", (chunk) => {
       body += chunk.toString();
 
       if (body.length > 100000) {
@@ -42,7 +34,12 @@ function readBody(req) {
 function getAstraReply(message) {
   const text = message.toLowerCase().trim();
 
-  if (/^(hi|hello|hey|hai)$/.test(text)) {
+  if (
+    text === "hi" ||
+    text === "hello" ||
+    text === "hey" ||
+    text === "hai"
+  ) {
     return "Hello! 👋 I am Astra, your GLOBAL AI LEARNING assistant. Ask me about programming, AI, mathematics, technology or RRB NTPC.";
   }
 
@@ -67,7 +64,7 @@ function getAstraReply(message) {
     text.includes("artificial intelligence") ||
     text.includes("learn ai")
   ) {
-    return "🤖 AI is the field of creating systems that can perform tasks involving learning, reasoning, language, vision and pattern recognition. You can start with Python and basic mathematics.";
+    return "🤖 AI is the field of creating systems that can perform tasks involving learning, reasoning, language, vision and pattern recognition.";
   }
 
   if (text.includes("html")) {
@@ -78,29 +75,38 @@ function getAstraReply(message) {
     return "⚡ JavaScript adds functionality and interaction to webpages. Start with variables, functions, conditions, loops, arrays, DOM and events.";
   }
 
-  if (text.includes("website") || text.includes("web development")) {
-    return "🌐 Web development usually uses HTML for structure, CSS for design and JavaScript for functionality. Backend technologies can provide APIs and databases.";
+  if (
+    text.includes("website") ||
+    text.includes("web development")
+  ) {
+    return "🌐 Web development uses HTML for structure, CSS for design and JavaScript for functionality. Backend technologies provide APIs and data services.";
   }
 
-  if (text.includes("math") || text.includes("mathematics")) {
-    return "📐 Send me a mathematics problem and I can explain the solution step by step.";
+  if (
+    text.includes("math") ||
+    text.includes("mathematics")
+  ) {
+    return "📐 Send me a mathematics problem and I can explain it step by step.";
   }
 
-  if (text.includes("rrb") || text.includes("ntpc")) {
-    return "🚆 RRB NTPC preparation covers Mathematics, General Intelligence & Reasoning and General Awareness. I can help you learn concepts and practice questions step by step.";
+  if (
+    text.includes("rrb") ||
+    text.includes("ntpc")
+  ) {
+    return "🚆 RRB NTPC preparation includes Mathematics, General Intelligence & Reasoning and General Awareness. I can help you learn concepts and practice questions step by step.";
   }
 
   if (
     text.includes("help") ||
     text.includes("what can you do")
   ) {
-    return "✨ Astra can currently help with Python, Java, C, AI, HTML, JavaScript, Mathematics, Web Development and RRB NTPC.";
+    return "✨ Astra can help with Python, Java, C, AI, HTML, JavaScript, Mathematics, Web Development and RRB NTPC.";
   }
 
   return "🤖 Astra received your message. Ask me about Python, Java, C, AI, HTML, JavaScript, Mathematics, Web Development or RRB NTPC.";
 }
 
-function getHealth() {
+function healthResponse() {
   return {
     success: true,
     service: "GLOBAL AI LEARNING",
@@ -113,25 +119,23 @@ function getHealth() {
 
 const server = http.createServer(async (req, res) => {
 
-  // CORS preflight
   if (req.method === "OPTIONS") {
-    sendJSON(res, 200, { success: true });
+    sendJSON(res, 200, {
+      success: true
+    });
     return;
   }
 
-  // Main API / health route
   if (req.method === "GET" && req.url === "/") {
-    sendJSON(res, 200, getHealth());
+    sendJSON(res, 200, healthResponse());
     return;
   }
 
-  // Health check
   if (req.method === "GET" && req.url === "/health") {
-    sendJSON(res, 200, getHealth());
+    sendJSON(res, 200, healthResponse());
     return;
   }
 
-  // API information
   if (req.method === "GET" && req.url === "/api") {
     sendJSON(res, 200, {
       success: true,
@@ -139,15 +143,15 @@ const server = http.createServer(async (req, res) => {
       assistant: "Astra",
       status: "online",
       endpoints: {
+        home: "GET /",
         health: "GET /health",
-        chat: "POST /api/chat",
-        api: "GET /api"
+        api: "GET /api",
+        chat: "POST /api/chat"
       }
     });
     return;
   }
 
-  // Astra chat API
   if (req.method === "POST" && req.url === "/api/chat") {
     try {
       const rawBody = await readBody(req);
@@ -156,7 +160,7 @@ const server = http.createServer(async (req, res) => {
 
       try {
         body = JSON.parse(rawBody || "{}");
-      } catch {
+      } catch (error) {
         sendJSON(res, 400, {
           success: false,
           error: "Invalid JSON request."
@@ -187,6 +191,8 @@ const server = http.createServer(async (req, res) => {
         reply: reply
       });
 
+      return;
+
     } catch (error) {
       console.error("Astra backend error:", error);
 
@@ -194,12 +200,11 @@ const server = http.createServer(async (req, res) => {
         success: false,
         error: "Astra server error."
       });
-    }
 
-    return;
+      return;
+    }
   }
 
-  // Unknown route
   sendJSON(res, 404, {
     success: false,
     error: "Route not found.",
@@ -213,21 +218,8 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, "0.0.0.0", () => {
   console.log(
     `GLOBAL AI LEARNING Astra backend running on port ${PORT}`
   );
 });
-
-ఇప్పుడు next step
-
-1. GitHubలో Save/Commit changes చేయి.
-2. Render automatic deploy start అవుతుంది.
-3. Deploy status Live అయ్యే వరకు wait చేయి.
-4. తర్వాత browserలో నీ URL open చేయి:
-
-"https://global-ai-learning-astra-6p8u.onrender.com"
-
-Root pageలో "success: true" వస్తే backend correct.
-
-అది వచ్చిన తర్వాత వెంటనే నాకు "Done" అని చెప్పు. అప్పుడు మనం website "index.html" ↔ Astra backend connection మొత్తం correct చేద్దాం.
