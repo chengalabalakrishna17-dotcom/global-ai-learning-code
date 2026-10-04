@@ -13,272 +13,156 @@
   padding:0;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
   font-family:Arial,sans-serif;
-  background:#050816;
-  color:#fff;
-  line-height:1.6;
+  background:#020617;
+  color:white;
 }
 
 header{
   position:sticky;
   top:0;
-  z-index:1000;
-  background:#020617;
-  border-bottom:1px solid #1e293b;
-}
-
-nav{
-  max-width:1200px;
-  margin:auto;
+  z-index:100;
+  background:#0f172a;
+  border-bottom:1px solid #334155;
   padding:15px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
 }
 
 .logo{
-  font-weight:bold;
-  color:#60a5fa;
-  font-size:18px;
+  text-align:center;
+  margin-bottom:12px;
 }
 
-.nav-links{
+.logo small{
+  display:block;
+  color:#94a3b8;
+  font-size:13px;
+}
+
+.logo h1{
+  font-size:26px;
+  color:#38bdf8;
+}
+
+nav{
   display:flex;
+  justify-content:center;
   gap:10px;
   flex-wrap:wrap;
 }
 
-.nav-links a,
-.nav-links button{
+nav button{
   border:0;
-  background:transparent;
-  color:#fff;
-  text-decoration:none;
-  cursor:pointer;
-  padding:8px 12px;
+  background:#1e293b;
+  color:white;
+  padding:10px 16px;
   border-radius:8px;
-  font-size:14px;
+  cursor:pointer;
 }
 
-.nav-links a:hover,
-.nav-links button:hover{
-  background:#1e293b;
+nav button:hover{
+  background:#2563eb;
 }
 
 .hero{
   text-align:center;
-  padding:80px 20px;
-  background:linear-gradient(180deg,#0b1535,#050816);
+  padding:70px 20px;
 }
 
-.small-title{
-  color:#60a5fa;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.hero h1{
-  font-size:clamp(40px,8vw,75px);
+.hero h2{
+  font-size:42px;
   margin-bottom:15px;
 }
 
 .hero p{
-  max-width:750px;
-  margin:0 auto 30px;
   color:#cbd5e1;
-}
-
-.btn{
-  display:inline-block;
-  border:0;
-  background:#2563eb;
-  color:#fff;
-  padding:13px 20px;
-  border-radius:10px;
-  cursor:pointer;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-.btn:hover{
-  background:#1d4ed8;
+  max-width:650px;
+  margin:auto;
+  line-height:1.6;
 }
 
 section{
   max-width:1100px;
   margin:auto;
-  padding:60px 20px;
+  padding:40px 20px;
 }
 
 section h2{
   text-align:center;
-  margin-bottom:30px;
-  font-size:32px;
-}
-
-.status-box{
-  max-width:600px;
-  margin:auto;
-  background:#0f172a;
-  border:1px solid #1e293b;
-  border-radius:14px;
-  padding:25px;
-  text-align:center;
-}
-
-.user-email{
-  color:#94a3b8;
-  margin-top:5px;
+  margin-bottom:25px;
 }
 
 .courses{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+  gap:18px;
 }
 
 .card{
   background:#0f172a;
-  border:1px solid #1e293b;
-  border-radius:15px;
+  border:1px solid #334155;
+  border-radius:14px;
   padding:25px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border-color:#38bdf8;
 }
 
 .card h3{
   margin-bottom:10px;
-  color:#60a5fa;
+  color:#38bdf8;
 }
 
 .card p{
   color:#cbd5e1;
-  margin-bottom:20px;
+  line-height:1.5;
 }
 
-.lesson{
+#lesson{
   display:none;
-  margin-top:15px;
-  padding:15px;
-  background:#020617;
-  border-radius:10px;
-  color:#cbd5e1;
 }
 
-.lesson.active{
-  display:block;
-}
-
-.practice-box,
-.astra-box{
-  max-width:850px;
-  margin:auto;
+.lesson-box{
   background:#0f172a;
-  border:1px solid #1e293b;
-  border-radius:15px;
+  border:1px solid #334155;
+  border-radius:14px;
   padding:25px;
 }
 
-textarea{
-  width:100%;
-  min-height:180px;
-  resize:vertical;
-  background:#020617;
-  color:#fff;
-  border:1px solid #334155;
-  border-radius:10px;
-  padding:15px;
-  font-family:monospace;
-  font-size:15px;
-  margin-bottom:15px;
+.lesson-box h2{
+  color:#38bdf8;
+  text-align:left;
 }
 
-.output{
-  background:#020617;
-  border:1px solid #334155;
-  min-height:80px;
-  border-radius:10px;
-  padding:15px;
-  white-space:pre-wrap;
-  color:#a7f3d0;
+.lesson-box p{
+  color:#cbd5e1;
+  line-height:1.7;
+  margin:15px 0;
 }
 
-.chat{
-  height:400px;
-  overflow-y:auto;
-  background:#020617;
-  border-radius:10px;
-  padding:15px;
-  margin-bottom:15px;
-}
-
-.message{
-  padding:12px;
-  margin-bottom:10px;
-  border-radius:10px;
-  white-space:pre-wrap;
-}
-
-.user{
-  background:#1e3a8a;
-  margin-left:40px;
-}
-
-.bot{
-  background:#172554;
-  margin-right:40px;
-}
-
-.chat-input{
-  display:flex;
-  gap:10px;
-}
-
-.chat-input input{
-  flex:1;
-  background:#020617;
-  color:#fff;
-  border:1px solid #334155;
-  border-radius:10px;
-  padding:13px;
-  outline:none;
-}
-
-.login-area{
-  text-align:center;
+.back{
+  background:#2563eb;
+  color:white;
+  border:0;
+  padding:11px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-bottom:20px;
 }
 
 footer{
   text-align:center;
-  padding:30px 20px;
-  border-top:1px solid #1e293b;
+  padding:40px 20px;
   color:#94a3b8;
 }
 
-@media(max-width:700px){
-
-  nav{
-    flex-direction:column;
-  }
-
-  .chat-input{
-    flex-direction:column;
-  }
-
-  .hero{
-    padding:60px 15px;
-  }
-
-  .user{
-    margin-left:10px;
-  }
-
-  .bot{
-    margin-right:10px;
+@media(max-width:600px){
+  .hero h2{
+    font-size:30px;
   }
 }
 </style>
@@ -287,750 +171,165 @@ footer{
 <body>
 
 <header>
-<nav>
 
-<div class="logo">
-Code with Bala Krishna
-</div>
+  <div class="logo">
+    <small>Code with Bala Krishna</small>
+    <h1>GLOBAL AI LEARNING</h1>
+  </div>
 
-<div class="nav-links">
+  <nav>
+    <button onclick="showHome()">Home</button>
+    <button onclick="openLesson('python')">Python</button>
+    <button onclick="openLesson('java')">Java</button>
+    <button onclick="openLesson('c')">C Language</button>
+    <button onclick="openLesson('html')">HTML</button>
+    <button onclick="openLesson('ai')">AI</button>
+  </nav>
 
-<a href="#home">Home</a>
-<a href="#courses">Courses</a>
-<a href="#practice">Practice</a>
-<a href="#astra">Astra GPT</a>
-<a href="#login">Login</a>
-
-<button
-id="logoutBtn"
-onclick="logoutUser()"
-style="display:none;">
-Logout
-</button>
-
-</div>
-</nav>
 </header>
 
+<main>
 
-<section class="hero" id="home">
+  <div id="home">
 
-<div class="small-title">
-Code with Bala Krishna
-</div>
+    <div class="hero">
+      <h2>Learn. Build. Create.</h2>
+      <p>
+        Welcome to Global AI Learning — a learning platform for
+        programming, artificial intelligence and future technology.
+      </p>
+    </div>
 
-<h1>
-GLOBAL AI LEARNING
-</h1>
+    <section>
+      <h2>Programming Courses</h2>
 
-<p>
-Learn Programming, Artificial Intelligence,
-Technology and Digital Skills in one place.
-</p>
+      <div class="courses">
 
-<a class="btn" href="#courses">
-Explore Courses
-</a>
+        <div class="card" onclick="openLesson('python')">
+          <h3>🐍 Python</h3>
+          <p>Learn Python from basics to advanced programming.</p>
+        </div>
 
-</section>
+        <div class="card" onclick="openLesson('java')">
+          <h3>☕ Java</h3>
+          <p>Learn Java programming step by step.</p>
+        </div>
 
+        <div class="card" onclick="openLesson('c')">
+          <h3>💻 C Language</h3>
+          <p>Learn C programming from fundamentals.</p>
+        </div>
 
-<section id="login">
+        <div class="card" onclick="openLesson('html')">
+          <h3>🌐 HTML</h3>
+          <p>Build websites using HTML.</p>
+        </div>
 
-<h2>
-Student Login
-</h2>
+        <div class="card" onclick="openLesson('ai')">
+          <h3>🤖 Artificial Intelligence</h3>
+          <p>Explore AI concepts and modern technology.</p>
+        </div>
 
-<div class="status-box">
+      </div>
+    </section>
 
-<div id="loginMessage">
+  </div>
 
-<button class="btn" onclick="loginWithGoogle()">
-Login with Google
-</button>
+  <section id="lesson">
 
-</div>
+    <div class="lesson-box">
 
+      <button class="back" onclick="showHome()">
+        ← Back to Courses
+      </button>
 
-<div id="userInfo" style="display:none;">
+      <h2 id="lessonTitle"></h2>
 
-<p>✅ Logged In</p>
+      <p id="lessonText"></p>
 
-<h3 id="welcomeName"></h3>
+      <h3>What you will learn</h3>
 
-<p class="user-email" id="userEmail"></p>
+      <p id="lessonTopics"></p>
 
-</div>
+    </div>
 
-</div>
+  </section>
 
-</section>
-
-
-<section id="courses">
-
-<h2>
-Programming Courses
-</h2>
-
-<div class="courses">
-
-
-<div class="card">
-
-<h3>Python</h3>
-
-<p>
-Learn Python from beginner level with
-practical coding.
-</p>
-
-<button
-class="btn"
-onclick="toggleLesson('pythonLesson')">
-Open Python
-</button>
-
-<div class="lesson" id="pythonLesson">
-
-<h4>Python Beginner</h4>
-
-<p>
-Variables, data types, conditions, loops,
-functions, lists and practical programming.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>Java</h3>
-
-<p>
-Learn Java programming and
-object-oriented concepts.
-</p>
-
-<button
-class="btn"
-onclick="toggleLesson('javaLesson')">
-Open Java
-</button>
-
-<div class="lesson" id="javaLesson">
-
-<h4>Java Beginner</h4>
-
-<p>
-Classes, objects, methods, variables,
-loops and object-oriented programming.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>C Language</h3>
-
-<p>
-Learn C programming, logic, arrays,
-strings and functions.
-</p>
-
-<button
-class="btn"
-onclick="toggleLesson('cLesson')">
-Open C
-</button>
-
-<div class="lesson" id="cLesson">
-
-<h4>C Programming</h4>
-
-<p>
-Variables, operators, conditions, loops,
-arrays, strings, functions and pointers.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>Artificial Intelligence</h3>
-
-<p>
-Learn AI concepts, machine learning,
-generative AI and modern tools.
-</p>
-
-<button
-class="btn"
-onclick="toggleLesson('aiLesson')">
-Open AI
-</button>
-
-<div class="lesson" id="aiLesson">
-
-<h4>Artificial Intelligence</h4>
-
-<p>
-AI fundamentals, Machine Learning,
-Generative AI, LLMs and AI applications.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section id="practice">
-
-<h2>
-Python Coding Practice
-</h2>
-
-<div class="practice-box">
-
-<p>
-Write Python code and run it directly
-in your browser.
-</p>
-
-<br>
-
-<textarea id="pythonCode">print("Hello Global AI Learning")</textarea>
-
-<button class="btn" onclick="runPython()">
-Run Python
-</button>
-
-<br><br>
-
-<div class="output" id="pythonOutput">
-Output will appear here.
-</div>
-
-</div>
-
-</section>
-
-
-<section id="astra">
-
-<h2>
-🤖 Astra GPT
-</h2>
-
-<div class="astra-box">
-
-<div class="chat" id="chatBox">
-
-<div class="message bot">
-Hello! I am Astra, the AI learning assistant
-of GLOBAL AI LEARNING.
-
-Ask me anything about programming,
-AI or technology.
-</div>
-
-</div>
-
-
-<div class="chat-input">
-
-<input
-id="astraInput"
-type="text"
-placeholder="Ask Astra..."
-autocomplete="off"
-/>
-
-<button
-class="btn"
-onclick="sendToAstra()">
-Send
-</button>
-
-</div>
-
-</div>
-
-</section>
-
+</main>
 
 <footer>
-
-© 2026 Code with Bala Krishna —
-GLOBAL AI LEARNING
-
+  © 2026 Code with Bala Krishna | GLOBAL AI LEARNING
 </footer>
-
-
-<!-- =========================
-     FIREBASE
-========================= -->
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-
 
 <script>
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+const lessons = {
 
-const firebaseConfig = {
+  python:{
+    title:"🐍 Python Programming",
+    text:"Start Python programming from the basics and gradually move towards real projects.",
+    topics:"Variables • Data Types • Conditions • Loops • Functions • Lists • Dictionaries • OOP • Projects"
+  },
 
-  apiKey:
-  "AIzaSyBwTtdNupA4S8vBhxuXAUCOOEiedALHrLo",
+  java:{
+    title:"☕ Java Programming",
+    text:"Learn Java step by step and understand object-oriented programming.",
+    topics:"Syntax • Variables • Conditions • Loops • Methods • Classes • Objects • OOP • Projects"
+  },
 
-  authDomain:
-  "global-ai-learning-7f2c7.firebaseapp.com",
+  c:{
+    title:"💻 C Language",
+    text:"Learn C programming fundamentals and build your programming logic.",
+    topics:"Variables • Data Types • Operators • Conditions • Loops • Arrays • Strings • Functions • Pointers"
+  },
 
-  projectId:
-  "global-ai-learning-7f2c7",
+  html:{
+    title:"🌐 HTML",
+    text:"Learn how websites are structured using HTML.",
+    topics:"HTML Structure • Headings • Paragraphs • Links • Images • Forms • Tables • Semantic HTML"
+  },
 
-  storageBucket:
-  "global-ai-learning-7f2c7.firebasestorage.app",
-
-  messagingSenderId:
-  "814301153167",
-
-  appId:
-  "1:814301153167:web:01db46d4bb807eb6feedfa"
+  ai:{
+    title:"🤖 Artificial Intelligence",
+    text:"Understand the fundamentals of Artificial Intelligence and modern AI systems.",
+    topics:"AI Basics • Machine Learning • Neural Networks • Generative AI • AI Tools • AI Projects"
+  }
 
 };
 
+function openLesson(course){
 
-firebase.initializeApp(firebaseConfig);
+  const data = lessons[course];
 
-const auth = firebase.auth();
-
-const provider =
-new firebase.auth.GoogleAuthProvider();
-
-
-/* =========================
-   LOGIN STATE
-========================= */
-
-auth.onAuthStateChanged(function(user){
-
-  const loginMessage =
-  document.getElementById("loginMessage");
-
-  const userInfo =
-  document.getElementById("userInfo");
-
-  const logoutBtn =
-  document.getElementById("logoutBtn");
-
-
-  if(user){
-
-    loginMessage.style.display = "none";
-
-    userInfo.style.display = "block";
-
-    logoutBtn.style.display = "inline-block";
-
-
-    document.getElementById("welcomeName")
-    .textContent =
-    "Welcome, " +
-    (user.displayName || "Student");
-
-
-    document.getElementById("userEmail")
-    .textContent =
-    user.email || "";
-
-  }
-
-  else{
-
-    loginMessage.style.display = "block";
-
-    userInfo.style.display = "none";
-
-    logoutBtn.style.display = "none";
-
-  }
-
-});
-
-
-/* =========================
-   GOOGLE LOGIN
-========================= */
-
-function loginWithGoogle(){
-
-  auth.signInWithPopup(provider)
-
-  .catch(function(error){
-
-    alert(
-      "Login error: " +
-      error.message
-    );
-
-  });
-
-}
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-function logoutUser(){
-
-  auth.signOut()
-
-  .catch(function(error){
-
-    alert(
-      "Logout error: " +
-      error.message
-    );
-
-  });
-
-}
-
-
-/* =========================
-   COURSE LESSONS
-========================= */
-
-function toggleLesson(id){
-
-  const element =
-  document.getElementById(id);
-
-  element.classList.toggle("active");
-
-}
-
-
-/* =========================
-   PYTHON PRACTICE
-========================= */
-
-let pyodide = null;
-
-
-async function loadPyodideEngine(){
-
-  if(pyodide){
-
-    return pyodide;
-
-  }
-
-
-  const output =
-  document.getElementById("pythonOutput");
-
-
-  output.textContent =
-  "Loading Python engine...";
-
-
-  pyodide =
-  await loadPyodide();
-
-
-  return pyodide;
-
-}
-
-
-async function runPython(){
-
-  const output =
-  document.getElementById("pythonOutput");
-
-
-  const code =
-  document.getElementById("pythonCode").value;
-
-
-  output.textContent =
-  "Running...";
-
-
-  try{
-
-    const engine =
-    await loadPyodideEngine();
-
-
-    let result = "";
-
-
-    engine.setStdout({
-
-      batched:function(text){
-
-        result += text;
-
-      }
-
-    });
-
-
-    await engine.runPythonAsync(code);
-
-
-    output.textContent =
-    result ||
-    "Program executed successfully.";
-
-  }
-
-  catch(error){
-
-    output.textContent =
-    "Python Error:\n" +
-    error;
-
-  }
-
-}
-
-
-/* =========================
-   ASTRA BACKEND
-========================= */
-
-/*
-IMPORTANT:
-
-No OpenAI API key is stored here.
-
-The secret API key remains on
-the Render backend.
-
-Current backend:
-*/
-
-const ASTRA_BACKEND =
-"https://global-ai-learning-astra-6p8u.onrender.com";
-
-
-/* =========================
-   CHAT MESSAGE
-========================= */
-
-function addChatMessage(text,type){
-
-  const chatBox =
-  document.getElementById("chatBox");
-
-
-  const message =
-  document.createElement("div");
-
-
-  message.className =
-  "message " + type;
-
-
-  message.textContent =
-  text;
-
-
-  chatBox.appendChild(message);
-
-
-  chatBox.scrollTop =
-  chatBox.scrollHeight;
-
-}
-
-
-/* =========================
-   SEND TO ASTRA
-========================= */
-
-async function sendToAstra(){
-
-  const input =
-  document.getElementById("astraInput");
-
-
-  const message =
-  input.value.trim();
-
-
-  if(!message){
-
+  if(!data){
     return;
-
   }
 
+  document.getElementById("home").style.display="none";
+  document.getElementById("lesson").style.display="block";
 
-  addChatMessage(
-    message,
-    "user"
-  );
+  document.getElementById("lessonTitle").textContent=data.title;
+  document.getElementById("lessonText").textContent=data.text;
+  document.getElementById("lessonTopics").textContent=data.topics;
 
-
-  input.value = "";
-
-
-  addChatMessage(
-    "Astra is thinking...",
-    "bot"
-  );
-
-
-  const chatBox =
-  document.getElementById("chatBox");
-
-
-  const thinkingMessage =
-  chatBox.lastElementChild;
-
-
-  try{
-
-    const response =
-    await fetch(
-
-      ASTRA_BACKEND +
-      "/api/chat",
-
-      {
-
-        method:"POST",
-
-        headers:{
-          "Content-Type":
-          "application/json"
-        },
-
-        body:
-        JSON.stringify({
-
-          message:message
-
-        })
-
-      }
-
-    );
-
-
-    const data =
-    await response.json();
-
-
-    thinkingMessage.remove();
-
-
-    if(
-      !response.ok ||
-      !data.success
-    ){
-
-      addChatMessage(
-
-        "Astra error: " +
-        (
-          data.error ||
-          "Server request failed."
-        ),
-
-        "bot"
-
-      );
-
-      return;
-
-    }
-
-
-    addChatMessage(
-
-      data.reply ||
-      "Astra did not return a response.",
-
-      "bot"
-
-    );
-
-  }
-
-
-  catch(error){
-
-    thinkingMessage.remove();
-
-
-    addChatMessage(
-
-      "Astra connection error: " +
-      error.message,
-
-      "bot"
-
-    );
-
-  }
-
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 }
 
+function showHome(){
 
-/* =========================
-   ENTER KEY
-========================= */
+  document.getElementById("lesson").style.display="none";
+  document.getElementById("home").style.display="block";
 
-document
-.getElementById("astraInput")
-.addEventListener(
-  "keydown",
-  function(event){
-
-    if(event.key === "Enter"){
-
-      event.preventDefault();
-
-      sendToAstra();
-
-    }
-
-  }
-);
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
 
 </script>
-
-
-<!-- =========================
-     PYODIDE
-========================= -->
-
-<script
-src="https://cdn.jsdelivr.net/pyodide/v0.28.2/full/pyodide.js">
-</script>
-
 
 </body>
-  </html>
+</html>
