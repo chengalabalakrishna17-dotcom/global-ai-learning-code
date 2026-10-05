@@ -1414,4 +1414,95 @@ addChatMessage(
 const chatBox =
 document.getElementById("chatBox");
 
-const thinkingMessag
+const thinkingMessage =
+  chatBox.lastElementChild;
+
+try {
+
+  const response = await fetch(
+    ASTRA_BACKEND + "/api/chat",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: message
+      })
+    }
+  );
+
+  const data = await response.json();
+
+  if (thinkingMessage) {
+    thinkingMessage.remove();
+  }
+
+  if (data.reply) {
+
+    addChatMessage(
+      data.reply,
+      "bot"
+    );
+
+  } else if (data.message) {
+
+    addChatMessage(
+      data.message,
+      "bot"
+    );
+
+  } else {
+
+    addChatMessage(
+      "Astra response was not received.",
+      "bot"
+    );
+
+  }
+
+} catch (error) {
+
+  if (thinkingMessage) {
+    thinkingMessage.remove();
+  }
+
+  addChatMessage(
+    "Astra connection failed. Please try again.",
+    "bot"
+  );
+
+  console.error(error);
+
+}
+
+}
+
+
+/* ENTER KEY FOR ASTRA */
+
+document
+  .getElementById("astraInput")
+  .addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+      sendToAstra();
+    }
+
+  });
+
+
+/* PYODIDE */
+
+const pyodideScript =
+document.createElement("script");
+
+pyodideScript.src =
+"https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js";
+
+document.head.appendChild(pyodideScript);
+
+</script>
+
+</body>
+</html>
