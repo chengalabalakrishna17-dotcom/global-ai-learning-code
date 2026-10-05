@@ -13,291 +13,353 @@
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   font-family:Arial,sans-serif;
-  background:#020617;
-  color:white;
+  background:#050816;
+  color:#fff;
+  line-height:1.6;
 }
 
 header{
   position:sticky;
   top:0;
-  z-index:100;
-  background:#0f172a;
-  border-bottom:1px solid #334155;
-  padding:15px 20px;
-}
-
-.logo{
-  text-align:center;
-  margin-bottom:12px;
-}
-
-.logo small{
-  display:block;
-  color:#94a3b8;
-  font-size:13px;
-}
-
-.logo h1{
-  font-size:26px;
-  color:#38bdf8;
+  z-index:1000;
+  background:#020617;
+  border-bottom:1px solid #1e293b;
 }
 
 nav{
+  max-width:1200px;
+  margin:auto;
+  padding:15px 20px;
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.logo{
+  font-weight:bold;
+  color:#60a5fa;
+  font-size:18px;
+}
+
+.nav-links{
+  display:flex;
   gap:8px;
   flex-wrap:wrap;
 }
 
-nav button{
+.nav-links a,
+.nav-links button{
   border:0;
-  background:#1e293b;
-  color:white;
-  padding:10px 14px;
-  border-radius:8px;
+  background:transparent;
+  color:#fff;
+  text-decoration:none;
   cursor:pointer;
+  padding:8px 12px;
+  border-radius:8px;
+  font-size:14px;
 }
 
-nav button:hover{
-  background:#2563eb;
+.nav-links a:hover,
+.nav-links button:hover{
+  background:#1e293b;
 }
 
 .hero{
   text-align:center;
-  padding:60px 20px;
+  padding:80px 20px;
+  background:linear-gradient(180deg,#0b1535,#050816);
 }
 
-.hero h2{
-  font-size:42px;
+.small-title{
+  color:#60a5fa;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.hero h1{
+  font-size:clamp(40px,8vw,75px);
   margin-bottom:15px;
 }
 
 .hero p{
+  max-width:750px;
+  margin:0 auto 30px;
   color:#cbd5e1;
-  max-width:700px;
-  margin:auto;
-  line-height:1.6;
+}
+
+.btn{
+  display:inline-block;
+  border:0;
+  background:#2563eb;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.btn:hover{
+  background:#1d4ed8;
+}
+
+.btn.secondary{
+  background:#334155;
+}
+
+.btn.secondary:hover{
+  background:#475569;
 }
 
 section{
   max-width:1100px;
   margin:auto;
-  padding:35px 20px;
+  padding:60px 20px;
 }
 
 section h2{
   text-align:center;
-  margin-bottom:25px;
+  margin-bottom:30px;
+  font-size:32px;
+}
+
+.status-box{
+  max-width:600px;
+  margin:auto;
+  background:#0f172a;
+  border:1px solid #1e293b;
+  border-radius:14px;
+  padding:25px;
+  text-align:center;
+}
+
+.user-email{
+  color:#94a3b8;
+  margin-top:5px;
 }
 
 .courses{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
+  gap:20px;
 }
 
 .card{
   background:#0f172a;
-  border:1px solid #334155;
-  border-radius:14px;
+  border:1px solid #1e293b;
+  border-radius:15px;
   padding:25px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.card:hover{
-  transform:translateY(-4px);
-  border-color:#38bdf8;
 }
 
 .card h3{
   margin-bottom:10px;
-  color:#38bdf8;
+  color:#60a5fa;
 }
 
 .card p{
   color:#cbd5e1;
-  line-height:1.5;
+  margin-bottom:18px;
 }
 
-#coursePage,
-#lessonPage{
+.course-meta{
+  font-size:13px;
+  color:#94a3b8;
+  margin-bottom:15px;
+}
+
+.lesson-panel{
   display:none;
-}
-
-.course-header,
-.lesson-box{
-  background:#0f172a;
+  margin-top:20px;
+  background:#020617;
   border:1px solid #334155;
-  border-radius:14px;
+  border-radius:15px;
   padding:25px;
 }
 
-.course-header h2,
-.lesson-box h2{
-  color:#38bdf8;
-  text-align:left;
-  margin-bottom:15px;
-}
-
-.course-header p,
-.lesson-box p{
-  color:#cbd5e1;
-  line-height:1.7;
-  margin-bottom:15px;
-}
-
-.lesson-list{
-  display:grid;
-  gap:12px;
-  margin-top:20px;
+.lesson-panel.active{
+  display:block;
 }
 
 .lesson-item{
-  background:#1e293b;
+  background:#0f172a;
   border:1px solid #334155;
-  border-radius:10px;
-  padding:16px;
-  cursor:pointer;
+  border-radius:12px;
+  padding:18px;
+  margin-top:12px;
 }
 
-.lesson-item:hover{
-  border-color:#38bdf8;
+.lesson-item h4{
+  color:#38bdf8;
+  margin-bottom:8px;
 }
 
-.lesson-item strong{
-  color:white;
+.lesson-item p{
+  margin-bottom:12px;
 }
 
-.completed{
-  border-color:#22c55e;
-}
-
-.completed span{
-  color:#22c55e;
-  font-weight:bold;
-}
-
-.progress-area{
-  margin-top:20px;
+.progress-box{
+  margin-top:15px;
 }
 
 .progress-bar{
-  height:12px;
+  width:100%;
+  height:10px;
   background:#1e293b;
   border-radius:20px;
   overflow:hidden;
-  margin-top:8px;
 }
 
 .progress-fill{
   height:100%;
   width:0%;
-  background:#22c55e;
+  background:#2563eb;
   transition:.3s;
 }
 
-.video-box{
-  margin:20px 0;
-  background:#020617;
-  border:1px solid #334155;
-  border-radius:12px;
-  padding:20px;
-}
-
-.video-placeholder{
-  min-height:220px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+.progress-text{
   color:#94a3b8;
-  border:1px dashed #475569;
-  border-radius:10px;
+  font-size:13px;
+  margin-top:6px;
 }
 
-video{
-  width:100%;
-  max-height:500px;
-  border-radius:10px;
-}
-
-.quiz{
-  margin-top:25px;
-  padding:20px;
+.quiz-box{
+  margin-top:20px;
   background:#020617;
   border:1px solid #334155;
   border-radius:12px;
+  padding:20px;
 }
 
-.quiz h3{
-  color:#38bdf8;
+.quiz-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  margin-top:10px;
+  padding:12px;
+  background:#0f172a;
+  color:white;
+  border:1px solid #334155;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.quiz-option:hover{
+  background:#1e293b;
+}
+
+.practice-box,
+.astra-box{
+  max-width:850px;
+  margin:auto;
+  background:#0f172a;
+  border:1px solid #1e293b;
+  border-radius:15px;
+  padding:25px;
+}
+
+textarea{
+  width:100%;
+  min-height:180px;
+  resize:vertical;
+  background:#020617;
+  color:#fff;
+  border:1px solid #334155;
+  border-radius:10px;
+  padding:15px;
+  font-family:monospace;
+  font-size:15px;
   margin-bottom:15px;
 }
 
-.option{
-  display:block;
-  background:#1e293b;
+.output{
+  background:#020617;
   border:1px solid #334155;
+  min-height:80px;
+  border-radius:10px;
+  padding:15px;
+  white-space:pre-wrap;
+  color:#a7f3d0;
+}
+
+.chat{
+  height:400px;
+  overflow-y:auto;
+  background:#020617;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:15px;
+}
+
+.message{
   padding:12px;
-  margin:8px 0;
-  border-radius:8px;
-  cursor:pointer;
+  margin-bottom:10px;
+  border-radius:10px;
+  white-space:pre-wrap;
 }
 
-.option:hover{
-  border-color:#38bdf8;
+.user{
+  background:#1e3a8a;
+  margin-left:40px;
 }
 
-.primary{
-  background:#2563eb;
-  color:white;
-  border:0;
-  padding:11px 18px;
-  border-radius:8px;
-  cursor:pointer;
-  margin-top:15px;
+.bot{
+  background:#172554;
+  margin-right:40px;
 }
 
-.primary:hover{
-  background:#1d4ed8;
+.chat-input{
+  display:flex;
+  gap:10px;
 }
 
-.back{
-  background:#2563eb;
-  color:white;
-  border:0;
-  padding:11px 18px;
-  border-radius:8px;
-  cursor:pointer;
-  margin-bottom:20px;
-}
-
-.status{
-  margin-top:15px;
-  padding:12px;
-  border-radius:8px;
-  background:#172033;
-  color:#cbd5e1;
+.chat-input input{
+  flex:1;
+  background:#020617;
+  color:#fff;
+  border:1px solid #334155;
+  border-radius:10px;
+  padding:13px;
+  outline:none;
 }
 
 footer{
   text-align:center;
-  padding:40px 20px;
+  padding:30px 20px;
+  border-top:1px solid #1e293b;
   color:#94a3b8;
-  margin-top:30px;
 }
 
-@media(max-width:600px){
-  .hero h2{
-    font-size:30px;
+.hidden{
+  display:none;
+}
+
+@media(max-width:700px){
+
+  nav{
+    flex-direction:column;
   }
 
-  nav button{
-    padding:9px 11px;
-    font-size:13px;
+  .chat-input{
+    flex-direction:column;
+  }
+
+  .hero{
+    padding:60px 15px;
+  }
+
+  .user{
+    margin-left:10px;
+  }
+
+  .bot{
+    margin-right:10px;
   }
 }
 </style>
@@ -306,720 +368,1050 @@ footer{
 <body>
 
 <header>
+<nav>
 
-  <div class="logo">
-    <small>Code with Bala Krishna</small>
-    <h1>GLOBAL AI LEARNING</h1>
-  </div>
+<div class="logo">
+Code with Bala Krishna
+</div>
 
-  <nav>
-    <button onclick="showHome()">Home</button>
-    <button onclick="openCourse('python')">Python</button>
-    <button onclick="openCourse('java')">Java</button>
-    <button onclick="openCourse('c')">C</button>
-    <button onclick="openCourse('html')">HTML</button>
-    <button onclick="openCourse('ai')">AI</button>
-  </nav>
+<div class="nav-links">
 
+<a href="#home">Home</a>
+<a href="#courses">Courses</a>
+<a href="#practice">Practice</a>
+<a href="#astra">Astra GPT</a>
+<a href="#login">Login</a>
+
+<button
+id="logoutBtn"
+onclick="logoutUser()"
+style="display:none;">
+Logout
+</button>
+
+</div>
+</nav>
 </header>
 
-<main>
 
-<!-- HOME -->
+<section class="hero" id="home">
 
-<div id="home">
+<div class="small-title">
+Code with Bala Krishna
+</div>
 
-  <div class="hero">
-    <h2>Learn. Build. Create.</h2>
+<h1>GLOBAL AI LEARNING</h1>
 
-    <p>
-      Welcome to Global AI Learning — a learning platform for
-      programming, artificial intelligence and future technology.
-    </p>
-  </div>
+<p>
+Learn Programming, Artificial Intelligence,
+Technology and Digital Skills in one place.
+</p>
 
-  <section>
+<a class="btn" href="#courses">
+Explore Courses
+</a>
 
-    <h2>Programming Courses</h2>
+</section>
 
-    <div class="courses">
 
-      <div class="card" onclick="openCourse('python')">
-        <h3>🐍 Python</h3>
-        <p>Learn Python from basics to advanced programming.</p>
-      </div>
+<section id="login">
 
-      <div class="card" onclick="openCourse('java')">
-        <h3>☕ Java</h3>
-        <p>Learn Java step by step.</p>
-      </div>
+<h2>Student Login</h2>
 
-      <div class="card" onclick="openCourse('c')">
-        <h3>💻 C Language</h3>
-        <p>Learn C programming from fundamentals.</p>
-      </div>
+<div class="status-box">
 
-      <div class="card" onclick="openCourse('html')">
-        <h3>🌐 HTML</h3>
-        <p>Build websites using HTML.</p>
-      </div>
+<div id="loginMessage">
 
-      <div class="card" onclick="openCourse('ai')">
-        <h3>🤖 Artificial Intelligence</h3>
-        <p>Explore AI concepts and modern technology.</p>
-      </div>
+<button class="btn" onclick="loginWithGoogle()">
+Login with Google
+</button>
 
-    </div>
+</div>
 
-  </section>
+<div id="userInfo" style="display:none;">
+
+<p>✅ Logged In</p>
+
+<h3 id="welcomeName"></h3>
+
+<p class="user-email" id="userEmail"></p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="courses">
+
+<h2>Programming Courses</h2>
+
+<div class="courses">
+
+
+<div class="card">
+
+<h3>🐍 Python</h3>
+
+<p>
+Learn Python from beginner level to advanced programming.
+</p>
+
+<div class="course-meta">
+Beginner → Advanced
+</div>
+
+<button
+class="btn"
+onclick="openCourse('python')">
+Open Course
+</button>
+
+<div
+class="lesson-panel"
+id="pythonCourse">
+
+<h3>🐍 Python Programming</h3>
+
+<p>
+Start Python step by step.
+</p>
+
+<div class="progress-box">
+<div class="progress-bar">
+<div class="progress-fill" id="pythonProgress"></div>
+</div>
+<div class="progress-text" id="pythonProgressText">
+0 / 5 lessons completed
+</div>
+</div>
+
+<div id="pythonLessons"></div>
+
+</div>
 
 </div>
 
 
-<!-- COURSE PAGE -->
+<div class="card">
 
-<section id="coursePage">
+<h3>☕ Java</h3>
 
-  <div class="course-header">
+<p>
+Learn Java programming and object-oriented concepts.
+</p>
 
-    <button class="back" onclick="showHome()">
-      ← Back to Courses
-    </button>
+<div class="course-meta">
+Beginner → Advanced
+</div>
 
-    <h2 id="courseTitle"></h2>
+<button
+class="btn"
+onclick="openCourse('java')">
+Open Course
+</button>
 
-    <p id="courseDescription"></p>
+<div
+class="lesson-panel"
+id="javaCourse">
 
-    <div class="progress-area">
+<h3>☕ Java Programming</h3>
 
-      <strong>Course Progress</strong>
+<div class="progress-box">
+<div class="progress-bar">
+<div class="progress-fill" id="javaProgress"></div>
+</div>
+<div class="progress-text" id="javaProgressText">
+0 / 5 lessons completed
+</div>
+</div>
 
-      <div class="progress-bar">
-        <div id="progressFill" class="progress-fill"></div>
-      </div>
+<div id="javaLessons"></div>
 
-      <p id="progressText">0% completed</p>
+</div>
 
-    </div>
+</div>
 
-  </div>
 
-  <div class="lesson-list" id="lessonList"></div>
+<div class="card">
+
+<h3>💻 C Language</h3>
+
+<p>
+Learn C programming, logic, arrays, strings and functions.
+</p>
+
+<div class="course-meta">
+Beginner → Advanced
+</div>
+
+<button
+class="btn"
+onclick="openCourse('c')">
+Open Course
+</button>
+
+<div
+class="lesson-panel"
+id="cCourse">
+
+<h3>💻 C Programming</h3>
+
+<div class="progress-box">
+<div class="progress-bar">
+<div class="progress-fill" id="cProgress"></div>
+</div>
+<div class="progress-text" id="cProgressText">
+0 / 5 lessons completed
+</div>
+</div>
+
+<div id="cLessons"></div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🌐 HTML</h3>
+
+<p>
+Build websites using HTML from basics.
+</p>
+
+<div class="course-meta">
+Beginner → Advanced
+</div>
+
+<button
+class="btn"
+onclick="openCourse('html')">
+Open Course
+</button>
+
+<div
+class="lesson-panel"
+id="htmlCourse">
+
+<h3>🌐 HTML</h3>
+
+<div class="progress-box">
+<div class="progress-bar">
+<div class="progress-fill" id="htmlProgress"></div>
+</div>
+<div class="progress-text" id="htmlProgressText">
+0 / 5 lessons completed
+</div>
+</div>
+
+<div id="htmlLessons"></div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🤖 Artificial Intelligence</h3>
+
+<p>
+Learn AI, machine learning and generative AI concepts.
+</p>
+
+<div class="course-meta">
+Beginner → Advanced
+</div>
+
+<button
+class="btn"
+onclick="openCourse('ai')">
+Open Course
+</button>
+
+<div
+class="lesson-panel"
+id="aiCourse">
+
+<h3>🤖 Artificial Intelligence</h3>
+
+<div class="progress-box">
+<div class="progress-bar">
+<div class="progress-fill" id="aiProgress"></div>
+</div>
+<div class="progress-text" id="aiProgressText">
+0 / 5 lessons completed
+</div>
+</div>
+
+<div id="aiLessons"></div>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 
-<!-- LESSON PAGE -->
+<section id="practice">
 
-<section id="lessonPage">
+<h2>Python Coding Practice</h2>
 
-  <div class="lesson-box">
+<div class="practice-box">
 
-    <button class="back" onclick="backToCourse()">
-      ← Back to Lessons
-    </button>
+<p>
+Write Python code and run it directly in your browser.
+</p>
 
-    <h2 id="lessonTitle"></h2>
+<br>
 
-    <p id="lessonContent"></p>
+<textarea id="pythonCode">print("Hello Global AI Learning")</textarea>
 
+<button class="btn" onclick="runPython()">
+Run Python
+</button>
 
-    <!-- VIDEO -->
+<br><br>
 
-    <div class="video-box">
+<div class="output" id="pythonOutput">
+Output will appear here.
+</div>
 
-      <h3>🎥 Lesson Video</h3>
-
-      <br>
-
-      <div id="videoContainer">
-
-        <div class="video-placeholder">
-          Owner video will appear here.
-          <br>
-          Video upload system will be connected later.
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- QUIZ -->
-
-    <div class="quiz">
-
-      <h3>📝 Lesson Quiz</h3>
-
-      <p id="quizQuestion"></p>
-
-      <div id="quizOptions"></div>
-
-      <button class="primary" onclick="checkAnswer()">
-        Check Answer
-      </button>
-
-      <div id="quizResult" class="status"></div>
-
-    </div>
-
-
-    <button class="primary" onclick="completeLesson()">
-      ✅ Complete Lesson
-    </button>
-
-    <div id="completeStatus" class="status"></div>
-
-  </div>
+</div>
 
 </section>
 
-</main>
+
+<section id="astra">
+
+<h2>🤖 Astra GPT</h2>
+
+<div class="astra-box">
+
+<div class="chat" id="chatBox">
+
+<div class="message bot">
+Hello! I am Astra, the AI learning assistant
+of GLOBAL AI LEARNING.
+
+Ask me anything about programming,
+AI or technology.
+</div>
+
+</div>
+
+<div class="chat-input">
+
+<input
+id="astraInput"
+type="text"
+placeholder="Ask Astra..."
+autocomplete="off"
+/>
+
+<button
+class="btn"
+onclick="sendToAstra()">
+Send
+</button>
+
+</div>
+
+</div>
+
+</section>
 
 
 <footer>
-  © 2026 Code with Bala Krishna | GLOBAL AI LEARNING
+© 2026 Code with Bala Krishna — GLOBAL AI LEARNING
 </footer>
+
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 
 
 <script>
 
-/* =========================
-   COURSE DATA
-========================= */
+const firebaseConfig = {
 
-const courses = {
+apiKey:
+"AIzaSyBwTtdNupA4S8vBhxuXAUCOOEiedALHrLo",
 
-  python:{
-    title:"🐍 Python Programming",
-    description:"Learn Python from zero to advanced level.",
-    lessons:[
-      {
-        title:"Python Lesson 1 — Introduction",
-        content:"Python is a high-level programming language used for websites, automation, data science, AI and many other applications.",
-        question:"What is Python?",
-        options:[
-          "A programming language",
-          "A web browser",
-          "An operating system",
-          "A database"
-        ],
-        answer:0
-      },
+authDomain:
+"global-ai-learning-7f2c7.firebaseapp.com",
 
-      {
-        title:"Python Lesson 2 — Variables",
-        content:"Variables are used to store data. Example: name = 'Bala' stores text inside a variable named name.",
-        question:"Which symbol is commonly used to assign a value to a variable in Python?",
-        options:[
-          "=",
-          "==",
-          "=>",
-          ":="
-        ],
-        answer:0
-      },
+projectId:
+"global-ai-learning-7f2c7",
 
-      {
-        title:"Python Lesson 3 — Data Types",
-        content:"Python supports common data types such as int, float, string, boolean, list and dictionary.",
-        question:"Which type is used for whole numbers?",
-        options:[
-          "int",
-          "str",
-          "float",
-          "bool"
-        ],
-        answer:0
-      },
+storageBucket:
+"global-ai-learning-7f2c7.firebasestorage.app",
 
-      {
-        title:"Python Lesson 4 — Conditions",
-        content:"Conditional statements allow a program to make decisions using if, elif and else.",
-        question:"Which keyword is used to start a condition in Python?",
-        options:[
-          "if",
-          "when",
-          "check",
-          "condition"
-        ],
-        answer:0
-      },
+messagingSenderId:
+"814301153167",
 
-      {
-        title:"Python Lesson 5 — Loops",
-        content:"Loops allow code to execute repeatedly. Python provides for and while loops.",
-        question:"Which keyword is commonly used for iteration?",
-        options:[
-          "for",
-          "repeat",
-          "loop",
-          "iterate"
-        ],
-        answer:0
-      }
-    ]
-  },
+appId:
+"1:814301153167:web:01db46d4bb807eb6feedfa"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+const provider =
+new firebase.auth.GoogleAuthProvider();
 
 
-  java:{
-    title:"☕ Java Programming",
-    description:"Learn Java programming and object-oriented concepts.",
-    lessons:[
-      {
-        title:"Java Lesson 1 — Introduction",
-        content:"Java is a popular programming language used for applications, backend systems and Android development.",
-        question:"Java is a...",
-        options:[
-          "Programming language",
-          "Browser",
-          "Database",
-          "Game console"
-        ],
-        answer:0
-      },
+/* LOGIN */
 
-      {
-        title:"Java Lesson 2 — Variables",
-        content:"Variables store data values. Java requires the variable type to be declared.",
-        question:"Which is a valid integer declaration?",
-        options:[
-          "int age = 20;",
-          "number age = 20;",
-          "integer age = 20;",
-          "age int = 20;"
-        ],
-        answer:0
-      },
+auth.onAuthStateChanged(function(user){
 
-      {
-        title:"Java Lesson 3 — Conditions",
-        content:"Java uses if, else if and else statements for decision making.",
-        question:"Which keyword starts a condition?",
-        options:[
-          "if",
-          "when",
-          "check",
-          "condition"
-        ],
-        answer:0
-      }
-    ]
-  },
+const loginMessage =
+document.getElementById("loginMessage");
+
+const userInfo =
+document.getElementById("userInfo");
+
+const logoutBtn =
+document.getElementById("logoutBtn");
+
+if(user){
+
+loginMessage.style.display="none";
+
+userInfo.style.display="block";
+
+logoutBtn.style.display="inline-block";
+
+document.getElementById("welcomeName")
+.textContent =
+"Welcome, " +
+(user.displayName || "Student");
+
+document.getElementById("userEmail")
+.textContent =
+user.email || "";
+
+}else{
+
+loginMessage.style.display="block";
+
+userInfo.style.display="none";
+
+logoutBtn.style.display="none";
+
+}
+
+});
 
 
-  c:{
-    title:"💻 C Language",
-    description:"Learn C programming from fundamentals.",
-    lessons:[
-      {
-        title:"C Lesson 1 — Introduction",
-        content:"C is a powerful programming language used to understand programming fundamentals and system-level concepts.",
-        question:"C is a...",
-        options:[
-          "Programming language",
-          "Browser",
-          "Database",
-          "Video player"
-        ],
-        answer:0
-      },
+function loginWithGoogle(){
 
-      {
-        title:"C Lesson 2 — Variables",
-        content:"Variables store values in memory. C provides types such as int, float and char.",
-        question:"Which type stores a whole number?",
-        options:[
-          "int",
-          "char",
-          "float",
-          "void"
-        ],
-        answer:0
-      },
+auth.signInWithPopup(provider)
+.catch(function(error){
 
-      {
-        title:"C Lesson 3 — Arrays",
-        content:"An array stores multiple values of the same type in a sequence.",
-        question:"An array normally stores...",
-        options:[
-          "Multiple values",
-          "Only one value",
-          "Only text",
-          "Only functions"
-        ],
-        answer:0
-      }
-    ]
-  },
+alert(
+"Login error: " +
+error.message
+);
+
+});
+
+}
 
 
-  html:{
-    title:"🌐 HTML",
-    description:"Learn how websites are structured using HTML.",
-    lessons:[
-      {
-        title:"HTML Lesson 1 — Introduction",
-        content:"HTML stands for HyperText Markup Language. It provides the structure of webpages.",
-        question:"What does HTML stand for?",
-        options:[
-          "HyperText Markup Language",
-          "HighText Machine Language",
-          "Hyper Tool Multi Language",
-          "Home Tool Markup Language"
-        ],
-        answer:0
-      },
+function logoutUser(){
 
-      {
-        title:"HTML Lesson 2 — Headings",
-        content:"HTML provides heading elements from h1 to h6.",
-        question:"Which is the largest standard HTML heading?",
-        options:[
-          "h1",
-          "h6",
-          "heading",
-          "head"
-        ],
-        answer:0
-      },
+auth.signOut()
+.catch(function(error){
 
-      {
-        title:"HTML Lesson 3 — Links",
-        content:"The anchor element is used to create hyperlinks.",
-        question:"Which element creates a hyperlink?",
-        options:[
-          "<a>",
-          "<link>",
-          "<href>",
-          "<url>"
-        ],
-        answer:0
-      }
-    ]
-  },
+alert(
+"Logout error: " +
+error.message
+);
+
+});
+
+}
 
 
-  ai:{
-    title:"🤖 Artificial Intelligence",
-    description:"Understand AI fundamentals and modern AI technology.",
-    lessons:[
-      {
-        title:"AI Lesson 1 — Introduction",
-        content:"Artificial Intelligence is the field of creating computer systems that can perform tasks requiring aspects of human intelligence.",
-        question:"What does AI stand for?",
-        options:[
-          "Artificial Intelligence",
-          "Automated Internet",
-          "Advanced Input",
-          "Artificial Internet"
-        ],
-        answer:0
-      },
+/* COURSE DATA */
 
-      {
-        title:"AI Lesson 2 — Machine Learning",
-        content:"Machine Learning is a branch of AI where systems learn patterns from data.",
-        question:"Machine Learning is a branch of...",
-        options:[
-          "Artificial Intelligence",
-          "HTML",
-          "CSS",
-          "Networking"
-        ],
-        answer:0
-      }
-    ]
-  }
+const courseData = {
+
+python:[
+{
+title:"Lesson 1 — Python Basics",
+text:"Learn Python variables, data types and print().",
+question:"Which function is commonly used to display output in Python?",
+options:["print()","show()","display()","write()"],
+answer:0
+},
+{
+title:"Lesson 2 — Conditions",
+text:"Learn if, elif and else conditions.",
+question:"Which keyword is used for a condition in Python?",
+options:["if","when","check","condition"],
+answer:0
+},
+{
+title:"Lesson 3 — Loops",
+text:"Learn for and while loops.",
+question:"Which loop is commonly used to iterate through a list?",
+options:["for","repeat","loop","iterate"],
+answer:0
+},
+{
+title:"Lesson 4 — Functions",
+text:"Learn how to create reusable functions.",
+question:"Which keyword creates a function in Python?",
+options:["function","def","fun","create"],
+answer:1
+},
+{
+title:"Lesson 5 — Lists",
+text:"Learn Python lists and basic list operations.",
+question:"Which brackets are normally used for a Python list?",
+options:["()","{}","[]","<>"],
+answer:2
+}
+],
+
+java:[
+{
+title:"Lesson 1 — Java Basics",
+text:"Learn variables and basic Java syntax.",
+question:"Which keyword is used to create a class?",
+options:["class","object","create","newclass"],
+answer:0
+},
+{
+title:"Lesson 2 — Conditions",
+text:"Learn if and else in Java.",
+question:"Which keyword checks a condition?",
+options:["if","check","when","condition"],
+answer:0
+},
+{
+title:"Lesson 3 — Loops",
+text:"Learn Java loops.",
+question:"Which is a Java loop?",
+options:["for","repeatx","cycle","again"],
+answer:0
+},
+{
+title:"Lesson 4 — Methods",
+text:"Learn Java methods.",
+question:"A method is mainly used to:",
+options:["Reuse code","Delete Java","Close program","Format computer"],
+answer:0
+},
+{
+title:"Lesson 5 — OOP",
+text:"Learn classes and objects.",
+question:"Java strongly supports which programming style?",
+options:["OOP","Only HTML","Only SQL","None"],
+answer:0
+}
+],
+
+c:[
+{
+title:"Lesson 1 — C Basics",
+text:"Learn variables and basic C syntax.",
+question:"Which function is commonly used for output in C?",
+options:["printf()","print()","output()","show()"],
+answer:0
+},
+{
+title:"Lesson 2 — Conditions",
+text:"Learn if and else statements.",
+question:"Which keyword starts a condition?",
+options:["if","when","check","condition"],
+answer:0
+},
+{
+title:"Lesson 3 — Loops",
+text:"Learn C loops.",
+question:"Which is a C loop?",
+options:["for","repeat","cycle","again"],
+answer:0
+},
+{
+title:"Lesson 4 — Arrays",
+text:"Learn arrays and indexed data.",
+question:"An array stores:",
+options:["Multiple values","Only one value","Only text","Nothing"],
+answer:0
+},
+{
+title:"Lesson 5 — Functions",
+text:"Learn functions in C.",
+question:"Functions help us:",
+options:["Reuse code","Delete code","Turn off PC","Create HTML"],
+answer:0
+}
+],
+
+html:[
+{
+title:"Lesson 1 — HTML Basics",
+text:"Learn the basic structure of an HTML page.",
+question:"Which tag is the root element of an HTML document?",
+options:["<html>","<body>","<page>","<root>"],
+answer:0
+},
+{
+title:"Lesson 2 — Headings",
+text:"Learn HTML headings.",
+question:"Which tag creates the largest standard heading?",
+options:["<h1>","<h6>","<head>","<title>"],
+answer:0
+},
+{
+title:"Lesson 3 — Paragraphs",
+text:"Learn paragraph elements.",
+question:"Which tag creates a paragraph?",
+options:["<p>","<para>","<text>","<paragraph>"],
+answer:0
+},
+{
+title:"Lesson 4 — Links",
+text:"Learn hyperlinks using anchor tags.",
+question:"Which tag creates a hyperlink?",
+options:["<a>","<link>","<url>","<href>"],
+answer:0
+},
+{
+title:"Lesson 5 — Images",
+text:"Learn how to add images.",
+question:"Which tag is used for an image?",
+options:["<img>","<image>","<pic>","<photo>"],
+answer:0
+}
+],
+
+ai:[
+{
+title:"Lesson 1 — What is AI?",
+text:"Understand the basic idea of Artificial Intelligence.",
+question:"AI stands for:",
+options:[
+"Artificial Intelligence",
+"Automatic Internet",
+"Advanced Internet",
+"Artificial Internet"
+],
+answer:0
+},
+{
+title:"Lesson 2 — Machine Learning",
+text:"Understand the basic idea of machine learning.",
+question:"Machine Learning is a branch of:",
+options:[
+"Artificial Intelligence",
+"HTML",
+"CSS",
+"Networking"
+],
+answer:0
+},
+{
+title:"Lesson 3 — Neural Networks",
+text:"Learn the basic idea of neural networks.",
+question:"Neural networks are inspired by:",
+options:[
+"The human brain",
+"A keyboard",
+"A database",
+"A monitor"
+],
+answer:0
+},
+{
+title:"Lesson 4 — Generative AI",
+text:"Learn what generative AI does.",
+question:"Generative AI can:",
+options:[
+"Generate content",
+"Only calculate electricity",
+"Only browse files",
+"Only create cables"
+],
+answer:0
+},
+{
+title:"Lesson 5 — AI Applications",
+text:"Explore practical applications of AI.",
+question:"AI can be used in:",
+options:[
+"Many different fields",
+"Only games",
+"Only phones",
+"Only schools"
+],
+answer:0
+}
+]
 
 };
 
 
-/* =========================
-   VARIABLES
-========================= */
-
-let currentCourse = "";
-let currentLesson = 0;
-let selectedAnswer = null;
-
-
-/* =========================
-   HOME
-========================= */
-
-function showHome(){
-
-  document.getElementById("home").style.display="block";
-  document.getElementById("coursePage").style.display="none";
-  document.getElementById("lessonPage").style.display="none";
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-
-/* =========================
-   OPEN COURSE
-========================= */
+/* COURSE FUNCTIONS */
 
 function openCourse(course){
 
-  if(!courses[course]){
-    return;
-  }
+const panel =
+document.getElementById(course+"Course");
 
-  currentCourse = course;
-
-  const data = courses[course];
-
-  document.getElementById("home").style.display="none";
-  document.getElementById("coursePage").style.display="block";
-  document.getElementById("lessonPage").style.display="none";
-
-  document.getElementById("courseTitle").textContent=data.title;
-  document.getElementById("courseDescription").textContent=data.description;
-
-  renderLessons();
-  updateProgress();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+if(!panel){
+return;
 }
 
+panel.classList.toggle("active");
 
-/* =========================
-   RENDER LESSONS
-========================= */
+renderCourse(course);
 
-function renderLessons(){
-
-  const list = document.getElementById("lessonList");
-
-  list.innerHTML="";
-
-  const lessons = courses[currentCourse].lessons;
-
-  lessons.forEach((lesson,index)=>{
-
-    const completed =
-      localStorage.getItem(
-        currentCourse+"_lesson_"+index
-      ) === "completed";
-
-    const div = document.createElement("div");
-
-    div.className =
-      "lesson-item " +
-      (completed ? "completed" : "");
-
-    div.innerHTML = `
-      <strong>${index+1}. ${lesson.title}</strong>
-      <br>
-      <span>
-        ${completed ? "✓ Completed" : "▶ Start Lesson"}
-      </span>
-    `;
-
-    div.onclick = function(){
-      openLesson(index);
-    };
-
-    list.appendChild(div);
-
-  });
+window.location.hash="courses";
 
 }
 
 
-/* =========================
-   OPEN LESSON
-========================= */
+function getProgress(course){
 
-function openLesson(index){
-
-  currentLesson=index;
-
-  const lesson =
-    courses[currentCourse].lessons[index];
-
-  selectedAnswer=null;
-
-  document.getElementById("coursePage").style.display="none";
-  document.getElementById("lessonPage").style.display="block";
-
-  document.getElementById("lessonTitle").textContent=
-    lesson.title;
-
-  document.getElementById("lessonContent").textContent=
-    lesson.content;
-
-  document.getElementById("quizQuestion").textContent=
-    lesson.question;
-
-  const options =
-    document.getElementById("quizOptions");
-
-  options.innerHTML="";
-
-  lesson.options.forEach((option,index)=>{
-
-    const label=document.createElement("label");
-
-    label.className="option";
-
-    label.innerHTML=`
-      <input
-        type="radio"
-        name="answer"
-        value="${index}"
-      >
-      ${option}
-    `;
-
-    label.onclick=function(){
-      selectedAnswer=index;
-    };
-
-    options.appendChild(label);
-
-  });
-
-  document.getElementById("quizResult").textContent="";
-
-  const completed =
-    localStorage.getItem(
-      currentCourse+"_lesson_"+index
-    ) === "completed";
-
-  document.getElementById("completeStatus").textContent =
-    completed
-    ? "✅ This lesson is already completed."
-    : "";
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+return JSON.parse(
+localStorage.getItem(
+"gal_progress_"+course
+) || "[]"
+);
 
 }
 
 
-/* =========================
-   CHECK ANSWER
-========================= */
+function saveProgress(course,index){
 
-function checkAnswer(){
+const progress =
+getProgress(course);
 
-  const lesson =
-    courses[currentCourse].lessons[currentLesson];
+if(!progress.includes(index)){
 
-  const result =
-    document.getElementById("quizResult");
+progress.push(index);
 
-  if(selectedAnswer === null){
+localStorage.setItem(
+"gal_progress_"+course,
+JSON.stringify(progress)
+);
 
-    result.textContent =
-      "Please select an answer first.";
-
-    return;
-  }
-
-  if(selectedAnswer === lesson.answer){
-
-    result.textContent =
-      "✅ Correct answer!";
-
-  }else{
-
-    result.textContent =
-      "❌ Incorrect. Try again.";
-
-  }
+}
 
 }
 
 
-/* =========================
-   COMPLETE LESSON
-========================= */
+function renderCourse(course){
 
-function completeLesson(){
+const lessons =
+courseData[course];
 
-  const key =
-    currentCourse+"_lesson_"+currentLesson;
+const container =
+document.getElementById(
+course+"Lessons"
+);
 
-  localStorage.setItem(key,"completed");
+if(!container){
+return;
+}
 
-  document.getElementById("completeStatus").textContent =
-    "✅ Lesson completed! Your progress has been saved.";
+const progress =
+getProgress(course);
+
+container.innerHTML="";
+
+lessons.forEach(function(lesson,index){
+
+const item =
+document.createElement("div");
+
+item.className="lesson-item";
+
+const completed =
+progress.includes(index);
+
+item.innerHTML=`
+
+<h4>${lesson.title}</h4>
+
+<p>${lesson.text}</p>
+
+${
+completed
+?
+'<p>✅ Lesson completed</p>'
+:
+`
+<button
+class="btn"
+onclick="showQuiz('${course}',${index})">
+Start Lesson Quiz
+</button>
+
+<div
+class="quiz-box"
+id="quiz-${course}-${index}"
+style="display:none;">
+</div>
+`
+}
+
+`;
+
+container.appendChild(item);
+
+});
+
+updateProgress(course);
 
 }
 
 
-/* =========================
-   BACK TO COURSE
-========================= */
+function showQuiz(course,index){
 
-function backToCourse(){
+const lesson =
+courseData[course][index];
 
-  document.getElementById("lessonPage").style.display="none";
-  document.getElementById("coursePage").style.display="block";
+const box =
+document.getElementById(
+"quiz-"+course+"-"+index
+);
 
-  renderLessons();
-  updateProgress();
+if(!box){
+return;
+}
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+box.style.display="block";
+
+let html=`
+<h4>Quick Quiz</h4>
+<p>${lesson.question}</p>
+`;
+
+lesson.options.forEach(function(option,i){
+
+html+=`
+<button
+class="quiz-option"
+onclick="answerQuiz('${course}',${index},${i})">
+${option}
+</button>
+`;
+
+});
+
+box.innerHTML=html;
 
 }
 
 
-/* =========================
-   PROGRESS
-========================= */
+function answerQuiz(course,index,selected){
 
-function updateProgress(){
+const lesson =
+courseData[course][index];
 
-  const lessons =
-    courses[currentCourse].lessons;
+if(selected === lesson.answer){
 
-  let completed=0;
+saveProgress(course,index);
 
-  lessons.forEach((lesson,index)=>{
+alert("Correct! Lesson completed.");
 
-    if(
-      localStorage.getItem(
-        currentCourse+"_lesson_"+index
-      ) === "completed"
-    ){
-      completed++;
-    }
+renderCourse(course);
 
-  });
+}else{
 
-  const percentage =
-    Math.round(
-      (completed / lessons.length) * 100
-    );
-
-  document.getElementById("progressFill").style.width=
-    percentage+"%";
-
-  document.getElementById("progressText").textContent=
-    completed+" of "+lessons.length+
-    " lessons completed ("+
-    percentage+"%)";
+alert("Not correct. Try again.");
 
 }
 
-</script>
+}
 
-</body>
-</html>
+
+function updateProgress(course){
+
+const total =
+courseData[course].length;
+
+const completed =
+getProgress(course).length;
+
+const percent =
+(total === 0)
+?
+0
+:
+(completed / total) * 100;
+
+const bar =
+document.getElementById(
+course+"Progress"
+);
+
+const text =
+document.getElementById(
+course+"ProgressText"
+);
+
+if(bar){
+
+bar.style.width =
+percent+"%";
+
+}
+
+if(text){
+
+text.textContent =
+completed+
+" / "+
+total+
+" lessons completed";
+
+}
+
+}
+
+
+/* PYTHON PRACTICE */
+
+let pyodide=null;
+
+
+async function loadPyodideEngine(){
+
+if(pyodide){
+return pyodide;
+}
+
+const output =
+document.getElementById("pythonOutput");
+
+output.textContent =
+"Loading Python engine...";
+
+pyodide =
+await loadPyodide();
+
+return pyodide;
+
+}
+
+
+async function runPython(){
+
+const output =
+document.getElementById("pythonOutput");
+
+const code =
+document.getElementById(
+"pythonCode"
+).value;
+
+output.textContent="Running...";
+
+try{
+
+const engine =
+await loadPyodideEngine();
+
+let result="";
+
+engine.setStdout({
+
+batched:function(text){
+
+result+=text;
+
+}
+
+});
+
+await engine.runPythonAsync(code);
+
+output.textContent =
+result ||
+"Program executed successfully.";
+
+}
+
+catch(error){
+
+output.textContent =
+"Python Error:\n"+
+error;
+
+}
+
+}
+
+
+/* ASTRA */
+
+const ASTRA_BACKEND =
+"https://global-ai-learning-astra-6p8u.onrender.com";
+
+
+function addChatMessage(text,type){
+
+const chatBox =
+document.getElementById("chatBox");
+
+const message =
+document.createElement("div");
+
+message.className =
+"message "+type;
+
+message.textContent=text;
+
+chatBox.appendChild(message);
+
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
+}
+
+
+async function sendToAstra(){
+
+const input =
+document.getElementById("astraInput");
+
+const message =
+input.value.trim();
+
+if(!message){
+return;
+}
+
+addChatMessage(
+message,
+"user"
+);
+
+input.value="";
+
+addChatMessage(
+"Astra is thinking...",
+"bot"
+);
+
+const chatBox =
+document.getElementById("chatBox");
+
+const thinkingMessag
