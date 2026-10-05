@@ -47,7 +47,7 @@ header{
 nav{
   display:flex;
   justify-content:center;
-  gap:10px;
+  gap:8px;
   flex-wrap:wrap;
 }
 
@@ -55,7 +55,7 @@ nav button{
   border:0;
   background:#1e293b;
   color:white;
-  padding:10px 16px;
+  padding:10px 14px;
   border-radius:8px;
   cursor:pointer;
 }
@@ -66,7 +66,7 @@ nav button:hover{
 
 .hero{
   text-align:center;
-  padding:70px 20px;
+  padding:60px 20px;
 }
 
 .hero h2{
@@ -76,7 +76,7 @@ nav button:hover{
 
 .hero p{
   color:#cbd5e1;
-  max-width:650px;
+  max-width:700px;
   margin:auto;
   line-height:1.6;
 }
@@ -84,7 +84,7 @@ nav button:hover{
 section{
   max-width:1100px;
   margin:auto;
-  padding:40px 20px;
+  padding:35px 20px;
 }
 
 section h2{
@@ -122,10 +122,12 @@ section h2{
   line-height:1.5;
 }
 
-#lesson{
+#coursePage,
+#lessonPage{
   display:none;
 }
 
+.course-header,
 .lesson-box{
   background:#0f172a;
   border:1px solid #334155;
@@ -133,15 +135,134 @@ section h2{
   padding:25px;
 }
 
+.course-header h2,
 .lesson-box h2{
   color:#38bdf8;
   text-align:left;
+  margin-bottom:15px;
 }
 
+.course-header p,
 .lesson-box p{
   color:#cbd5e1;
   line-height:1.7;
-  margin:15px 0;
+  margin-bottom:15px;
+}
+
+.lesson-list{
+  display:grid;
+  gap:12px;
+  margin-top:20px;
+}
+
+.lesson-item{
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:10px;
+  padding:16px;
+  cursor:pointer;
+}
+
+.lesson-item:hover{
+  border-color:#38bdf8;
+}
+
+.lesson-item strong{
+  color:white;
+}
+
+.completed{
+  border-color:#22c55e;
+}
+
+.completed span{
+  color:#22c55e;
+  font-weight:bold;
+}
+
+.progress-area{
+  margin-top:20px;
+}
+
+.progress-bar{
+  height:12px;
+  background:#1e293b;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:#22c55e;
+  transition:.3s;
+}
+
+.video-box{
+  margin:20px 0;
+  background:#020617;
+  border:1px solid #334155;
+  border-radius:12px;
+  padding:20px;
+}
+
+.video-placeholder{
+  min-height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#94a3b8;
+  border:1px dashed #475569;
+  border-radius:10px;
+}
+
+video{
+  width:100%;
+  max-height:500px;
+  border-radius:10px;
+}
+
+.quiz{
+  margin-top:25px;
+  padding:20px;
+  background:#020617;
+  border:1px solid #334155;
+  border-radius:12px;
+}
+
+.quiz h3{
+  color:#38bdf8;
+  margin-bottom:15px;
+}
+
+.option{
+  display:block;
+  background:#1e293b;
+  border:1px solid #334155;
+  padding:12px;
+  margin:8px 0;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.option:hover{
+  border-color:#38bdf8;
+}
+
+.primary{
+  background:#2563eb;
+  color:white;
+  border:0;
+  padding:11px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:15px;
+}
+
+.primary:hover{
+  background:#1d4ed8;
 }
 
 .back{
@@ -154,15 +275,29 @@ section h2{
   margin-bottom:20px;
 }
 
+.status{
+  margin-top:15px;
+  padding:12px;
+  border-radius:8px;
+  background:#172033;
+  color:#cbd5e1;
+}
+
 footer{
   text-align:center;
   padding:40px 20px;
   color:#94a3b8;
+  margin-top:30px;
 }
 
 @media(max-width:600px){
   .hero h2{
     font-size:30px;
+  }
+
+  nav button{
+    padding:9px 11px;
+    font-size:13px;
   }
 }
 </style>
@@ -179,138 +314,445 @@ footer{
 
   <nav>
     <button onclick="showHome()">Home</button>
-    <button onclick="openLesson('python')">Python</button>
-    <button onclick="openLesson('java')">Java</button>
-    <button onclick="openLesson('c')">C Language</button>
-    <button onclick="openLesson('html')">HTML</button>
-    <button onclick="openLesson('ai')">AI</button>
+    <button onclick="openCourse('python')">Python</button>
+    <button onclick="openCourse('java')">Java</button>
+    <button onclick="openCourse('c')">C</button>
+    <button onclick="openCourse('html')">HTML</button>
+    <button onclick="openCourse('ai')">AI</button>
   </nav>
 
 </header>
 
 <main>
 
-  <div id="home">
+<!-- HOME -->
 
-    <div class="hero">
-      <h2>Learn. Build. Create.</h2>
-      <p>
-        Welcome to Global AI Learning — a learning platform for
-        programming, artificial intelligence and future technology.
-      </p>
-    </div>
+<div id="home">
 
-    <section>
-      <h2>Programming Courses</h2>
+  <div class="hero">
+    <h2>Learn. Build. Create.</h2>
 
-      <div class="courses">
-
-        <div class="card" onclick="openLesson('python')">
-          <h3>🐍 Python</h3>
-          <p>Learn Python from basics to advanced programming.</p>
-        </div>
-
-        <div class="card" onclick="openLesson('java')">
-          <h3>☕ Java</h3>
-          <p>Learn Java programming step by step.</p>
-        </div>
-
-        <div class="card" onclick="openLesson('c')">
-          <h3>💻 C Language</h3>
-          <p>Learn C programming from fundamentals.</p>
-        </div>
-
-        <div class="card" onclick="openLesson('html')">
-          <h3>🌐 HTML</h3>
-          <p>Build websites using HTML.</p>
-        </div>
-
-        <div class="card" onclick="openLesson('ai')">
-          <h3>🤖 Artificial Intelligence</h3>
-          <p>Explore AI concepts and modern technology.</p>
-        </div>
-
-      </div>
-    </section>
-
+    <p>
+      Welcome to Global AI Learning — a learning platform for
+      programming, artificial intelligence and future technology.
+    </p>
   </div>
 
-  <section id="lesson">
+  <section>
 
-    <div class="lesson-box">
+    <h2>Programming Courses</h2>
 
-      <button class="back" onclick="showHome()">
-        ← Back to Courses
-      </button>
+    <div class="courses">
 
-      <h2 id="lessonTitle"></h2>
+      <div class="card" onclick="openCourse('python')">
+        <h3>🐍 Python</h3>
+        <p>Learn Python from basics to advanced programming.</p>
+      </div>
 
-      <p id="lessonText"></p>
+      <div class="card" onclick="openCourse('java')">
+        <h3>☕ Java</h3>
+        <p>Learn Java step by step.</p>
+      </div>
 
-      <h3>What you will learn</h3>
+      <div class="card" onclick="openCourse('c')">
+        <h3>💻 C Language</h3>
+        <p>Learn C programming from fundamentals.</p>
+      </div>
 
-      <p id="lessonTopics"></p>
+      <div class="card" onclick="openCourse('html')">
+        <h3>🌐 HTML</h3>
+        <p>Build websites using HTML.</p>
+      </div>
+
+      <div class="card" onclick="openCourse('ai')">
+        <h3>🤖 Artificial Intelligence</h3>
+        <p>Explore AI concepts and modern technology.</p>
+      </div>
 
     </div>
 
   </section>
 
+</div>
+
+
+<!-- COURSE PAGE -->
+
+<section id="coursePage">
+
+  <div class="course-header">
+
+    <button class="back" onclick="showHome()">
+      ← Back to Courses
+    </button>
+
+    <h2 id="courseTitle"></h2>
+
+    <p id="courseDescription"></p>
+
+    <div class="progress-area">
+
+      <strong>Course Progress</strong>
+
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+
+      <p id="progressText">0% completed</p>
+
+    </div>
+
+  </div>
+
+  <div class="lesson-list" id="lessonList"></div>
+
+</section>
+
+
+<!-- LESSON PAGE -->
+
+<section id="lessonPage">
+
+  <div class="lesson-box">
+
+    <button class="back" onclick="backToCourse()">
+      ← Back to Lessons
+    </button>
+
+    <h2 id="lessonTitle"></h2>
+
+    <p id="lessonContent"></p>
+
+
+    <!-- VIDEO -->
+
+    <div class="video-box">
+
+      <h3>🎥 Lesson Video</h3>
+
+      <br>
+
+      <div id="videoContainer">
+
+        <div class="video-placeholder">
+          Owner video will appear here.
+          <br>
+          Video upload system will be connected later.
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- QUIZ -->
+
+    <div class="quiz">
+
+      <h3>📝 Lesson Quiz</h3>
+
+      <p id="quizQuestion"></p>
+
+      <div id="quizOptions"></div>
+
+      <button class="primary" onclick="checkAnswer()">
+        Check Answer
+      </button>
+
+      <div id="quizResult" class="status"></div>
+
+    </div>
+
+
+    <button class="primary" onclick="completeLesson()">
+      ✅ Complete Lesson
+    </button>
+
+    <div id="completeStatus" class="status"></div>
+
+  </div>
+
+</section>
+
 </main>
+
 
 <footer>
   © 2026 Code with Bala Krishna | GLOBAL AI LEARNING
 </footer>
 
+
 <script>
 
-const lessons = {
+/* =========================
+   COURSE DATA
+========================= */
+
+const courses = {
 
   python:{
     title:"🐍 Python Programming",
-    text:"Start Python programming from the basics and gradually move towards real projects.",
-    topics:"Variables • Data Types • Conditions • Loops • Functions • Lists • Dictionaries • OOP • Projects"
+    description:"Learn Python from zero to advanced level.",
+    lessons:[
+      {
+        title:"Python Lesson 1 — Introduction",
+        content:"Python is a high-level programming language used for websites, automation, data science, AI and many other applications.",
+        question:"What is Python?",
+        options:[
+          "A programming language",
+          "A web browser",
+          "An operating system",
+          "A database"
+        ],
+        answer:0
+      },
+
+      {
+        title:"Python Lesson 2 — Variables",
+        content:"Variables are used to store data. Example: name = 'Bala' stores text inside a variable named name.",
+        question:"Which symbol is commonly used to assign a value to a variable in Python?",
+        options:[
+          "=",
+          "==",
+          "=>",
+          ":="
+        ],
+        answer:0
+      },
+
+      {
+        title:"Python Lesson 3 — Data Types",
+        content:"Python supports common data types such as int, float, string, boolean, list and dictionary.",
+        question:"Which type is used for whole numbers?",
+        options:[
+          "int",
+          "str",
+          "float",
+          "bool"
+        ],
+        answer:0
+      },
+
+      {
+        title:"Python Lesson 4 — Conditions",
+        content:"Conditional statements allow a program to make decisions using if, elif and else.",
+        question:"Which keyword is used to start a condition in Python?",
+        options:[
+          "if",
+          "when",
+          "check",
+          "condition"
+        ],
+        answer:0
+      },
+
+      {
+        title:"Python Lesson 5 — Loops",
+        content:"Loops allow code to execute repeatedly. Python provides for and while loops.",
+        question:"Which keyword is commonly used for iteration?",
+        options:[
+          "for",
+          "repeat",
+          "loop",
+          "iterate"
+        ],
+        answer:0
+      }
+    ]
   },
+
 
   java:{
     title:"☕ Java Programming",
-    text:"Learn Java step by step and understand object-oriented programming.",
-    topics:"Syntax • Variables • Conditions • Loops • Methods • Classes • Objects • OOP • Projects"
+    description:"Learn Java programming and object-oriented concepts.",
+    lessons:[
+      {
+        title:"Java Lesson 1 — Introduction",
+        content:"Java is a popular programming language used for applications, backend systems and Android development.",
+        question:"Java is a...",
+        options:[
+          "Programming language",
+          "Browser",
+          "Database",
+          "Game console"
+        ],
+        answer:0
+      },
+
+      {
+        title:"Java Lesson 2 — Variables",
+        content:"Variables store data values. Java requires the variable type to be declared.",
+        question:"Which is a valid integer declaration?",
+        options:[
+          "int age = 20;",
+          "number age = 20;",
+          "integer age = 20;",
+          "age int = 20;"
+        ],
+        answer:0
+      },
+
+      {
+        title:"Java Lesson 3 — Conditions",
+        content:"Java uses if, else if and else statements for decision making.",
+        question:"Which keyword starts a condition?",
+        options:[
+          "if",
+          "when",
+          "check",
+          "condition"
+        ],
+        answer:0
+      }
+    ]
   },
+
 
   c:{
     title:"💻 C Language",
-    text:"Learn C programming fundamentals and build your programming logic.",
-    topics:"Variables • Data Types • Operators • Conditions • Loops • Arrays • Strings • Functions • Pointers"
+    description:"Learn C programming from fundamentals.",
+    lessons:[
+      {
+        title:"C Lesson 1 — Introduction",
+        content:"C is a powerful programming language used to understand programming fundamentals and system-level concepts.",
+        question:"C is a...",
+        options:[
+          "Programming language",
+          "Browser",
+          "Database",
+          "Video player"
+        ],
+        answer:0
+      },
+
+      {
+        title:"C Lesson 2 — Variables",
+        content:"Variables store values in memory. C provides types such as int, float and char.",
+        question:"Which type stores a whole number?",
+        options:[
+          "int",
+          "char",
+          "float",
+          "void"
+        ],
+        answer:0
+      },
+
+      {
+        title:"C Lesson 3 — Arrays",
+        content:"An array stores multiple values of the same type in a sequence.",
+        question:"An array normally stores...",
+        options:[
+          "Multiple values",
+          "Only one value",
+          "Only text",
+          "Only functions"
+        ],
+        answer:0
+      }
+    ]
   },
+
 
   html:{
     title:"🌐 HTML",
-    text:"Learn how websites are structured using HTML.",
-    topics:"HTML Structure • Headings • Paragraphs • Links • Images • Forms • Tables • Semantic HTML"
+    description:"Learn how websites are structured using HTML.",
+    lessons:[
+      {
+        title:"HTML Lesson 1 — Introduction",
+        content:"HTML stands for HyperText Markup Language. It provides the structure of webpages.",
+        question:"What does HTML stand for?",
+        options:[
+          "HyperText Markup Language",
+          "HighText Machine Language",
+          "Hyper Tool Multi Language",
+          "Home Tool Markup Language"
+        ],
+        answer:0
+      },
+
+      {
+        title:"HTML Lesson 2 — Headings",
+        content:"HTML provides heading elements from h1 to h6.",
+        question:"Which is the largest standard HTML heading?",
+        options:[
+          "h1",
+          "h6",
+          "heading",
+          "head"
+        ],
+        answer:0
+      },
+
+      {
+        title:"HTML Lesson 3 — Links",
+        content:"The anchor element is used to create hyperlinks.",
+        question:"Which element creates a hyperlink?",
+        options:[
+          "<a>",
+          "<link>",
+          "<href>",
+          "<url>"
+        ],
+        answer:0
+      }
+    ]
   },
+
 
   ai:{
     title:"🤖 Artificial Intelligence",
-    text:"Understand the fundamentals of Artificial Intelligence and modern AI systems.",
-    topics:"AI Basics • Machine Learning • Neural Networks • Generative AI • AI Tools • AI Projects"
+    description:"Understand AI fundamentals and modern AI technology.",
+    lessons:[
+      {
+        title:"AI Lesson 1 — Introduction",
+        content:"Artificial Intelligence is the field of creating computer systems that can perform tasks requiring aspects of human intelligence.",
+        question:"What does AI stand for?",
+        options:[
+          "Artificial Intelligence",
+          "Automated Internet",
+          "Advanced Input",
+          "Artificial Internet"
+        ],
+        answer:0
+      },
+
+      {
+        title:"AI Lesson 2 — Machine Learning",
+        content:"Machine Learning is a branch of AI where systems learn patterns from data.",
+        question:"Machine Learning is a branch of...",
+        options:[
+          "Artificial Intelligence",
+          "HTML",
+          "CSS",
+          "Networking"
+        ],
+        answer:0
+      }
+    ]
   }
 
 };
 
-function openLesson(course){
 
-  const data = lessons[course];
+/* =========================
+   VARIABLES
+========================= */
 
-  if(!data){
-    return;
-  }
+let currentCourse = "";
+let currentLesson = 0;
+let selectedAnswer = null;
 
-  document.getElementById("home").style.display="none";
-  document.getElementById("lesson").style.display="block";
 
-  document.getElementById("lessonTitle").textContent=data.title;
-  document.getElementById("lessonText").textContent=data.text;
-  document.getElementById("lessonTopics").textContent=data.topics;
+/* =========================
+   HOME
+========================= */
+
+function showHome(){
+
+  document.getElementById("home").style.display="block";
+  document.getElementById("coursePage").style.display="none";
+  document.getElementById("lessonPage").style.display="none";
 
   window.scrollTo({
     top:0,
@@ -318,15 +760,263 @@ function openLesson(course){
   });
 }
 
-function showHome(){
 
-  document.getElementById("lesson").style.display="none";
-  document.getElementById("home").style.display="block";
+/* =========================
+   OPEN COURSE
+========================= */
+
+function openCourse(course){
+
+  if(!courses[course]){
+    return;
+  }
+
+  currentCourse = course;
+
+  const data = courses[course];
+
+  document.getElementById("home").style.display="none";
+  document.getElementById("coursePage").style.display="block";
+  document.getElementById("lessonPage").style.display="none";
+
+  document.getElementById("courseTitle").textContent=data.title;
+  document.getElementById("courseDescription").textContent=data.description;
+
+  renderLessons();
+  updateProgress();
 
   window.scrollTo({
     top:0,
     behavior:"smooth"
   });
+}
+
+
+/* =========================
+   RENDER LESSONS
+========================= */
+
+function renderLessons(){
+
+  const list = document.getElementById("lessonList");
+
+  list.innerHTML="";
+
+  const lessons = courses[currentCourse].lessons;
+
+  lessons.forEach((lesson,index)=>{
+
+    const completed =
+      localStorage.getItem(
+        currentCourse+"_lesson_"+index
+      ) === "completed";
+
+    const div = document.createElement("div");
+
+    div.className =
+      "lesson-item " +
+      (completed ? "completed" : "");
+
+    div.innerHTML = `
+      <strong>${index+1}. ${lesson.title}</strong>
+      <br>
+      <span>
+        ${completed ? "✓ Completed" : "▶ Start Lesson"}
+      </span>
+    `;
+
+    div.onclick = function(){
+      openLesson(index);
+    };
+
+    list.appendChild(div);
+
+  });
+
+}
+
+
+/* =========================
+   OPEN LESSON
+========================= */
+
+function openLesson(index){
+
+  currentLesson=index;
+
+  const lesson =
+    courses[currentCourse].lessons[index];
+
+  selectedAnswer=null;
+
+  document.getElementById("coursePage").style.display="none";
+  document.getElementById("lessonPage").style.display="block";
+
+  document.getElementById("lessonTitle").textContent=
+    lesson.title;
+
+  document.getElementById("lessonContent").textContent=
+    lesson.content;
+
+  document.getElementById("quizQuestion").textContent=
+    lesson.question;
+
+  const options =
+    document.getElementById("quizOptions");
+
+  options.innerHTML="";
+
+  lesson.options.forEach((option,index)=>{
+
+    const label=document.createElement("label");
+
+    label.className="option";
+
+    label.innerHTML=`
+      <input
+        type="radio"
+        name="answer"
+        value="${index}"
+      >
+      ${option}
+    `;
+
+    label.onclick=function(){
+      selectedAnswer=index;
+    };
+
+    options.appendChild(label);
+
+  });
+
+  document.getElementById("quizResult").textContent="";
+
+  const completed =
+    localStorage.getItem(
+      currentCourse+"_lesson_"+index
+    ) === "completed";
+
+  document.getElementById("completeStatus").textContent =
+    completed
+    ? "✅ This lesson is already completed."
+    : "";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================
+   CHECK ANSWER
+========================= */
+
+function checkAnswer(){
+
+  const lesson =
+    courses[currentCourse].lessons[currentLesson];
+
+  const result =
+    document.getElementById("quizResult");
+
+  if(selectedAnswer === null){
+
+    result.textContent =
+      "Please select an answer first.";
+
+    return;
+  }
+
+  if(selectedAnswer === lesson.answer){
+
+    result.textContent =
+      "✅ Correct answer!";
+
+  }else{
+
+    result.textContent =
+      "❌ Incorrect. Try again.";
+
+  }
+
+}
+
+
+/* =========================
+   COMPLETE LESSON
+========================= */
+
+function completeLesson(){
+
+  const key =
+    currentCourse+"_lesson_"+currentLesson;
+
+  localStorage.setItem(key,"completed");
+
+  document.getElementById("completeStatus").textContent =
+    "✅ Lesson completed! Your progress has been saved.";
+
+}
+
+
+/* =========================
+   BACK TO COURSE
+========================= */
+
+function backToCourse(){
+
+  document.getElementById("lessonPage").style.display="none";
+  document.getElementById("coursePage").style.display="block";
+
+  renderLessons();
+  updateProgress();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function updateProgress(){
+
+  const lessons =
+    courses[currentCourse].lessons;
+
+  let completed=0;
+
+  lessons.forEach((lesson,index)=>{
+
+    if(
+      localStorage.getItem(
+        currentCourse+"_lesson_"+index
+      ) === "completed"
+    ){
+      completed++;
+    }
+
+  });
+
+  const percentage =
+    Math.round(
+      (completed / lessons.length) * 100
+    );
+
+  document.getElementById("progressFill").style.width=
+    percentage+"%";
+
+  document.getElementById("progressText").textContent=
+    completed+" of "+lessons.length+
+    " lessons completed ("+
+    percentage+"%)";
+
 }
 
 </script>
