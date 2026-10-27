@@ -1,1 +1,433 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GLOBAL AI LEARNING | Code with Bala Krishna</title>
+<style>
+:root{--bg:#080d1d;--panel:#111d35;--line:#2b3c5c;--text:#f1f5ff;--muted:#b1bfd7;--blue:#74e2ff;--purple:#ad94ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;line-height:1.6}
+a{color:var(--blue);text-decoration:none}
+button{cursor:pointer;border:0;border-radius:9px;padding:11px 16px;background:var(--blue);color:#07111e;font-weight:bold}
+button.secondary{background:#263957;color:white;border:1px solid var(--line)}
+input,textarea,select{font:inherit;background:#081326;color:white;border:1px solid var(--line);border-radius:9px;padding:11px;width:100%}
+.wrap{width:min(1150px,94%);margin:auto}
+header{position:sticky;top:0;background:#080d1df5;border-bottom:1px solid var(--line);z-index:10}
+nav{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:13px 0;flex-wrap:wrap}
+.brand{font-size:12px;letter-spacing:2px;color:var(--blue)}
+.brand strong{display:block;font-size:21px;color:white;letter-spacing:0}
+.links{display:flex;gap:15px;flex-wrap:wrap}
+.links a{color:var(--muted)}
+.hero{padding:55px 0 35px;display:grid;grid-template-columns:1.3fr .7fr;gap:25px;align-items:center}
+.hero h1{font-size:clamp(34px,5vw,60px);line-height:1.1;margin:12px 0}
+.gradient{background:linear-gradient(90deg,var(--blue),var(--purple));color:transparent;background-clip:text}
+.muted{color:var(--muted)}
+.panel,.course,.stat{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{text-align:center;padding:12px}
+.stat strong{display:block;font-size:24px;color:var(--blue)}
+section{padding:25px 0 35px}
+h2{font-size:30px;margin:0 0 8px}
+.coursegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:18px}
+.course{display:flex;flex-direction:column;gap:9px}
+.course h3{margin:0}
+.course p{color:var(--muted);flex:1;margin:0}
+.icon{font-size:32px}
+.bar{height:7px;background:#263752;border-radius:20px;overflow:hidden}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--purple))}
+.filters{display:flex;gap:10px;max-width:600px;margin-top:15px}
+.classroom{display:grid;grid-template-columns:260px 1fr;gap:15px}
+.lesson-list{display:grid;gap:8px}
+.lesson-btn{text-align:left;background:#0a1529;color:white;border:1px solid var(--line)}
+.lesson-btn.active{border-color:var(--blue)}
+pre{white-space:pre-wrap;overflow:auto;background:#050a13;padding:15px;border-radius:10px;color:#c9f6e6}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.notice{padding:12px;background:#302915;border:1px solid #67552b;border-radius:10px;color:#ffe6a2}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.tool{background:var(--panel);padding:18px;border:1px solid var(--line);border-radius:16px}
+textarea{min-height:190px;font-family:Consolas,monospace}
+iframe{width:100%;height:230px;background:white;border:0;border-radius:10px}
+.chatlog{height:220px;overflow:auto;background:#071124;border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:10px}
+.msg{padding:9px;margin:7px 0;border-radius:8px;white-space:pre-wrap}
+.user{background:#263a5b}.bot{background:#172743}
+footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:13px}
+@media(max-width:800px){.hero,.classroom,.grid2{grid-template-columns:1fr}.coursegrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.coursegrid{grid-template-columns:1fr}.filters{flex-direction:column}.hero{padding-top:30px}.links{gap:10px}}
+</style>
+</head>
+<body>
+<header><nav class="wrap">
+<a href="#home"><div class="brand">CODE WITH BALA KRISHNA<strong>GLOBAL AI LEARNING</strong></div></a>
+<div class="links"><a href="#courses">Courses</a><a href="#classroom">Learn</a><a href="#practice">Practice</a><a href="#astra">AI Astra</a><a href="#progress">Progress</a></div>
+</nav></header>
+
+<main class="wrap">
+<section class="hero" id="home">
+<div>
+<div class="brand">LEARN • BUILD • CREATE</div>
+<h1>Learn technology.<br><span class="gradient">Build your future.</span></h1>
+<p class="muted">Learn programming and Artificial Intelligence from beginner level to practical projects. Learn step by step, practise and track your progress.</p>
+<div class="actions"><a href="#courses"><button>Explore Courses</button></a><a href="#practice"><button class="secondary">Start Coding</button></a></div>
+</div>
+<div class="panel">
+<h3>Your Learning Dashboard</h3>
+<div class="stats">
+<div class="stat"><strong id="courseCount">6</strong><span>Courses</span></div>
+<div class="stat"><strong id="lessonCount">48</strong><span>Lessons</span></div>
+<div class="stat"><strong id="doneCount">0</strong><span>Completed</span></div>
+</div>
+<p class="muted">Progress is saved in this browser on this device.</p>
+</div>
+</section>
+
+<section id="courses">
+<h2>All Courses</h2>
+<p class="muted">Choose a course and start learning.</p>
+<div class="filters"><input id="search" placeholder="Search courses..."><select id="level"><option value="all">All levels</option><option>Beginner</option><option>Intermediate</option></select></div>
+<div class="coursegrid" id="courseGrid"></div>
+</section>
+
+<section id="classroom">
+<h2 id="courseTitle">Learning Classroom</h2>
+<p id="courseDescription" class="muted">Select a course to begin.</p>
+<div class="classroom">
+<aside class="panel"><h3>Lessons</h3><div class="lesson-list" id="lessonList">Choose a course above.</div><p id="progressText" class="muted">0% completed</p><div class="bar"><span id="progressBar" style="width:0%"></span></div></aside>
+<article class="panel" id="lessonContent">Your lesson will appear here.</article>
+</div>
+</section>
+
+<section id="practice">
+<h2>Coding Practice</h2>
+<p class="muted">Try HTML, CSS and JavaScript in the editor. Python runs in your browser after the runtime loads.</p>
+<div class="grid2">
+<div class="tool">
+<h3>Web Code Editor</h3>
+<textarea id="webCode" spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+<style>
+body { font-family: Arial; padding: 20px; }
+h1 { color: royalblue; }
+</style>
+</head>
+<body>
+<h1>Hello, GLOBAL AI LEARNING!</h1>
+<p>My first webpage.</p>
+<button onclick="document.querySelector('p').textContent='Keep learning!'">Click me</button>
+</body>
+</html></textarea>
+<div class="actions"><button id="runWeb">Run Preview</button><button class="secondary" id="resetWeb">Reset</button></div>
+<iframe id="preview" title="Web preview" sandbox="allow-scripts"></iframe>
+</div>
+<div class="tool">
+<h3>Python Runner</h3>
+<textarea id="pythonCode" spellcheck="false">name = "Learner"
+print("Hello", name)
+for n in range(1, 4):
+    print(n)</textarea>
+<div class="actions"><button id="runPython">Run Python</button></div>
+<pre id="pythonOutput">Python output appears here.</pre>
+<p id="pythonStatus" class="muted">Python runtime not loaded.</p>
+</div>
+</div>
+</section>
+
+<section id="astra">
+<h2>AI Astra</h2>
+<p class="muted">Ask questions about programming, web development and AI.</p>
+<div class="tool">
+<div id="chatLog" class="chatlog"><div class="msg bot">Hello! I am AI Astra. Configure the secure backend to enable AI answers.</div></div>
+<form id="chatForm" class="actions"><input id="chatInput" placeholder="Ask a question..." required style="flex:1;min-width:180px"><button>Send</button></form>
+<p id="astraStatus" class="muted">Backend configuration is required.</p>
+<div class="notice">Never put a private AI API key in this public HTML file.</div>
+</div>
+</section>
+
+<section id="progress">
+<h2>My Progress</h2>
+<div class="panel" id="overview"></div>
+<div class="actions"><button id="exportProgress">Export Progress</button><button class="secondary" id="resetProgress">Reset Progress</button></div>
+</section>
+</main>
+
+<footer><div class="wrap"><strong>GLOBAL AI LEARNING</strong> — Code with Bala Krishna<p>Educational learning platform. Secure login, shared video uploads, payments, cloud progress and admin tools require backend configuration.</p></div></footer>
+
+<script>
+const ASTRA_API_URL = ""; // Add your deployed backend endpoint here. Do not add secret API keys.
+
+const courses = {
+python:{
+title:"Python Programming",icon:"🐍",level:"Beginner",
+description:"Learn Python basics, data structures, functions and projects.",
+lessons:[
+["Introduction to Python","Python is a readable language used for automation, web development, data and AI.","print('Hello, world!')"],
+["Variables and Data Types","Variables store values. Common types include int, float, str and bool.","name = 'Bala'\nage = 18\nprint(name, age)"],
+["Input and Operators","Use input() to read text and operators to calculate values.","a = int(input('First number: '))\nb = int(input('Second number: '))\nprint(a + b)"],
+["Conditions","if, elif and else let a program make decisions.","marks = 80\nif marks >= 35:\n    print('Pass')\nelse:\n    print('Try again')"],
+["Loops","Loops repeat code. for is useful for iterating through a sequence.","for n in range(1, 4):\n    print(n)"],
+["Lists and Dictionaries","Lists store ordered items; dictionaries store key-value pairs.","scores = [80, 91, 75]\nstudent = {'name': 'Bala'}\nprint(scores[0], student['name'])"],
+["Functions","Functions create reusable blocks of code.","def square(n):\n    return n * n\nprint(square(5))"],
+["Mini Project: Quiz","Combine input, conditions and output to build a small quiz.","answer = input('What is 2 + 2? ')\nif answer.strip() == '4':\n    print('Correct!')\nelse:\n    print('Try again')"]
+],
+quiz:[["Which keyword defines a function?",["func","def","function"],1],["What does len([2,4,6]) return?",["2","3","6"],1]]
+},
+c:{
+title:"C Programming",icon:"⚙️",level:"Beginner",
+description:"Learn C syntax, variables, conditions, loops, arrays and functions.",
+lessons:[
+["Introduction to C","A C program commonly starts execution inside main().",'#include <stdio.h>\nint main(void) {\n  printf("Hello, world!\\n");\n  return 0;\n}'],
+["Variables and Types","Use int, float, char and other types to store values.","int age = 18;\nfloat price = 12.5f;\nchar grade = 'A';"],
+["Input and Output","printf displays output; scanf can read input.","int number;\nprintf("Enter a number: ");\nscanf("%d", &number);\nprintf("%d\\n", number);"],
+["Conditions","Use if and else to choose which code runs.","int marks = 75;\nif (marks >= 35) printf("Pass\\n");\nelse printf("Try again\\n");"],
+["Loops","Use loops to repeat statements.","for (int i = 1; i <= 3; i++) {\n  printf("%d\\n", i);\n}"],
+["Arrays and Strings","Arrays hold multiple values of the same type. C strings end with '\\0'.","int nums[] = {10, 20, 30};\nprintf("%d\\n", nums[1]);"],
+["Functions","Functions help split programs into reusable parts.","int square(int n) {\n  return n * n;\n}"],
+["Mini Project: Calculator","Plan a calculator that checks an operator and performs the matching operation.","/* Read two numbers and an operator.\n   Select +, -, * or /.\n   Check division by zero. */"]
+],
+quiz:[["Which header declares printf?",["stdlib.h","stdio.h","math.h"],1],["C array indexes usually start at…",["0","1","2"],0]]
+},
+cpp:{
+title:"C++ Programming",icon:"➕",level:"Beginner",
+description:"Learn C++ basics, functions, classes, objects, vectors and problem solving.",
+lessons:[
+["Introduction to C++","C++ supports procedural and object-oriented programming.","#include <iostream>\nint main() {\n  std::cout << "Hello, world!\\n";\n  return 0;\n}"],
+["Variables and Types","Use int, double, char, bool and std::string.","int age = 18;\ndouble price = 99.5;\nstd::string name = "Bala";"],
+["Conditions and Loops","Use if statements and loops to control program flow.","for (int i = 1; i <= 3; ++i) {\n  std::cout << i << "\\n";\n}"],
+["Functions","Functions accept inputs and can return results.","int square(int n) { return n * n; }\n// square(5) returns 25"],
+["Classes and Objects","A class defines a type; an object is an instance of it.","class Student {\npublic:\n  std::string name;\n};"],
+["Vectors and Strings","std::vector can grow dynamically; std::string stores text.","#include <vector>\nstd::vector<int> scores = {80, 90, 95};"],
+["Pointers and References","A pointer stores an address; a reference acts as an alias.","int value = 10;\nint* ptr = &value;\n// *ptr refers to value"],
+["Mini Project: Grade Tracker","Store scores, calculate the average and show a summary.","// Plan: store scores in a vector\n// calculate total and average\n// display the result"]
+],
+quiz:[["Which stream commonly prints to console?",["std::cout","std::input","std::printline"],0],["A class instance is called a…",["loop","object","header"],1]]
+},
+java:{
+title:"Java Programming",icon:"☕",level:"Beginner",
+description:"Learn Java syntax, methods, classes, arrays, exceptions and collections.",
+lessons:[
+["Introduction to Java","A Java application commonly starts with the main method.","public class Main {\n  public static void main(String[] args) {\n    System.out.println("Hello, world!");\n  }\n}"],
+["Variables and Types","Use primitive types and String for text.","int age = 18;\ndouble price = 99.5;\nString name = "Bala";"],
+["Conditions and Loops","Use if and loops to control program flow.","for (int i = 1; i <= 3; i++) {\n  System.out.println(i);\n}"],
+["Methods","Methods are reusable blocks that can accept parameters.","static int square(int n) {\n  return n * n;\n}"],
+["Classes and Objects","Classes group data and behavior together.","class Student {\n  String name;\n  Student(String name) { this.name = name; }\n}"],
+["Arrays and ArrayList","Arrays have fixed length; ArrayList can grow.","int[] nums = {10, 20, 30};\nSystem.out.println(nums[1]);"],
+["Exceptions","try/catch can handle exceptional conditions.","try {\n  int n = Integer.parseInt("42");\n} catch (NumberFormatException e) {\n  System.out.println("Invalid number");\n}"],
+["Mini Project: Student Record","Design a Student class with a name, roll number and marks.","// Plan a Student class\n// add fields and a display method"]
+],
+quiz:[["Which method is a common Java entry point?",["start()","main()","runNow()"],1],["Which collection grows dynamically?",["ArrayList","int","char"],0]]
+},
+web:{
+title:"Web Development",icon:"🌐",level:"Beginner",
+description:"Build responsive websites using HTML, CSS and JavaScript.",
+lessons:[
+["How the Web Works","HTML structures content, CSS styles it and JavaScript adds behavior.","<h1>Hello web!</h1>\n<p>My first page.</p>"],
+["HTML Structure","Use headings, paragraphs, links, images and semantic elements.","<main>\n  <h1>My Portfolio</h1>\n  <p>Welcome!</p>\n  <a href="#projects">Projects</a>\n</main>"],
+["CSS Styling","CSS controls colors, spacing, layout and typography.","body { font-family: Arial; }\n.card { padding: 16px; border-radius: 12px; }"],
+["JavaScript Basics","JavaScript responds to events and can update a webpage.","document.querySelector('button')?.addEventListener('click', () => alert('Hello!'));"],
+["Forms and Validation","Forms collect information. Validate important data on the server too.","<form>\n  <label>Email <input type="email" required></label>\n  <button>Submit</button>\n</form>"],
+["Responsive Design","Use flexible layouts and media queries for phones and desktops.","@media (max-width: 600px) {\n  .columns { display: block; }\n}"],
+["Accessibility","Semantic HTML and keyboard-friendly controls help more users.","<button type="button">Save</button>"],
+["Mini Project: Portfolio","Build a portfolio with About, Skills, Projects and Contact sections.","<!-- header, about, projects, contact -->"]
+],
+quiz:[["Which language structures webpages?",["HTML","CSS","SQL"],0],["Which CSS feature supports responsive rules?",["@media","<script>","print()"],0]]
+},
+ai:{
+title:"Artificial Intelligence & ML",icon:"🤖",level:"Intermediate",
+description:"Understand AI, machine learning, datasets, evaluation and responsible AI.",
+lessons:[
+["What is AI?","AI is a broad field. Machine learning learns patterns from data.","Example: a spam filter predicts whether a message is spam."],
+["Data and Features","A feature describes an example; a label is the target in supervised learning.","Example features: practice hours. Label: quiz score."],
+["Supervised Learning","Classification predicts categories; regression predicts numbers.","Classification: spam/not spam.\nRegression: predict a price."],
+["Training and Testing","Test data helps estimate performance on unseen examples.","Keep test data separate from model training."],
+["Model Evaluation","Accuracy, precision and recall measure different aspects of performance.","Choose a metric based on the cost of mistakes."],
+["Neural Networks","Neural networks transform inputs through layers of learned parameters.","Input → hidden layers → output"],
+["Generative AI","Generative systems create text, images or other content from learned patterns.","Give a task, context, constraints and desired format."],
+["Mini Project: AI Study Helper","Plan a study assistant that explains topics and creates practice questions.","Define the user need, check answers and protect private data."]
+],
+quiz:[["Machine learning learns patterns from…",["data","screen brightness","keyboard color"],0],["A test set should mainly contain…",["training duplicates","unseen evaluation examples","model answers"],1]]
+}
+};
+
+let current = null;
+let currentLesson = 0;
+const $ = id => document.getElementById(id);
+const progressKey = id => "global_ai_learning_progress_" + id;
+function getDone(id) {
+ try { return JSON.parse(localStorage.getItem(progressKey(id)) || "[]"); }
+ catch { return []; }
+}
+function saveDone(id, list) {
+ localStorage.setItem(progressKey(id), JSON.stringify([...new Set(list)]));
+ updateStats(); renderCourses(); renderOverview(); updateProgress();
+}
+function updateStats() {
+ $("courseCount").textContent = Object.keys(courses).length;
+ $("lessonCount").textContent = Object.values(courses).reduce((n,c)=>n+c.lessons.length,0);
+ $("doneCount").textContent = Object.keys(courses).reduce((n,id)=>n+getDone(id).length,0);
+}
+function renderCourses() {
+ const q = $("search").value.toLowerCase();
+ const level = $("level").value;
+ $("courseGrid").innerHTML = Object.entries(courses)
+ .filter(([id,c]) => (c.title+" "+c.description).toLowerCase().includes(q) && (level==="all"||c.level===level))
+ .map(([id,c]) => {
+  const done = getDone(id).length;
+  const pct = Math.round(done/c.lessons.length*100);
+  return `<article class="course">
+   <div class="icon">${c.icon}</div><span class="muted">${c.level} · ${done}/${c.lessons.length} lessons</span>
+   <h3>${c.title}</h3><p>${c.description}</p>
+   <div class="bar"><span style="width:${pct}%"></span></div>
+   <button onclick="openCourse('${id}')">${done ? "Continue learning" : "Start course"}</button>
+  </article>`;
+ }).join("") || "<p>No courses found.</p>";
+}
+function openCourse(id) {
+ current = id; currentLesson = 0;
+ $("courseTitle").textContent = courses[id].title;
+ $("courseDescription").textContent = courses[id].description;
+ renderLessonList(); renderLesson(); updateProgress();
+ location.hash = "classroom";
+}
+function renderLessonList() {
+ const c = courses[current], done = getDone(current);
+ $("lessonList").innerHTML = c.lessons.map((l,i)=>
+  `<button class="lesson-btn ${i===currentLesson?"active":""}" onclick="selectLesson(${i})">${i+1}. ${l[0]} ${done.includes(i)?"✓":""}</button>`
+ ).join("") + `<button class="lesson-btn" onclick="showQuiz()">🧠 Course Quiz</button>`;
+}
+function selectLesson(i) {
+ currentLesson = i; renderLessonList(); renderLesson();
+}
+function renderLesson() {
+ if (!current) return;
+ const c = courses[current], l = c.lessons[currentLesson], done = getDone(current);
+ $("lessonContent").innerHTML = `
+  <span class="muted">${c.title} · Lesson ${currentLesson+1} of ${c.lessons.length}</span>
+  <h3>${l[0]}</h3><p>${l[1]}</p>
+  ${l[2] ? "<h4>Example</h4><pre>"+escapeHTML(l[2])+"</pre>" : ""}
+  <div class="actions">
+   <button class="secondary" onclick="selectLesson(Math.max(0,currentLesson-1))" ${currentLesson===0?"disabled":""}>Previous</button>
+   <button onclick="completeLesson()" ${done.includes(currentLesson)?"disabled":""}>${done.includes(currentLesson)?"Completed ✓":"Mark Complete"}</button>
+   <button class="secondary" onclick="selectLesson(Math.min(courses[current].lessons.length-1,currentLesson+1))" ${currentLesson===c.lessons.length-1?"disabled":""}>Next</button>
+  </div>
+  <p class="muted">Lesson completion is saved in this browser.</p>`;
+}
+function escapeHTML(s) {
+ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function completeLesson() {
+ const list = getDone(current); list.push(currentLesson);
+ saveDone(current,list); renderLessonList(); renderLesson();
+}
+function updateProgress() {
+ if (!current) return;
+ const pct = Math.round(getDone(current).length/courses[current].lessons.length*100);
+ $("progressText").textContent = pct+"% completed";
+ $("progressBar").style.width = pct+"%";
+}
+function showQuiz() {
+ const c = courses[current];
+ let html = `<h3>${c.title} — Quick Quiz</h3><form id="quizForm">`;
+ c.quiz.forEach((q,i)=>{
+  html += `<div><strong>${i+1}. ${q[0]}</strong>`;
+  q[1].forEach((answer,j)=>{
+   html += `<label style="display:block;margin:8px 0"><input style="width:auto" type="radio" name="q${i}" value="${j}" required> ${answer}</label>`;
+  });
+  html += `</div><hr>`;
+ });
+ html += `<button>Check Answers</button></form><div id="quizResult"></div>`;
+ $("lessonContent").innerHTML = html;
+ $("quizForm").addEventListener("submit",e=>{
+  e.preventDefault(); const data = new FormData(e.target); let score = 0;
+  c.quiz.forEach((q,i)=>{if(Number(data.get("q"+i))===q[2])score++});
+  $("quizResult").innerHTML = `<div class="notice">Your score: ${score}/${c.quiz.length}. Review the lessons and try again.</div>`;
+ });
+}
+function renderOverview() {
+ $("overview").innerHTML = Object.entries(courses).map(([id,c])=>{
+  const n=getDone(id).length,p=Math.round(n/c.lessons.length*100);
+  return `<p><strong>${c.icon} ${c.title}</strong> — ${n}/${c.lessons.length} lessons (${p}%)</p><div class="bar"><span style="width:${p}%"></span></div>`;
+ }).join("");
+}
+$("search").addEventListener("input",renderCourses);
+$("level").addEventListener("change",renderCourses);
+$("runWeb").addEventListener("click",()=>{$("preview").srcdoc=$("webCode").value});
+const originalWeb = $("webCode").value;
+$("resetWeb").addEventListener("click",()=>{$("webCode").value=originalWeb;$("preview").srcdoc=originalWeb});
+$("preview").srcdoc = originalWeb;
+
+let pyodide = null;
+$("runPython").addEventListener("click",async()=>{
+ const output=$("pythonOutput"), status=$("pythonStatus");
+ try {
+  if (!pyodide) {
+   status.textContent="Loading Python runtime. Internet connection required…";
+   if (!window.loadPyodide) {
+    await new Promise((resolve,reject)=>{
+     const script=document.createElement("script");
+     script.src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js";
+     script.onload=resolve; script.onerror=()=>reject(new Error("Python runtime could not load"));
+     document.head.appendChild(script);
+    });
+   }
+   pyodide=await window.loadPyodide();
+  }
+  let lines=[];
+  pyodide.setStdout({batched:s=>lines.push(s)});
+  pyodide.setStderr({batched:s=>lines.push("Error: "+s)});
+  await pyodide.runPythonAsync($("pythonCode").value);
+  output.textContent=lines.join("\n")||"Program finished.";
+  status.textContent="Python runtime ready.";
+ } catch(err) {
+  output.textContent=String(err);
+  status.textContent="Check your code and internet connection.";
+ }
+});
+function addMessage(text,who) {
+ const div=document.createElement("div");
+ div.className="msg "+who; div.textContent=text;
+ $("chatLog").appendChild(div); $("chatLog").scrollTop=$("chatLog").scrollHeight;
+}
+$("chatForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const message=$("chatInput").value.trim(); if(!message)return;
+ addMessage(message,"user"); $("chatInput").value="";
+ if(!ASTRA_API_URL) {
+  addMessage("AI Astra needs a backend URL before it can generate AI answers. Connect a secure server endpoint in the website configuration.","bot");
+  $("astraStatus").textContent="Backend not configured.";
+  return;
+ }
+ try {
+  $("astraStatus").textContent="Connecting…";
+  const response=await fetch(ASTRA_API_URL,{
+   method:"POST",headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({message})
+  });
+  if(!response.ok)throw new Error("Server error: "+response.status);
+  const data=await response.json();
+  addMessage(data.reply||data.response||data.message||"No answer returned.","bot");
+  $("astraStatus").textContent="Connected.";
+ } catch(err) {
+  addMessage("Could not connect to AI Astra. Check the backend URL and server settings.","bot");
+  $("astraStatus").textContent=err.message;
+ }
+});
+$("exportProgress").addEventListener("click",()=>{
+ const data={platform:"GLOBAL AI LEARNING",progress:Object.fromEntries(Object.keys(courses).map(id=>[id,getDone(id)]))};
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+ const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+ a.download="global-ai-learning-progress.json"; a.click(); URL.revokeObjectURL(a.href);
+});
+$("resetProgress").addEventListener("click",()=>{
+ if(confirm("Reset all saved lesson progress?")) {
+  Object.keys(courses).forEach(id=>localStorage.removeItem(progressKey(id)));
+  renderCourses(); renderOverview(); updateStats();
+  if(current){renderLessonList();renderLesson();updateProgress();}
+ }
+});
+renderCourses(); renderOverview(); updateStats();
+</script>
+</body>
+</html>
+
